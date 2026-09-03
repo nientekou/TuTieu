@@ -8,11 +8,11 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
         .setName('balance')
-        .setDescription("Check your or someone else's balance")
+        .setDescription("Mở Hành Trang của bạn hoặc người khác")
         .addUserOption(option =>
             option
                 .setName('user')
-                .setDescription('User to check balance for')
+                .setDescription('Người bạn cần xem Hành Trang')
                 .setRequired(false)
         ),
 
@@ -30,9 +30,9 @@ export default {
 
         if (targetUser.bot) {
             throw createError(
-                "Bot user queried for balance",
+                "Đang kiểm tra",
                 ErrorTypes.VALIDATION,
-                "Bots don't have an economy balance."
+                "Bots không có Hành Trang"
             );
         }
 
@@ -42,9 +42,9 @@ export default {
 
         if (!userData) {
             throw createError(
-                "Failed to load economy data",
+                "Không tải được dữ liệu",
                 ErrorTypes.DATABASE,
-                "Failed to load economy data. Please try again later.",
+                "Không tải được dữ liệu, hãy kiểm lại sau",
                 { userId: targetUser.id, guildId }
             );
         }
@@ -55,28 +55,28 @@ export default {
         const bank = typeof userData.bank === 'number' ? userData.bank : 0;
 
             const embed = createEmbed({
-                title: `${targetUser.username}'s Balance`,
-                description: `Here is the current financial status for ${targetUser.username}.`,
+                title: `Hành Trang của ${targetUser.username}`,
+                description: `Bên trong Hành Trang của ${targetUser.username}.`,
             })
                 .addFields(
                     {
-                        name: "💵 Cash",
+                        name: ":lt1: Linh Thạch",
                         value: `$${wallet.toLocaleString()}`,
                         inline: true,
                     },
                     {
-                        name: "🏦 Bank",
+                        name: "🏦 Tiền Trang",
                         value: `$${bank.toLocaleString()} / $${maxBank.toLocaleString()}`,
                         inline: true,
                     },
                     {
-                        name: "💰 Total",
+                        name: ":tvp1: Tổng cộng",
                         value: `$${(wallet + bank).toLocaleString()}`,
                         inline: true,
                     }
                 )
                 .setFooter({
-                    text: `Requested by ${interaction.user.tag}`,
+                    text: `Nhìn trộm bởi ${interaction.user.tag}`,
                     iconURL: interaction.user.displayAvatarURL(),
                 });
 
