@@ -448,7 +448,7 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
 
     const newSymbol = submitted.fields.getTextInputValue('currency_symbol').trim();
 
-    if (newSymbol.length === 0 || newSymbol.length > 3) {
+    if (newSymbol.length === 0 || newSymbol.length > 30) {
         await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Cần nhập ký hiệu lại' });
         return;
     }
