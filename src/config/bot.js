@@ -24,7 +24,7 @@ export const botConfig = {
     activities: [
       {
         name: "Custom Status", // required by Discord API, not shown in the client
-        state: "stalking",     // this is what people actually see
+        state: "Tiểu đạo chỉ đến để giao duyên",     // this is what people actually see
         type: 4,               // Custom
       },
     ],
@@ -61,9 +61,9 @@ export const botConfig = {
   applications: {
     // Default questions shown when someone fills out an application.
     defaultQuestions: [
-      { question: "What is your name?", required: true },
-      { question: "How old are you?", required: true },
-      { question: "Why do you want to join?", required: true },
+      { question: "Đạo hữu tên là gì?", required: true },
+      { question: "Tuổi đời đạo hữu là?", required: true },
+      { question: "Cơ duyên nào đưa đẩy đạo hữu đến đây?", required: true },
     ],
 
     // Embed colors by application status.
@@ -141,7 +141,7 @@ export const botConfig = {
     },
     footer: {
       // Default footer text used in bot embeds.
-      text: "Titan Bot",
+      text: "Tử Tiêu",
       // Footer icon URL (null = no icon).
       icon: null,
     },
@@ -161,9 +161,9 @@ export const botConfig = {
   economy: {
     currency: {
       // Currency display name.
-      name: "coins",
+      name: "Linh Thạch",
       // Plural display name.
-      namePlural: "coins",
+      namePlural: "Linh Thạch",
       // Currency symbol shown in balances.
       symbol: "$",
     },
@@ -302,10 +302,10 @@ export const botConfig = {
   // =========================
   verification: {
     // Message shown when posting the verification panel.
-    defaultMessage: "Click the button below to verify yourself and gain access to the server!",
+    defaultMessage: "Hãy xác nhận danh tính và gia nhập!",
 
     // Text on the verification button.
-    defaultButtonText: "Verify",
+    defaultButtonText: "Xác nhận",
 
     // Automatic verification behavior.
     autoVerify: {
@@ -332,9 +332,9 @@ export const botConfig = {
 
       // Human-readable descriptions for each criteria mode.
       criteria: {
-        account_age: "Account must be older than specified days",
-        server_size: "All users if server has less than 1000 members",
-        none: "All users immediately"
+        account_age: "Tài khoản phải lâu hơn số ngày chỉ định",
+        server_size: "Tất cả tài khoản nếu sv có nhiều hơn 1k người",
+        none: "Toàn bộ thành viên"
       }
     },
 
@@ -372,11 +372,11 @@ export const botConfig = {
     // Welcome template posted when a user joins.
     // Placeholders: {user}, {server}, {memberCount}
     defaultWelcomeMessage:
-      "Welcome {user} to {server}! We now have {memberCount} members!",
+      "Chào mừng đạo hữu **{user}** đã đến với {server}! Giờ chúng ta đã có `{memberCount}` đạo hữu!",
     // Goodbye template posted when a user leaves.
     // Placeholders: {user}, {memberCount}
     defaultGoodbyeMessage:
-      "{user} has left the server. We now have {memberCount} members.",
+      "Đạo hữu **{user}** đã tìm được đạo lộ mới của mình, chúng ta tạm từ biệt từ đây",
     // Channel ID for welcome messages.
     defaultWelcomeChannel: null,
     // Channel ID for goodbye messages.
@@ -390,7 +390,7 @@ export const botConfig = {
     defaults: {
       // Default naming/description templates for counter entries.
       name: "{name} Counter",
-      description: "Server {name} counter",
+      description: "Bảng Thông Tin {name} ",
       // Channel type used for counters (typically "voice").
       type: "voice",
       // Channel name format. `{count}` is replaced automatically.
@@ -404,26 +404,26 @@ export const botConfig = {
     },
     messages: {
       // Default response messages for counter actions.
-      created: "✅ Created counter **{name}**",
-      deleted: "🗑️ Deleted counter **{name}**",
-      updated: "🔄 Updated counter **{name}**",
+      created: "✅ Đã tạo **{name}**",
+      deleted: "🗑️ Đã xóa **{name}**",
+      updated: "🔄 Đã làm mới **{name}**",
     },
     types: {
       // Built-in counter types and how each count is calculated.
       members: {
         name: "👥 Members",
-        description: "Total members in the server",
+        description: "Tổng Đạo Hữu",
         getCount: (guild) => guild.memberCount.toString(),
       },
       bots: {
         name: "🤖 Bots",
-        description: "Total bot accounts in the server",
+        description: "Tổng Ất Bính Giáp",
         getCount: (guild) =>
           guild.members.cache.filter((m) => m.user.bot).size.toString(),
       },
       members_only: {
         name: "👤 Humans",
-        description: "Total human members (non-bots)",
+        description: "Tổng Người Hữu Duyên",
         getCount: (guild) =>
           guild.members.cache.filter((m) => !m.user.bot).size.toString(),
       },
@@ -434,13 +434,13 @@ export const botConfig = {
   // GENERIC BOT MESSAGES
   // =========================
   messages: {
-    noPermission: "You do not have permission to use this command.",
-    cooldownActive: "Please wait {time} before using this command again.",
-    errorOccurred: "An error occurred while executing this command.",
+    noPermission: "Đạo hữu chưa được phép dùng thuật thức này.",
+    cooldownActive: "Đạo hữu xin hãy nhẫn nại, người còn `{time}` !",
+    errorOccurred: "Đã có vấn đề xảy ra khi dùng thuật thức.",
     missingPermissions:
-      "I am missing required permissions to perform this action.",
-    commandDisabled: "This command has been disabled.",
-    maintenanceMode: "The bot is currently in maintenance mode.",
+      "Đạo hữu chưa đủ quyền hạn để dùng thuật thức.",
+    commandDisabled: "Thuật thức này đã bị vô hiệu hóa.",
+    maintenanceMode: "Ất Bính Giáp đang bế quan tĩnh tu.",
   },
 
   // =========================
@@ -491,11 +491,11 @@ export function validateConfig(config) {
   }
 
   if (!process.env.DISCORD_TOKEN && !process.env.TOKEN) {
-    errors.push("Bot token is required (DISCORD_TOKEN or TOKEN environment variable)");
+    errors.push("Cần Token Sever (DISCORD_TOKEN or TOKEN environment variable)");
   }
 
   if (!process.env.CLIENT_ID) {
-    errors.push("Client ID is required (CLIENT_ID environment variable)");
+    errors.push("Client ID cần được cài đặt (CLIENT_ID environment variable)");
   }
 
   if (process.env.NODE_ENV === 'production') {
@@ -521,7 +521,7 @@ export function validateConfig(config) {
 
 const configErrors = validateConfig(botConfig);
 if (configErrors.length > 0) {
-  logger.error("Bot configuration errors:", configErrors.join("\n"));
+  logger.error("Ất Bính Giáp xuất hiện lỗi: ", configErrors.join("\n"));
   if (process.env.NODE_ENV === "production") {
     process.exit(1);
   }
@@ -530,24 +530,24 @@ if (configErrors.length > 0) {
 export const BotConfig = botConfig;
 
 const COMMAND_CATEGORY_FEATURE_MAP = {
-  birthday: "birthday",
-  community: "community",
-  economy: "economy",
-  fun: "fun",
-  giveaway: "giveaways",
-  jointocreate: "joinToCreate",
-  leveling: "leveling",
-  logging: "logging",
-  moderation: "moderation",
-  music: "music",
-  reaction_roles: "reactionRoles",
-  search: "search",
-  serverstats: "counter",
-  ticket: "tickets",
-  tools: "tools",
-  utility: "utility",
-  verification: "verification",
-  welcome: "welcome",
+  birthday: "Bát Tự",
+  community: "Đạo Hữu",
+  economy: "Linh Thạch",
+  fun: "Tiên Duyên",
+  giveaway: "Cơ Duyên",
+  jointocreate: "Khai Tông",
+  leveling: "Tu Vi",
+  logging: "Thiên Cơ Lục",
+  moderation: "Giới Luật",
+  music: "Nhã Nhạc",
+  reaction_roles: "Pháp Ấn",
+  search: "Truy Cơ",
+  serverstats: "Thiên Cơ Bảng",
+  ticket: "Thiên Cơ Thiếp",
+  tools: "Pháp Khí",
+  utility: "Đạo Cụ",
+  verification: "Khảo Đạo",
+  welcome: "Nghênh Đạo",
 };
 
 function normalizeCategoryKey(category) {
