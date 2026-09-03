@@ -60,17 +60,17 @@ export default {
             })
                 .addFields(
                     {
-                        name: ":lt1: Linh Thạch",
+                        name: "<:lt1:1545082415033360495> Linh Thạch",
                         value: `$${wallet.toLocaleString()}`,
                         inline: true,
                     },
                     {
-                        name: "🏦 Tiền Trang",
+                        name: "<:tientrang:1545104597901774948> Tiền Trang",
                         value: `$${bank.toLocaleString()} / $${maxBank.toLocaleString()}`,
                         inline: true,
                     },
                     {
-                        name: ":tvp1: Tổng cộng",
+                        name: "<:tvp1:1545082419273801859> Tổng cộng",
                         value: `$${(wallet + bank).toLocaleString()}`,
                         inline: true,
                     }
