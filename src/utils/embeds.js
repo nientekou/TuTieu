@@ -227,23 +227,23 @@ export function createEmbed({
 }
 
 const NOTIFICATION_DEFAULT_TITLES = {
-  success: 'Success',
-  error: 'Error',
-  info: 'Information',
-  warning: 'Warning',
-  primary: 'Notice',
+  success: 'Thiên Cơ Đã Thành',
+  error: 'Thiên Cơ Nghịch Chuyển',
+  info: 'Thông Tin',
+  warning: 'Cảnh Báo!',
+  primary: 'Đạo Môn Cáo Thị',
 };
 
 export const USER_ERROR_TITLES = {
-  validation: 'Invalid Input',
-  permission: 'Permission Denied',
-  configuration: 'Configuration Error',
-  database: 'Database Error',
-  network: 'Network Error',
-  discord_api: 'Discord API Error',
-  user_input: 'Input Error',
-  rate_limit: 'Too Fast',
-  unknown: 'Something Went Wrong',
+  validation: 'Đạo Pháp Bất Hợp',
+  permission: 'Vô Duyên Chạm Cấm Chế',
+  configuration: 'Trận Pháp Sai Lệch',
+  database: 'Thiên Cơ Lục Tán Loạn',
+  network: 'Linh Mạch Bế Tắc',
+  discord_api: 'Thiên Đình Truyền Lệnh Dị Thường',
+  user_input: 'Linh Khế Điền Sai',
+  rate_limit: 'Dục Tốc Bất Đạt',
+  unknown: 'Thiên Cơ Chưa Thể Suy Diễn',
 };
 
 const USER_ERROR_COLORS = {
@@ -252,11 +252,11 @@ const USER_ERROR_COLORS = {
 
 /**
  * Build a consistent user-facing error embed.
- * @param {string} errorType - Error category key (e.g. validation, permission)
+ * @param {string} errorType - Thiên Cơ Nghịch Chuyển category key (e.g. validation, permission)
  * @param {string} [description] - Specific, actionable message for the user
  * @param {{ titleOverride?: string }} [options]
  */
-export function buildUserErrorEmbed(errorType, description = '', options = {}) {
+export function buildUserThiên Cơ Nghịch ChuyểnEmbed(errorType, description = '', options = {}) {
   const type = errorType || 'unknown';
   const title = options.titleOverride || USER_ERROR_TITLES[type] || USER_ERROR_TITLES.unknown;
   const color = USER_ERROR_COLORS[type] || 'error';
@@ -291,7 +291,7 @@ function buildNotificationEmbed(title, body = '', color = 'primary') {
 }
 
 /**
- * @deprecated Prefer buildUserErrorEmbed or replyUserError from errorHandler.js.
+ * @deprecated Prefer buildUserThiên Cơ Nghịch ChuyểnEmbed or replyUserThiên Cơ Nghịch Chuyển from errorHandler.js.
  */
 export function errorEmbed(title, detail = null, options = {}) {
   const { showDetails = process.env.NODE_ENV !== 'production' } = options;
@@ -303,36 +303,36 @@ export function errorEmbed(title, detail = null, options = {}) {
   }
 
   const description = body ? String(body).trim() : '';
-  const titleOverride = title && title !== 'Error' ? title : undefined;
+  const titleOverride = title && title !== 'Thiên Cơ Nghịch Chuyển' ? title : undefined;
 
-  return buildUserErrorEmbed('unknown', description, { titleOverride });
+  return buildUserThiên Cơ Nghịch ChuyểnEmbed('unknown', description, { titleOverride });
 }
 
 /** @param {string} titleOrBody - With one arg: body text. With two args: title and body. */
 export function successEmbed(title, body = '') {
   if (arguments.length === 1) {
-    return buildNotificationEmbed('Success', title, 'success');
+    return buildNotificationEmbed('Thiên Cơ Đã Thành', title, 'success');
   }
 
-  return buildNotificationEmbed(title || 'Success', body, 'success');
+  return buildNotificationEmbed(title || 'Thiên Cơ Đã Thành', body, 'success');
 }
 
 /** @param {string} titleOrBody - With one arg: body text. With two args: title and body. */
 export function infoEmbed(title, body = '') {
   if (arguments.length === 1) {
-    return buildNotificationEmbed('Information', title, 'info');
+    return buildNotificationEmbed('Thông Tin', title, 'info');
   }
 
-  return buildNotificationEmbed(title || 'Information', body, 'info');
+  return buildNotificationEmbed(title || 'Thông Tin', body, 'info');
 }
 
 /** @param {string} titleOrBody - With one arg: body text. With two args: title and body. */
 export function warningEmbed(title, body = '') {
   if (arguments.length === 1) {
-    return buildNotificationEmbed('Warning', title, 'warning');
+    return buildNotificationEmbed('Cảnh Báo!', title, 'warning');
   }
 
-  return buildNotificationEmbed(title || 'Warning', body, 'warning');
+  return buildNotificationEmbed(title || 'Cảnh Báo!', body, 'warning');
 }
 
 export function formatUser(user) {
