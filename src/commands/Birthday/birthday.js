@@ -13,15 +13,15 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
         .setName('birthday')
-        .setDescription('Birthday system commands')
+        .setDescription('Hệ thống Bát Tự')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('set')
-                .setDescription('Set your birthday')
+                .setDescription('Đặt Bát Tự của đạo hữu')
                 .addIntegerOption(option =>
                     option
                         .setName('month')
-                        .setDescription('Birth month (1-12)')
+                        .setDescription('Tháng sinh(1-12)')
                         .setRequired(true)
                         .setMinValue(1)
                         .setMaxValue(12)
@@ -29,7 +29,7 @@ export default {
                 .addIntegerOption(option =>
                     option
                         .setName('day')
-                        .setDescription('Birth day (1-31)')
+                        .setDescription('Ngày sinh (1-31)')
                         .setRequired(true)
                         .setMinValue(1)
                         .setMaxValue(31)
@@ -38,28 +38,28 @@ export default {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('info')
-                .setDescription('View birthday information')
+                .setDescription('Xem Bát Tự')
                 .addUserOption(option =>
                     option
                         .setName('user')
-                        .setDescription('User to check birthday for')
+                        .setDescription('Đạo hữu kiểm tra Bát Tự')
                         .setRequired(false)
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('List all birthdays in the server')
+                .setDescription('Danh sách bát tự')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
-                .setDescription('Remove your birthday')
+                .setDescription('Bỏ Bát Tự cũ')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('next')
-                .setDescription('Show upcoming birthdays')
+                .setDescription('Xem ngày sinh tiếp theo')
         )
         .addSubcommand(subcommand =>
             subcommand
