@@ -61,17 +61,17 @@ export default {
                 .addFields(
                     {
                         name: "<:lt1:1545082415033360495> Linh Thạch",
-                        value: `$${wallet.toLocaleString()}`,
+                        value: `<:lt1:1545082415033360495>${wallet.toLocaleString()}`,
                         inline: true,
                     },
                     {
                         name: "<:tientrang:1545104597901774948> Tiền Trang",
-                        value: `$${bank.toLocaleString()} / $${maxBank.toLocaleString()}`,
+                        value: `<:lt1:1545082415033360495>${bank.toLocaleString()} / <:lt1:1545082415033360495>${maxBank.toLocaleString()}`,
                         inline: true,
                     },
                     {
                         name: "<:tvp1:1545082419273801859> Tổng cộng",
-                        value: `$${(wallet + bank).toLocaleString()}`,
+                        value: `<:lt1:1545082415033360495>${(wallet + bank).toLocaleString()}`,
                         inline: true,
                     }
                 )
