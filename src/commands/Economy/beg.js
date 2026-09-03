@@ -63,14 +63,14 @@ export default {
                 newCash += amountWon;
 
                 const successMessages = [
-                    `Một vị Đạo Hữu nào đó đã ném **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** vào cái bát mẻ của bạn`,
-                    `Ai mà hớ hênh quá! Bạn la lên rồi lủm túi tiền có chứa **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** rồi chạy mất.`,
-                    `Có người thấy bạn thật đáng thương nên cho bạn **<:lt1:1545082415033360495>${amountWon.toLocaleString()}**!`,
-                    `Bạn tìm thấy **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** dưới ghế quán trà bên lề đường.`,
+                    `Một vị Đạo Hữu nào đó đã ném **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** vào cái bát mẻ của bạn`,
+                    `Ai mà hớ hênh quá! Bạn la lên rồi lủm túi tiền có chứa **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** rồi chạy mất.`,
+                    `Có người thấy bạn thật đáng thương nên cho bạn **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!`,
+                    `Bạn tìm thấy **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** dưới ghế quán trà bên lề đường.`,
                 ];
 
                 replyEmbed = successEmbed(
-                    'Ăn xin thành công',
+                    'Khất Linh Thành Công',
                     successMessages[
                         Math.floor(Math.random() * successMessages.length)
                     ]
@@ -84,7 +84,7 @@ export default {
                 ];
 
                 replyEmbed = warningEmbed(
-                    'Không đủ Linh Thạch',
+                    'Vẫn Là Nên Tự Lực Cánh Sinh',
                     failMessages[Math.floor(Math.random() * failMessages.length)]
                 );
             }
