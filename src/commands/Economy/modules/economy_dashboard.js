@@ -252,11 +252,11 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
 
     const typeInput = new TextInputBuilder()
         .setCustomId('type')
-        .setLabel('Nhập (wallet or bank)')
+        .setLabel('Nhập (wallet hoặc bank)')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('wallet')
         .setMinLength(1)
-        .setMaxLength(5)
+        .setMaxLength(6)
         .setRequired(true);
 
     modal.addLabelComponents(userLabel);
@@ -349,11 +349,11 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
 
     const typeInput = new TextInputBuilder()
         .setCustomId('type')
-        .setLabel('Nhập (wallet or bank)')
+        .setLabel('Nhập (wallet hoặc bank)')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('wallet')
         .setMinLength(1)
-        .setMaxLength(5)
+        .setMaxLength(6)
         .setRequired(true);
 
     modal.addLabelComponents(userLabel);
@@ -430,7 +430,7 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
         .setValue(BotConfig.economy.currency.symbol)
         .setPlaceholder('$')
         .setMinLength(1)
-        .setMaxLength(3)
+        .setMaxLength(30)
         .setRequired(true);
 
     modal.addComponents(new ActionRowBuilder().addComponents(symbolInput));
