@@ -60,8 +60,8 @@ export async function createInitialHelpMenu(client) {
 
     const options = [
         {
-            label: "📋 All Commands",
-            description: "Browse every available command in a single list",
+            label: "📋 Toàn bộ lệnh",
+            description: "Xem danh sách tổng hợp các lệnh đã có",
             value: ALL_COMMANDS_ID,
         },
         ...categoryDirs.map((category) => {
@@ -69,7 +69,7 @@ export async function createInitialHelpMenu(client) {
             const icon = CATEGORY_ICONS[categoryName] || "🔍";
             return {
                 label: `${icon} ${categoryName}`,
-                description: `View commands in the ${categoryName} category`,
+                description: `Xem lệnh theo ${categoryName} `,
                 value: category,
             };
         }),
@@ -78,24 +78,24 @@ export async function createInitialHelpMenu(client) {
     const botName = client?.user?.username || "Bot";
     const embed = createEmbed({
         title: `📖 ${botName} Help`,
-        description: 'Set up your server, pick what to enable, then browse commands below.',
+        description: 'Cài đặt cho server của đạo hữu, chọn lệnh cần kích hoạt, xem các lệnh bên dưới.',
         color: 'primary',
         thumbnail: client.user?.displayAvatarURL?.({ size: 1024 }),
         fields: [
             {
-                name: '🚀 Getting Started',
+                name: '🚀 Bắt đầu',
                 value: [
-                    '**1. Launch setup** — Run `/configwizard` to configure prefix, mod role, and logs.',
-                    '**2. Enable systems** — Use `/commands dashboard` to turn categories on or off.',                    '**3. Browse commands** — Use the menu below to view categories and commands.',
+                    '**1. Cài đặt** — Dùng `/configwizard` để tạo tiền tố, chế độ mod, và bảng',
+                    '**2. Kích hoạt hệ thống** — Dùng `/commands dashboard` để bật tắt lệnh.',                    '**3. Danh sách** — Dùng danh sách bên dưới để xem lệnh và tệp lệnh.',
                 ].join('\n'),
                 inline: false,
             },
             {
-                name: 'ℹ️ How It Works',
+                name: 'ℹ️ Cách hoạt động',
                 value: [
-                    '• Dashboard commands manage each feature visually',
-                    '• Settings are saved per server',
-                    '• Slash commands and prefixes both work once enabled',
+                    '• Bảng điều khiển giúp quản lý lệnh trực quan hơn ',
+                    '• Cài đặt được lưu cho từng server',
+                    '• Lệnh / và prefix đều sử dụng được khi kích hoạt',
                 ].join('\n'),
                 inline: false,
             },
@@ -108,23 +108,23 @@ export async function createInitialHelpMenu(client) {
     });
 
     embed.setFooter({ 
-        text: "Made with ❤️" 
+        text: "Tử Tiêu with ❤️" 
     });
     embed.setTimestamp();
 
     const bugReportButton = new ButtonBuilder()
         .setCustomId(BUG_REPORT_BUTTON_ID)
-        .setLabel("Report Bug")
+        .setLabel("Báo lỗi")
         .setStyle(ButtonStyle.Danger);
 
     const supportButton = new ButtonBuilder()
-        .setLabel("Support Server")
-        .setURL("https://discord.gg/QnWNz2dKCE")
+        .setLabel("Kênh hỗ trợ")
+        .setURL("https://discord.gg/zTPdWHMwTE")
         .setStyle(ButtonStyle.Link);
 
     const selectRow = createSelectMenu(
         CATEGORY_SELECT_ID,
-        "Select to view the commands",
+        "Chọn để xem lệnh",
         options,
     );
 
@@ -142,8 +142,8 @@ export async function createInitialHelpMenu(client) {
 export default {
     slashOnly: true,
     data: new SlashCommandBuilder()
-        .setName("help")
-        .setDescription("Displays the help menu with all available commands"),
+        .setName("Hỗ Trợ")
+        .setDescription("Hiển thị menu trợ giúp với tất cả các lệnh khả dụng."),
 
     async execute(interaction, guildConfig, client) {
         
@@ -164,8 +164,8 @@ export default {
                 }
 
                 const closedEmbed = createEmbed({
-                    title: "Help menu closed",
-                    description: "Help menu has been closed, use /help again.",
+                    title: "Menu hỗ trợ đã đóng",
+                    description: "Menu hỗ trợ đã đóng lại, dùng lệnh /help lần nữa để mở",
                     color: "secondary",
                 });
 
@@ -174,7 +174,7 @@ export default {
                     components: [],
                 });
             } catch (error) {
-                logger.debug('Help menu close edit failed (interaction may have expired):', error?.message);
+                logger.debug('Đóng menu Hỗ Trợ thất bại (phiên tương tác có thể đã hết hạn):', error?.message);
             }
         }, HELP_MENU_TIMEOUT_MS);
     },
