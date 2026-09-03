@@ -12,15 +12,15 @@ import birthdaySetchannel from './modules/birthday_setchannel.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
-        .setName('birthday')
+        .setName('ngaysinh')
         .setDescription('Hệ thống Bát Tự')
         .addSubcommand(subcommand =>
             subcommand
-                .setName('set')
+                .setName('đặt')
                 .setDescription('Đặt Bát Tự của đạo hữu')
                 .addIntegerOption(option =>
                     option
-                        .setName('month')
+                        .setName('tháng')
                         .setDescription('Tháng sinh(1-12)')
                         .setRequired(true)
                         .setMinValue(1)
@@ -28,7 +28,7 @@ export default {
                 )
                 .addIntegerOption(option =>
                     option
-                        .setName('day')
+                        .setName('ngày')
                         .setDescription('Ngày sinh (1-31)')
                         .setRequired(true)
                         .setMinValue(1)
@@ -64,11 +64,11 @@ export default {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setchannel')
-                .setDescription('Set or disable the channel for birthday announcements. (Manage Server required)')
+                .setDescription('Cài đặt kênh thông báo ngày sinh')
                 .addChannelOption(option =>
                     option
                         .setName('channel')
-                        .setDescription('The text channel for announcements. Leave empty to disable.')
+                        .setDescription('Tên channel.Bỏ trống nếu không cần.')
                         .addChannelTypes(ChannelType.GuildText)
                         .setRequired(false)
                 )
