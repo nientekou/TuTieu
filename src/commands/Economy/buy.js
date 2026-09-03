@@ -11,17 +11,17 @@ const SHOP_ITEMS = shopItems;
 export default {
     data: new SlashCommandBuilder()
         .setName('buy')
-        .setDescription('Buy an item from the shop')
+        .setDescription('Mua vật phẩm từ Nhất Phẩm Các')
         .addStringOption(option =>
             option
                 .setName('item_id')
-                .setDescription('ID of the item to buy')
+                .setDescription('ID của vật phẩm cần mua')
                 .setRequired(true)
         )
         .addIntegerOption(option =>
             option
                 .setName('quantity')
-                .setDescription('Quantity to buy (default: 1)')
+                .setDescription('Số lượng (Mặc định: 1)')
                 .setRequired(false)
                 .setMinValue(1)
                 .setMaxValue(10)
@@ -40,18 +40,18 @@ export default {
 
             if (!item) {
                 throw createError(
-                    `Item ${itemId} not found`,
+                    `Vật phẩm ${itemId} không thể tìm thấy trong Nhất Phẩm Các`,
                     ErrorTypes.VALIDATION,
-                    `The item ID \`${itemId}\` does not exist in the shop.`,
+                    `ID vật phẩm \`${itemId}\` không có trong Nhất Phẩm Các.`,
                     { itemId }
                 );
             }
 
             if (quantity < 1) {
                 throw createError(
-                    "Invalid quantity",
+                    "Số Lượng Không Đúng",
                     ErrorTypes.VALIDATION,
-                    "You must purchase a quantity of 1 or more.",
+                    "Chỉ được mua từ 1 kiện pháp khí trở lên.",
                     { quantity }
                 );
             }
@@ -65,9 +65,9 @@ export default {
 
             if (userData.wallet < totalCost) {
                 throw createError(
-                    "Insufficient funds",
+                    "Linh Thạch Không Đủ",
                     ErrorTypes.VALIDATION,
-                    `You need **$${totalCost.toLocaleString()}** to purchase ${quantity}x **${item.name}**, but you only have **$${userData.wallet.toLocaleString()}** in cash.`,
+                    `Đạo hữu cần có **${totalCost.toLocaleString()}<:lt1:1545082415033360495>** để mua ${quantity}x **${item.name}**, nhưng Đạo Hữu chỉ có **${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>** trong người.`,
                     { required: totalCost, current: userData.wallet, itemId, quantity }
                 );
             }
@@ -75,25 +75,25 @@ export default {
             if (item.type === "role" && itemId === "premium_role") {
                 if (!PREMIUM_ROLE_ID) {
                     throw createError(
-                        "Premium role not configured",
+                        "Đạo Ấn **Đặc Phong Đạo Vị**",
                         ErrorTypes.CONFIGURATION,
-                        "The **Premium Shop Role** has not been configured by a server administrator yet.",
+                        "Tầng lâu giành riêng cho **Đặc Phong Đạo Vị** vẫn chưa được khai mở",
                         { itemId }
                     );
                 }
                 if (interaction.member.roles.cache.has(PREMIUM_ROLE_ID)) {
                     throw createError(
-                        "Role already owned",
+                        "Đã Sở Hữu Đạo Ấn Thân Phận Này",
                         ErrorTypes.VALIDATION,
-                        `You already have the **${item.name}** role.`,
+                        `Đạo Hữu đã sở hữu Đạo Ấn Thân Phận **${item.name}**`,
                         { itemId, roleId: PREMIUM_ROLE_ID }
                     );
                 }
                 if (quantity > 1) {
                     throw createError(
-                        "Invalid quantity for role",
+                        "Một Đạo Ấn Duy Nhất",
                         ErrorTypes.VALIDATION,
-                        `You can only purchase the **${item.name}** role once.`,
+                        `Đạo Hữu đã sở hữu Đạo Ấn **${item.name}** rồi`,
                         { itemId, quantity }
                     );
                 }
@@ -101,7 +101,7 @@ export default {
 
             userData.wallet -= totalCost;
 
-            let successDescription = `You successfully purchased ${quantity}x **${item.name}** for **$${totalCost.toLocaleString()}**!`;
+            let successDescription = `Đạo Hữu đã thành công mua ${quantity}x **${item.name}** với **${totalCost.toLocaleString()}<:lt1:1545082415033360495>**!`;
 
             if (item.type === "role" && itemId === "premium_role") {
                 const member = interaction.member;
@@ -110,9 +110,9 @@ export default {
 
                 if (!role) {
                     throw createError(
-                        "Role not found",
+                        "Không Thấy Đạo Ấn",
                         ErrorTypes.CONFIGURATION,
-                        "The configured premium role no longer exists in this guild.",
+                        "Nhất Phẩm Các đã ngừng nhận người lên Thiên Các",
                         { roleId: PREMIUM_ROLE_ID }
                     );
                 }
@@ -120,38 +120,38 @@ export default {
                 try {
                     await member.roles.add(
                         role,
-                        `Purchased role: ${item.name}`,
+                        `Nhận Đạo Ấn: ${item.name}`,
                     );
-                    successDescription += `\n\n**👑 The role ${role.toString()} has been granted to you!**`;
+                    successDescription += `\n\n**👑 Đạo Ấn ${role.toString()} đã được trao cho Đạo Hữu**`;
                 } catch (roleError) {
                     userData.wallet += totalCost;
                     await setEconomyData(client, guildId, userId, userData);
                     throw createError(
-                        "Role assignment failed",
+                        "Nhận Thất Bại",
                         ErrorTypes.DISCORD_API,
-                        "Successfully deducted money, but failed to grant the role. Your cash has been refunded.",
+                        "Đã khấu trừ Linh Thạch, nhưng ban phong thất bại. Linh Thạch đã hoàn trả về Linh Khố.",
                         { roleId: PREMIUM_ROLE_ID, originalError: roleError.message }
                     );
                 }
             } else if (item.type === "upgrade") {
                 userData.upgrades[itemId] = true;
-                successDescription += `\n\n**✨ Your upgrade is now active!**`;
+                successDescription += `\n\n**✨ Đạo Ấn đã khắc thành, thân phận chính thức sinh hiệu!**`;
             } else if (item.type === "consumable" || item.type === "tool") {
                 userData.inventory[itemId] =
                     (userData.inventory[itemId] || 0) + quantity;
                 if (item.type === "tool") {
-                    successDescription += `\n\n**🛠️ ${item.name} added to your inventory!**`;
+                    successDescription += `\n\n**🛠️ ${item.name} đã được thu vào Túi Càn Khôn của Đạo Hữu!**`;
                 }
             }
 
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                "💰 Purchase Successful",
+                "💰 Thỉnh Bảo Thành Công",
                 successDescription,
             ).addFields({
-                name: "New Balance",
-                value: `$${userData.wallet.toLocaleString()}`,
+                name: "Linh Khố",
+                value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                 inline: true,
             });
 
