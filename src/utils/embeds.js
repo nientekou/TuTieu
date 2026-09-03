@@ -252,11 +252,11 @@ const USER_ERROR_COLORS = {
 
 /**
  * Build a consistent user-facing error embed.
- * @param {string} errorType - Thiên Cơ Nghịch Chuyển category key (e.g. validation, permission)
+ * @param {string} errorType - Error category key (e.g. validation, permission)
  * @param {string} [description] - Specific, actionable message for the user
  * @param {{ titleOverride?: string }} [options]
  */
-export function buildUserThiên Cơ Nghịch ChuyểnEmbed(errorType, description = '', options = {}) {
+export function buildUserErrorEmbed(errorType, description = '', options = {}) {
   const type = errorType || 'unknown';
   const title = options.titleOverride || USER_ERROR_TITLES[type] || USER_ERROR_TITLES.unknown;
   const color = USER_ERROR_COLORS[type] || 'error';
@@ -291,7 +291,7 @@ function buildNotificationEmbed(title, body = '', color = 'primary') {
 }
 
 /**
- * @deprecated Prefer buildUserThiên Cơ Nghịch ChuyểnEmbed or replyUserThiên Cơ Nghịch Chuyển from errorHandler.js.
+ * @deprecated Prefer buildUserErrorEmbed or replyUserError from errorHandler.js.
  */
 export function errorEmbed(title, detail = null, options = {}) {
   const { showDetails = process.env.NODE_ENV !== 'production' } = options;
@@ -305,7 +305,7 @@ export function errorEmbed(title, detail = null, options = {}) {
   const description = body ? String(body).trim() : '';
   const titleOverride = title && title !== 'Thiên Cơ Nghịch Chuyển' ? title : undefined;
 
-  return buildUserThiên Cơ Nghịch ChuyểnEmbed('unknown', description, { titleOverride });
+  return buildUserErrorEmbed('unknown', description, { titleOverride });
 }
 
 /** @param {string} titleOrBody - With one arg: body text. With two args: title and body. */
