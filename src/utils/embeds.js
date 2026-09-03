@@ -227,23 +227,23 @@ export function createEmbed({
 }
 
 const NOTIFICATION_DEFAULT_TITLES = {
-  success: 'Success',
-  error: 'Error',
-  info: 'Information',
-  warning: 'Warning',
-  primary: 'Notice',
+  success: 'Thiên Cơ Đã Thành',
+  error: 'Đạo Vận Gặp Lỗi',
+  info: 'Thông Tin',
+  warning: 'Cảnh Báo',
+  primary: 'Đạo Môn Cáo Thị',
 };
 
 export const USER_ERROR_TITLES = {
-  validation: 'Invalid Input',
-  permission: 'Permission Denied',
-  configuration: 'Configuration Error',
-  database: 'Database Error',
-  network: 'Network Error',
-  discord_api: 'Discord API Error',
-  user_input: 'Input Error',
-  rate_limit: 'Too Fast',
-  unknown: 'Something Went Wrong',
+  validation: 'Đạo Pháp Bất Hợp',
+  permission: 'Vô Duyên Chạm Cấm Chế',
+  configuration: 'Trận Pháp Sai Lệch',
+  database: 'Thiên Cơ Lục Tán Loạn',
+  network: 'Linh Mạch Bế Tắc',
+  discord_api: 'Thiên Đình Truyền Lệnh Dị Thường',
+  user_input: 'Linh Khế Điền Sai',
+  rate_limit: 'Đạo Tâm Quá Nóng Vội',
+  unknown: 'Thiên Cơ Chưa Thể Suy Diễn',
 };
 
 const USER_ERROR_COLORS = {
