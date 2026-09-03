@@ -12,15 +12,15 @@ import birthdaySetchannel from './modules/birthday_setchannel.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
-        .setName('ngaysinh')
+        .setName('birthday')
         .setDescription('Hệ thống Bát Tự')
         .addSubcommand(subcommand =>
             subcommand
-                .setName('đặt')
+                .setName('set')
                 .setDescription('Đặt Bát Tự của đạo hữu')
                 .addIntegerOption(option =>
                     option
-                        .setName('tháng')
+                        .setName('month')
                         .setDescription('Tháng sinh(1-12)')
                         .setRequired(true)
                         .setMinValue(1)
@@ -28,7 +28,7 @@ export default {
                 )
                 .addIntegerOption(option =>
                     option
-                        .setName('ngày')
+                        .setName('day')
                         .setDescription('Ngày sinh (1-31)')
                         .setRequired(true)
                         .setMinValue(1)
