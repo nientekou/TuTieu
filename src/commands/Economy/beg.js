@@ -13,7 +13,7 @@ const SUCCESS_CHANCE = 0.7;
 export default {
     data: new SlashCommandBuilder()
         .setName('beg')
-        .setDescription('Beg for a small amount of money'),
+        .setDescription('Cầu cho thiện nam tín nữ bố thí cho vài đồng cắc lẻ'),
 
     execute: withErrorHandling(async (interaction, config, client) => {
         const deferred = await InteractionHelper.safeDefer(interaction);
@@ -26,9 +26,9 @@ export default {
             
             if (!userData) {
                 throw createError(
-                    "Failed to load economy data",
+                    "Hành Trang bị kẹt",
                     ErrorTypes.DATABASE,
-                    "Failed to load your economy data. Please try again later.",
+                    "Hành Trang của bạn không thể mở ra được, hãy mở lại sau",
                     { userId, guildId }
                 );
             }
@@ -44,9 +44,9 @@ export default {
                     minutes > 0 ? `${minutes} minute(s)` : `${seconds} second(s)`;
 
                 throw createError(
-                    "Beg cooldown active",
+                    "Bạn đã ăn xin quá nhiều rồi",
                     ErrorTypes.RATE_LIMIT,
-                    `You are tired from begging! Try again in **${timeMessage}**.`,
+                    `Không ai thèm hữu duyên cho bạn vài đồng, hãy chờ thêm **${timeMessage}**.`,
                     { remainingTime, minutes, seconds, cooldownType: 'beg' }
                 );
             }
@@ -63,28 +63,28 @@ export default {
                 newCash += amountWon;
 
                 const successMessages = [
-                    `A kind stranger drops **$${amountWon.toLocaleString()}** into your cup.`,
-                    `You spotted an unattended wallet! You grab **$${amountWon.toLocaleString()}** and run.`,
-                    `Someone took pity on you and gave you **$${amountWon.toLocaleString()}**!`,
-                    `You found **$${amountWon.toLocaleString()}** under a park bench.`,
+                    `Một vị Đạo Hữu nào đó đã ném **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** vào cái bát mẻ của bạn`,
+                    `Ai mà hớ hênh quá! Bạn la lên rồi lủm túi tiền có chứa **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** rồi chạy mất.`,
+                    `Có người thấy bạn thật đáng thương nên cho bạn **<:lt1:1545082415033360495>${amountWon.toLocaleString()}**!`,
+                    `Bạn tìm thấy **<:lt1:1545082415033360495>${amountWon.toLocaleString()}** dưới ghế quán trà bên lề đường.`,
                 ];
 
                 replyEmbed = successEmbed(
-                    'Begging Successful',
+                    'Ăn xin thành công',
                     successMessages[
                         Math.floor(Math.random() * successMessages.length)
                     ]
                 );
             } else {
                 const failMessages = [
-                    "The police chased you off. You got nothing.",
-                    "Someone yelled, 'Get a job!' and walked past.",
-                    "A squirrel stole the single coin you had.",
-                    "You tried to beg, but you were too embarrassed and gave up.",
+                    "Quan binh truy sát, bạn bị đá văng",
+                    "Có tiếng la vang vọng, 'Không làm mà đòi có ăn, thì chỉ có...', bạn không kịp nghe những từ cuối",
+                    "Con sóc nhỏ ngậm linh thạch mà bạn cố gắng cả ngày đi mất",
+                    "Bạn thử đặt chén mẻ ra, nhưng quá ngại để mở lời",
                 ];
 
                 replyEmbed = warningEmbed(
-                    'Insufficient Funds',
+                    'Không đủ Linh Thạch',
                     failMessages[Math.floor(Math.random() * failMessages.length)]
                 );
             }
