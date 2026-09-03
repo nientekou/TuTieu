@@ -425,7 +425,7 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
 
     const symbolInput = new TextInputBuilder()
         .setCustomId('currency_symbol')
-        .setLabel('New Currency Symbol')
+        .setLabel('Ký Hiệu Mới')
         .setStyle(TextInputStyle.Short)
         .setValue(BotConfig.economy.currency.symbol)
         .setPlaceholder('$')
@@ -449,23 +449,23 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
     const newSymbol = submitted.fields.getTextInputValue('currency_symbol').trim();
 
     if (newSymbol.length === 0 || newSymbol.length > 3) {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Currency symbol must be 1-3 characters long.' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Cần nhập ký hiệu lại' });
         return;
     }
 
     const success = await updateConfigFile(newSymbol, BotConfig.economy.currency.name);
 
     if (!success) {
-        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Could not update the config file. Please check the logs.' });
+        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Không thể cập nhật Thiên Cơ. Vui lòng kiểm tra lại.' });
         return;
     }
 
     await submitted.reply({
-        embeds: [successEmbed('Currency Symbol Updated', `Currency symbol changed to **${newSymbol}**.\n\n**Note:** The bot needs to be restarted for changes to take effect.`)],
+        embeds: [successEmbed('Ký Hiệu Đã Được Cập Nhật', `Ký hiệu đã được đổi thành **${newSymbol}**.\n\n**Lưu ý:** Cần khởi động lại Tử Tiêu để thay đổi có hiệu lực.`)],
         flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`[ECONOMY_DASHBOARD] Currency symbol changed`, {
+    logger.info(`[ECONOMY_DASHBOARD] Ký Hiệu Đã Được Cập Nhật`, {
         adminId: submitted.user.id,
         oldSymbol: BotConfig.economy.currency.symbol,
         newSymbol
@@ -515,7 +515,7 @@ async function handleChangeName(selectInteraction, rootInteraction, guild) {
     }
 
     await submitted.reply({
-        embeds: [successEmbed('Đã Cập Nhật Tên Mới', `Tên tiền tệ đã được đổi thành **${newName}**.\n\n**Lưu Ý:** Cần khởi động lại bots để tiến hành cập nhật.`)],
+        embeds: [successEmbed('Đã Cập Nhật Tên Mới', `Tên tiền tệ đã được đổi thành **${newName}**.\n\n**Lưu Ý:** Cần khởi động lại Tử Tiêu để thay đổi có hiệu lực.`)],
         flags: MessageFlags.Ephemeral,
     });
 
