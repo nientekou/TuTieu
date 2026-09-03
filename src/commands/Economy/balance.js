@@ -8,11 +8,11 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
         .setName('balance')
-        .setDescription("Mở Hành Trang của bạn hoặc người khác")
+        .setDescription("Mở Túi Càn Khôn của bạn hoặc người khác")
         .addUserOption(option =>
             option
                 .setName('user')
-                .setDescription('Người bạn cần xem Hành Trang')
+                .setDescription('Người bạn cần xem Túi Càn Khôn')
                 .setRequired(false)
         ),
 
@@ -32,7 +32,7 @@ export default {
             throw createError(
                 "Đang kiểm tra",
                 ErrorTypes.VALIDATION,
-                "Bots không có Hành Trang"
+                "Bots không có Túi Càn Khôn"
             );
         }
 
@@ -42,9 +42,9 @@ export default {
 
         if (!userData) {
             throw createError(
-                "Hành Trang bị kẹt",
+                "Túi Càn Khôn bị kẹt",
                 ErrorTypes.DATABASE,
-                "Hành Trang không thể mở ra, thử lại lần sau vậy",
+                "Túi Càn Khôn không thể mở ra, thử lại lần sau vậy",
                 { userId: targetUser.id, guildId }
             );
         }
@@ -55,8 +55,8 @@ export default {
         const bank = typeof userData.bank === 'number' ? userData.bank : 0;
 
             const embed = createEmbed({
-                title: `Hành Trang của ${targetUser.username}`,
-                description: `Bên trong Hành Trang của ${targetUser.username}.`,
+                title: `Túi Càn Khôn của ${targetUser.username}`,
+                description: `Bên trong Túi Càn Khôn của ${targetUser.username}.`,
             })
                 .addFields(
                     {
