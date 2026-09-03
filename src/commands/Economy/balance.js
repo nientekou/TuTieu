@@ -42,9 +42,9 @@ export default {
 
         if (!userData) {
             throw createError(
-                "Không tải được dữ liệu",
+                "Hành Trang bị kẹt",
                 ErrorTypes.DATABASE,
-                "Không tải được dữ liệu, hãy kiểm lại sau",
+                "Hành Trang không thể mở ra, thử lại lần sau vậy",
                 { userId: targetUser.id, guildId }
             );
         }
@@ -61,17 +61,17 @@ export default {
                 .addFields(
                     {
                         name: "<:lt1:1545082415033360495> Linh Thạch",
-                        value: `<:lt1:1545082415033360495>${wallet.toLocaleString()}`,
+                        value: `${wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
                         name: "<:tientrang:1545104597901774948> Tiền Trang",
-                        value: `<:lt1:1545082415033360495>${bank.toLocaleString()} / <:lt1:1545082415033360495>${maxBank.toLocaleString()}`,
+                        value: `${bank.toLocaleString()}<:lt1:1545082415033360495> / ${maxBank.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
                         name: "<:tvp1:1545082419273801859> Tổng cộng",
-                        value: `<:lt1:1545082415033360495>${(wallet + bank).toLocaleString()}`,
+                        value: `${(wallet + bank).toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     }
                 )
