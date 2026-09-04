@@ -12,7 +12,7 @@ const SUCCESS_CHANCE = 0.7;
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('beg')
+        .setName('anxin')
         .setDescription('Cầu cho thiện nam tín nữ bố thí cho vài đồng cắc lẻ'),
 
     execute: withErrorHandling(async (interaction, config, client) => {
@@ -26,9 +26,9 @@ export default {
             
             if (!userData) {
                 throw createError(
-                    "Hành Trang bị kẹt",
+                    "Túi Càn Khôn bị kẹt",
                     ErrorTypes.DATABASE,
-                    "Hành Trang của bạn không thể mở ra được, hãy mở lại sau",
+                    "Túi Càn Khôn của bạn không thể mở ra được, hãy mở lại sau",
                     { userId, guildId }
                 );
             }
