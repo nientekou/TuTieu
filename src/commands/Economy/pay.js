@@ -112,7 +112,7 @@ export default {
                         inline: true,
                     },
                     {
-                        name: "Your New Balance",
+                        name: "Túi Càn Khôn Mới",
                         value: `$${updatedSenderData.wallet.toLocaleString()}`,
                         inline: true,
                     },
@@ -128,8 +128,8 @@ export default {
                 senderId,
                 receiverId: receiver.id,
                 amount,
-                senderBalance: updatedSenderData.wallet,
-                receiverBalance: updatedReceiverData.wallet
+                senderTui: updatedSenderData.wallet,
+                receiverTui: updatedReceiverData.wallet
             });
 
             try {
