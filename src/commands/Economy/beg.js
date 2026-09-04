@@ -6,8 +6,8 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
 const COOLDOWN = 30 * 60 * 1000;
-const MIN_WIN = Number(botConfig?.economy?.begMin) || 50;
-const MAX_WIN = Number(botConfig?.economy?.begMax) || 200;
+const MIN_WIN = Number(botConfig?.economy?.anxinMin) || 50;
+const MAX_WIN = Number(botConfig?.economy?.anxinMax) || 200;
 const SUCCESS_CHANCE = 0.7;
 
 export default {
@@ -33,8 +33,8 @@ export default {
                 );
             }
 
-            const lastBeg = userData.lastBeg || 0;
-            const remainingTime = lastBeg + COOLDOWN - Date.now();
+            const lastAnxin = userData.lastAnxin || 0;
+            const remainingTime = lastAnxin + COOLDOWN - Date.now();
 
             if (remainingTime > 0) {
                 const minutes = Math.floor(remainingTime / 60000);
@@ -47,7 +47,7 @@ export default {
                     "Bạn đã ăn xin quá nhiều rồi",
                     ErrorTypes.RATE_LIMIT,
                     `Không ai thèm hữu duyên cho bạn vài đồng, hãy chờ thêm **${timeMessage}**.`,
-                    { remainingTime, minutes, seconds, cooldownType: 'beg' }
+                    { remainingTime, minutes, seconds, cooldownType: 'anxin' }
                 );
             }
 
@@ -90,10 +90,10 @@ export default {
             }
 
             userData.wallet = newCash;
-userData.lastBeg = Date.now();
+userData.lastAnxin = Date.now();
 
             await setEconomyData(client, guildId, userId, userData);
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [replyEmbed] });
-    }, { command: 'beg' })
+    }, { command: 'anxin' })
 };
