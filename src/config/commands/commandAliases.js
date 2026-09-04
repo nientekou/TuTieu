@@ -4,9 +4,9 @@
  */
 
 export const commandAliases = {
-    'bal': 'balance',
-    'money': 'balance',
-    'cash': 'balance',
+    'bal': 'tui',
+    'money': 'tui',
+    'cash': 'tui',
 
     'dep': 'deposit',
     'with': 'withdraw',
