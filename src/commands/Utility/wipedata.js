@@ -8,22 +8,22 @@ export default {
     slashOnly: true,
     data: new SlashCommandBuilder()
         .setName('wipedata')
-        .setDescription('Delete all your personal data from the bot (irreversible)'),
+        .setDescription('Xóa mọi dấu ấn của bạn (không thể hoàn tác)'),
 
     async execute(interaction, guildConfig, client) {
         const warningMessage = 
-            `⚠️ **THIS ACTION IS IRREVERSIBLE!** ⚠️\n\n` +
-            `This will permanently delete **ALL** your data from this server including:\n` +
-            `• 💰 Economy balance (wallet & bank)\n` +
-            `• 📊 Levels and XP\n` +
-            `• 🎒 Inventory items\n` +
-            `• 🛍️ Shop purchases\n` +
-            `• 🎂 Birthday information\n` +
-            `• 🔢 Counter data\n` +
-            `• 📋 All other personal data\n\n` +
-            `**This cannot be undone. Are you absolutely sure?**`;
+            `⚠️ **LỆNH NÀY KHÔNG THỂ HOÀN TÁC!** ⚠️\n\n` +
+            `Dùng lệnh này sẽ vĩnh viễn xóa toàn bộ dấu ấn của Đạo hHữu khỏi server này, bao gồm:\n` +
+            `• 💰 Economy balance (Túi Càn Khôn & Linh Khố)\n` +
+            `• 📊 Tu Vi và Đạo Hạnh\n` +
+            `• 🎒 Toàn bộ vật phẩm trong Túi\n` +
+            `• 🛍️ Vật phẩm mua từ Nhất Phẩm Các\n` +
+            `• 🎂 Sinh thần Bát Tự\n` +
+            `• 🔢 Ghi chép trên Thiên Cơ\n` +
+            `• 📋 Mọi dữ liệu cá nhân khác\n\n` +
+            `**Nhân quả một khi đã định sẽ không thể nghịch chuyển. Đạo Hữu đã suy xét kỹ chưa?**`;
 
-        const embed = warningEmbed('Wipe All Data', warningMessage);
+        const embed = warningEmbed('Xóa Mọi Dấu Ấn', warningMessage);
 
         const confirmButtons = getConfirmationButtons('wipedata');
 
