@@ -1,10 +1,10 @@
 export const shopItems = [
     {
         id: 'extra_work',
-        name: 'Extra Work Shift',
+        name: 'Trấn Hải Lệnh',
         price: 5000,
-        description: 'Allows 1 extra use of the `/work` command.',
-        type: 'consumable',
+        description: 'Có thể dùng Lệnh bài này để nhận thêm nhiệm vụ từ Trấn Hải Các. `/work` ',
+        type: 'vattu',
         maxSoluong: 5,
 cooldown: 86400000,
         effect: {
@@ -15,10 +15,10 @@ cooldown: 86400000,
     },
     {
         id: 'bank_upgrade_1',
-        name: 'Bank Upgrade I',
+        name: 'Linh Khố Đột Phá I',
         price: 15000,
-        description: 'Increases bank capacity and allows more funds to be deposited.',
-        type: 'upgrade',
+        description: 'Mở rộng dung lượng Linh Khố, cho phép tích trữ thêm Linh Thạch.',
+        type: 'dotpha',
         maxLevel: 5,
         effect: {
             type: 'bank_capacity',
@@ -27,10 +27,10 @@ cooldown: 86400000,
     },
     {
         id: 'diamond_pickaxe',
-        name: 'Diamond Pickaxe',
+        name: 'Cuốc Khai Linh',
         price: 50000,
-        description: 'Increases yield from `/mine`',
-        type: 'tool',
+        description: 'Gia tăng sản lượng Linh Thạch thu được từ /mine.',
+        type: 'phapkhi',
         durability: 100,
         effect: {
             type: 'mining_yield',
@@ -42,7 +42,7 @@ cooldown: 86400000,
         name: 'Premium Server Role',
         price: 15000,
         description: 'A special role granting a fancy color and a 10% daily bonus.',
-        type: 'role',
+        type: 'thanphan',
 roleId: null,
         effect: {
             type: 'daily_bonus',
@@ -54,7 +54,7 @@ roleId: null,
         name: 'Lucky Clover',
         price: 10000,
         description: 'Increases the chance of winning a higher payout on `/gamble` once.',
-        type: 'consumable',
+        type: 'vattu',
         maxSoluong: 10,
         effect: {
             type: 'gamble_boost',
@@ -67,7 +67,7 @@ roleId: null,
         name: '🎣 Fishing Rod',
         price: 5000,
         description: 'Used for fishing commands',
-        type: 'tool',
+        type: 'phapkhi',
         durability: 100,
         effect: {
             type: 'fishing_yield',
@@ -79,7 +79,7 @@ roleId: null,
         name: '⛏️ Pickaxe',
         price: 7500,
         description: 'Used for mining commands',
-        type: 'tool',
+        type: 'phapkhi',
         durability: 100,
         effect: {
             type: 'mining_yield',
@@ -91,7 +91,7 @@ roleId: null,
         name: '💻 Laptop',
         price: 15000,
         description: 'Increases work earnings',
-        type: 'tool',
+        type: 'phapkhi',
         durability: 200,
         effect: {
             type: 'work_yield',
@@ -103,7 +103,7 @@ roleId: null,
         name: '🍀 Lucky Charm',
         price: 10000,
         description: 'Increases luck for gambling. Has 3 uses before being consumed.',
-        type: 'consumable',
+        type: 'vattu',
         maxSoluong: 10,
         effect: {
             type: 'gamble_boost',
@@ -116,7 +116,7 @@ roleId: null,
         name: '📜 Bank Note',
         price: 25000,
         description: 'Increases bank capacity by 10,000. Can be purchased multiple times.',
-        type: 'tool',
+        type: 'phapkhi',
         durability: null,
         effect: {
             type: 'bank_capacity',
@@ -128,7 +128,7 @@ roleId: null,
         name: '🔒 Personal Safe',
         price: 30000,
         description: 'Protects your money from theft. Prevents others from robbing you.',
-        type: 'tool',
+        type: 'phapkhi',
         durability: null,
         effect: {
             type: 'robbery_protection',
@@ -159,7 +159,7 @@ export function validatePurchase(itemId, userData) {
     const inventory = userData.inventory || {};
     const upgrades = userData.upgrades || {};
 
-    if (item.type === 'consumable' && item.maxSoluong) {
+    if (item.type === 'vattu' && item.maxSoluong) {
         const currentSoluong = inventory[itemId] || 0;
         if (currentSoluong >= item.maxSoluong) {
             return { 
@@ -169,7 +169,7 @@ export function validatePurchase(itemId, userData) {
         }
     }
 
-    if (item.type === 'upgrade' && item.maxLevel) {
+    if (item.type === 'dotpha' && item.maxLevel) {
         
         if (upgrades[itemId]) {
             return { 
@@ -179,7 +179,7 @@ export function validatePurchase(itemId, userData) {
         }
     }
 
-    if (item.type === 'tool') {
+    if (item.type === 'phapkhi') {
         
         const currentSoluong = inventory[itemId] || 0;
         if (itemId !== 'bank_note' && currentSoluong > 0) {
@@ -190,7 +190,7 @@ export function validatePurchase(itemId, userData) {
         }
     }
 
-    if (item.type === 'role' && item.roleId) {
+    if (item.type === 'thanphan' && item.roleId) {
         if (userData.roles?.includes(item.roleId)) {
             return { 
                 valid: false, 
