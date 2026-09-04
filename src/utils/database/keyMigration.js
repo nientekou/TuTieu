@@ -82,15 +82,15 @@ function resolveTimestampValue(input, fallback = new Date()) {
 async function migrateEconomyFromTemp(client, legacyKey, value) {
     const parsed = parseKey(canonicalizeKey(legacyKey));
     const payload = typeof value === 'string' ? JSON.parse(value) : value;
-    const wallet = payload?.wallet ?? payload?.balance ?? 0;
+    const wallet = payload?.wallet ?? payload?.tui ?? 0;
     const bank = payload?.bank ?? 0;
 
     await ensureParentRows(client, parsed.guildId, parsed.userId);
     await client.query(
-        `INSERT INTO ${pgConfig.tables.economy} (guild_id, user_id, balance, bank, data, updated_at)
+        `INSERT INTO ${pgConfig.tables.economy} (guild_id, user_id, tui, bank, data, updated_at)
          VALUES ($1, $2, $3, $4, $5::jsonb, CURRENT_TIMESTAMP)
          ON CONFLICT (guild_id, user_id) DO UPDATE SET
-           balance = EXCLUDED.balance,
+           tui = EXCLUDED.tui,
            bank = EXCLUDED.bank,
            data = EXCLUDED.data,
            updated_at = CURRENT_TIMESTAMP`,
