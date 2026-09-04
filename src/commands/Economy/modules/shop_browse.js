@@ -18,11 +18,11 @@ export default {
                 const embed = new EmbedBuilder()
                     .setTitle('Store')
                     .setColor(getColor('primary'))
-                    .setDescription('Use `/buy item_id:<id> quantity:<amount>` to purchase an item.');
+                    .setDescription('Dùng lệnh `/mua item_id:<id> soluong:<số lượng>` để mua vật phẩm.');
                 pageItems.forEach(item => {
                     embed.addFields({
                         name: `${item.name} (${item.id})`,
-                        value: `**Type:** ${item.type}\n **Price:** $${item.price.toLocaleString()}\n${item.description}`,
+                        value: `**Nhập:** ${item.type}\n **Giá:** $${item.price.toLocaleString()}\n${item.description}`,
                         inline: false,
                     });
                 });
@@ -36,12 +36,12 @@ export default {
                     new ActionRowBuilder().addComponents(
                         new ButtonBuilder()
                             .setCustomId('shop_prev')
-                            .setLabel('⬅️ Previous')
+                            .setLabel('⬅️ Trang trước')
                             .setStyle(ButtonStyle.Secondary)
                             .setDisabled(page === 1),
                         new ButtonBuilder()
                             .setCustomId('shop_next')
-                            .setLabel('Next ➡️')
+                            .setLabel('Trang sau ➡️')
                             .setStyle(ButtonStyle.Secondary)
                             .setDisabled(page === totalPages),
                     ),
@@ -61,7 +61,7 @@ export default {
 
             collector.on('collect', async (buttonInteraction) => {
                 if (buttonInteraction.user.id !== interaction.user.id) {
-                    await buttonInteraction.reply({ content: '❌ You cannot use these buttons. Run `/shop` to get your own shop view.', flags: 64 });
+                    await buttonInteraction.reply({ content: '❌ Đạo Hữu không thể can thiệp người khác. Hãy dùng `/npc` để tự tiến vào Nhất Phẩm Các.', flags: 64 });
                     return;
                 }
                 const { customId } = buttonInteraction;
@@ -82,7 +82,7 @@ export default {
                     disabledComponents.forEach(row => row.components.forEach(btn => btn.setDisabled(true)));
                     await message.edit({ components: disabledComponents });
                 } catch (error) {
-                    logger.debug('shop_browse: could not disable components on collector end', {
+                    logger.debug('ĐÓNG: Nhất Phẩm Các đã đóng', {
                         error: error.message,
                     });
                 }
