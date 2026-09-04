@@ -66,7 +66,7 @@ export async function getEconomyData(client, guildId, userId) {
         const data = await client.db.get(key, {});
         const defaults = {
             ...DEFAULT_ECONOMY_DATA,
-            wallet: ECONOMY_CONFIG.startingTui ?? DEFAULT_ECONOMY_DATA.wallet,
+            wallet: ECONOMY_CONFIG.startingBalance ?? DEFAULT_ECONOMY_DATA.wallet,
         };
         
         return normalizeEconomyData(data, defaults);
@@ -92,7 +92,7 @@ export async function setEconomyData(client, guildId, userId, data) {
     }
 }
 
-export async function updateTui(client, guildId, userId, options = {}) {
+export async function updateBalance(client, guildId, userId, options = {}) {
     const data = await getEconomyData(client, guildId, userId);
     
     if (options.wallet !== undefined) {
@@ -207,8 +207,8 @@ export function getCrimeOutcome() {
     return outcomes[Math.floor(Math.random() * outcomes.length)];
 }
 
-export function getRobOutcome(targetTui) {
-    if (targetTui <= 0) {
+export function getRobOutcome(targetBalance) {
+    if (targetBalance <= 0) {
         return {
             success: false,
             amount: 0,
@@ -220,8 +220,8 @@ const success = Math.random() > 0.4;
     
     if (success) {
         const amount = Math.min(
-Math.floor(Math.random() * (targetTui * 0.3)) + 1,
-            targetTui
+Math.floor(Math.random() * (targetBalance * 0.3)) + 1,
+            targetBalance
         );
         
         return {
@@ -285,7 +285,7 @@ export const addMoney = wrapServiceBoundary(async function addMoney(client, guil
     await setEconomyData(client, guildId, userId, userData);
 
     return {
-        newTui: type === 'bank' ? userData.bank : userData.wallet,
+        newBalance: type === 'bank' ? userData.bank : userData.wallet,
         ...(type === 'bank' ? { maxBank: getMaxBankCapacity(userData) } : {}),
     };
 }, {
@@ -341,7 +341,7 @@ export const removeMoney = wrapServiceBoundary(async function removeMoney(client
     await setEconomyData(client, guildId, userId, userData);
 
     return {
-        newTui: type === 'bank' ? userData.bank : userData.wallet,
+        newBalance: type === 'bank' ? userData.bank : userData.wallet,
     };
 }, {
     service: 'economy',
