@@ -5,7 +5,7 @@ export const shopItems = [
         price: 5000,
         description: 'Allows 1 extra use of the `/work` command.',
         type: 'consumable',
-        maxQuantity: 5,
+        maxSoluong: 5,
 cooldown: 86400000,
         effect: {
             type: 'command_boost',
@@ -55,7 +55,7 @@ roleId: null,
         price: 10000,
         description: 'Increases the chance of winning a higher payout on `/gamble` once.',
         type: 'consumable',
-        maxQuantity: 10,
+        maxSoluong: 10,
         effect: {
             type: 'gamble_boost',
             multiplier: 1.5,
@@ -104,7 +104,7 @@ roleId: null,
         price: 10000,
         description: 'Increases luck for gambling. Has 3 uses before being consumed.',
         type: 'consumable',
-        maxQuantity: 10,
+        maxSoluong: 10,
         effect: {
             type: 'gamble_boost',
             multiplier: 1.3,
@@ -159,12 +159,12 @@ export function validatePurchase(itemId, userData) {
     const inventory = userData.inventory || {};
     const upgrades = userData.upgrades || {};
 
-    if (item.type === 'consumable' && item.maxQuantity) {
-        const currentQuantity = inventory[itemId] || 0;
-        if (currentQuantity >= item.maxQuantity) {
+    if (item.type === 'consumable' && item.maxSoluong) {
+        const currentSoluong = inventory[itemId] || 0;
+        if (currentSoluong >= item.maxSoluong) {
             return { 
                 valid: false, 
-                reason: `You can only have a maximum of ${item.maxQuantity} ${item.name}s` 
+                reason: `You can only have a maximum of ${item.maxSoluong} ${item.name}s` 
             };
         }
     }
@@ -181,8 +181,8 @@ export function validatePurchase(itemId, userData) {
 
     if (item.type === 'tool') {
         
-        const currentQuantity = inventory[itemId] || 0;
-        if (itemId !== 'bank_note' && currentQuantity > 0) {
+        const currentSoluong = inventory[itemId] || 0;
+        if (itemId !== 'bank_note' && currentSoluong > 0) {
             return { 
                 valid: false, 
                 reason: `You already have a ${item.name}` 
