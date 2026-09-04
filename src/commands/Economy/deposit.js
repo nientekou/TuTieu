@@ -57,7 +57,7 @@ export default {
                     "Zero deposit amount",
                     ErrorTypes.VALIDATION,
                     "You have no cash to deposit.",
-                    { userId, walletTui: userData.wallet }
+                    { userId, walletBalance: userData.wallet }
                 );
             }
 
@@ -107,7 +107,7 @@ export default {
                     "No space or cash for deposit",
                     ErrorTypes.VALIDATION,
                     "The amount you tried to deposit was either 0 or exceeded your bank capacity after checking your cash balance.",
-                    { depositAmount, availableSpace, walletTui: userData.wallet }
+                    { depositAmount, availableSpace, walletBalance: userData.wallet }
                 );
             }
 
