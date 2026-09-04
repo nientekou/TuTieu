@@ -14,13 +14,13 @@ export default {
         const warningMessage = 
             `⚠️ **LỆNH NÀY KHÔNG THỂ HOÀN TÁC!** ⚠️\n\n` +
             `Dùng lệnh này sẽ vĩnh viễn xóa toàn bộ dấu ấn của Đạo hHữu khỏi server này, bao gồm:\n` +
-            `• 💰 Economy balance (Túi Càn Khôn & Linh Khố)\n` +
-            `• 📊 Tu Vi và Đạo Hạnh\n` +
-            `• 🎒 Toàn bộ vật phẩm trong Túi\n` +
-            `• 🛍️ Vật phẩm mua từ Nhất Phẩm Các\n` +
+            `• <:lt1:1545082415033360495> Linh Thạch (Túi Càn Khôn & Linh Khố)\n` +
+            `• <:vdl:1545397492831494144> Tu Vi và Đạo Hạnh\n` +
+            `• <:tvp1:1545082419273801859> Toàn bộ vật phẩm trong Túi\n` +
+            `• <:tvp2:1545082417012932639> Vật phẩm mua từ Nhất Phẩm Các\n` +
             `• 🎂 Sinh thần Bát Tự\n` +
-            `• 🔢 Ghi chép trên Thiên Cơ\n` +
-            `• 📋 Mọi dữ liệu cá nhân khác\n\n` +
+            `• <:tin2:1545087233135214702> Ghi chép trên Thiên Cơ\n` +
+            `• <:tin1:1545087235227918346> Mọi dữ liệu cá nhân khác\n\n` +
             `**Nhân quả một khi đã định sẽ không thể nghịch chuyển. Đạo Hữu đã suy xét kỹ chưa?**`;
 
         const embed = warningEmbed('Xóa Mọi Dấu Ấn', warningMessage);
