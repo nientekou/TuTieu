@@ -682,7 +682,7 @@ class PostgreSQLDatabase {
                     if (row.data && typeof row.data === 'object' && Object.keys(row.data).length > 0) {
                         return row.data;
                     }
-                    return { wallet: row.balance ?? 0, bank: row.bank ?? 0 };
+                    return { wallet: row.tui ?? 0, bank: row.bank ?? 0 };
                 }
                 
                 case 'afk_status': {
@@ -864,8 +864,8 @@ class PostgreSQLDatabase {
                         `INSERT INTO ${pgConfig.tables.economy} (guild_id, user_id, balance, bank, data, updated_at) 
                          VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP) 
                          ON CONFLICT (guild_id, user_id) DO UPDATE SET 
-                         balance = $3, bank = $4, data = $5, updated_at = CURRENT_TIMESTAMP`,
-                        [parsedKey.guildId, parsedKey.userId, value.wallet ?? value.balance ?? 0, value.bank ?? 0, value]
+                         tui = $3, bank = $4, data = $5, updated_at = CURRENT_TIMESTAMP`,
+                        [parsedKey.guildId, parsedKey.userId, value.wallet ?? value.tui ?? 0, value.bank ?? 0, value]
                     );
                     return true;
                 
