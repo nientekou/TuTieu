@@ -169,7 +169,7 @@ export const botConfig = {
     },
 
     // Starting balance for new users.
-    startingTui: 0,
+    startingBalance: 0,
 
     // Maximum bank amount before upgrades (if upgrades are used).
     baseBankCapacity: 100000,
