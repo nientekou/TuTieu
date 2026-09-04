@@ -55,7 +55,7 @@ async function buildDashboardEmbed(guild, client) {
         logger.error('Lỗi tính toán thống kê Linh Khố:', error);
     }
 
-    const avgBalance = userCount > 0 ? Math.floor(totalInCirculation / userCount) : 0;
+    const avgTui = userCount > 0 ? Math.floor(totalInCirculation / userCount) : 0;
 
     return new EmbedBuilder()
         .setTitle('💰 Thiên Cơ Linh Khố')
@@ -64,7 +64,7 @@ async function buildDashboardEmbed(guild, client) {
         .addFields(
             { name: '💰 Tổng Tiền Tệ Lưu Hành', value: `\`${currencySymbol}${totalInCirculation.toLocaleString()}\``, inline: true },
             { name: '👥 Đạo Hữu', value: `\`${userCount.toLocaleString()}\``, inline: true },
-            { name: '📊 Tiền Tệ Bình Quân', value: `\`${currencySymbol}${avgBalance.toLocaleString()}\``, inline: true },
+            { name: '📊 Tiền Tệ Bình Quân', value: `\`${currencySymbol}${avgTui.toLocaleString()}\``, inline: true },
             { name: '💱 Ký Hiệu Tiền Tệ', value: `\`${currencySymbol}\``, inline: true },
             { name: '📝 Tên Tiền Tệ', value: `\`${currencyName}\``, inline: true },
         )
@@ -301,12 +301,12 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
         return;
     }
 
-    const { newBalance } = await addMoney(client, guild.id, userId, amount, type);
+    const { newTui } = await addMoney(client, guild.id, userId, amount, type);
 
     const currencySymbol = BotConfig.economy.currency.symbol;
 
     await submitted.reply({
-        embeds: [successEmbed('Nạp Thành Công', `Đã thành công thêm ${currencySymbol}${amount.toLocaleString()} cho ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newBalance.toLocaleString()}`)],
+        embeds: [successEmbed('Nạp Thành Công', `Đã thành công thêm ${currencySymbol}${amount.toLocaleString()} cho ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newTui.toLocaleString()}`)],
         flags: MessageFlags.Ephemeral,
     });
 
@@ -315,7 +315,7 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
         targetUserId: userId,
         amount,
         type,
-        newBalance,
+        newTui,
     });
 
     await refreshDashboard(rootInteraction, guild, client);
@@ -398,12 +398,12 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
         return;
     }
 
-    const { newBalance } = await removeMoney(client, guild.id, userId, amount, type);
+    const { newTui } = await removeMoney(client, guild.id, userId, amount, type);
 
     const currencySymbol = BotConfig.economy.currency.symbol;
 
     await submitted.reply({
-        embeds: [successEmbed('Trừ Thành Công', `Đã trừ ${currencySymbol}${amount.toLocaleString()} từ ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newBalance.toLocaleString()}`)],
+        embeds: [successEmbed('Trừ Thành Công', `Đã trừ ${currencySymbol}${amount.toLocaleString()} từ ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newTui.toLocaleString()}`)],
         flags: MessageFlags.Ephemeral,
     });
 
@@ -412,7 +412,7 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
         targetUserId: userId,
         amount,
         type,
-        newBalance,
+        newTui,
     });
 
     await refreshDashboard(rootInteraction, guild, client);
