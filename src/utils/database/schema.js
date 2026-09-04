@@ -117,7 +117,7 @@ export const tableStatements = [
     `CREATE TABLE IF NOT EXISTS ${t.economy} (
         guild_id VARCHAR(20),
         user_id VARCHAR(20),
-        tui BIGINT DEFAULT 0,
+        balance BIGINT DEFAULT 0,
         bank BIGINT DEFAULT 0,
         data JSONB DEFAULT '{}',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
