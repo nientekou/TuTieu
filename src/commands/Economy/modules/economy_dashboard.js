@@ -52,49 +52,49 @@ async function buildDashboardEmbed(guild, client) {
             }
         }
     } catch (error) {
-        logger.error('Lỗi tính toán thống kê Linh Khố:', error);
+        logger.error('Error calculating economy stats:', error);
     }
 
-    const avgTui = userCount > 0 ? Math.floor(totalInCirculation / userCount) : 0;
+    const avgBalance = userCount > 0 ? Math.floor(totalInCirculation / userCount) : 0;
 
     return new EmbedBuilder()
-        .setTitle('💰 Thiên Cơ Linh Khố')
-        .setDescription(`Quản lý Linh Khố của **${guild.name}**.\n Chọn một mục bên dưới để thực hiện thao tác.`)
+        .setTitle('💰 Economy Dashboard')
+        .setDescription(`Manage the economy system for **${guild.name}**.\nSelect an option below to perform an action.`)
         .setColor(getColor('economy'))
         .addFields(
-            { name: '💰 Tổng Tiền Tệ Lưu Hành', value: `\`${currencySymbol}${totalInCirculation.toLocaleString()}\``, inline: true },
-            { name: '👥 Đạo Hữu', value: `\`${userCount.toLocaleString()}\``, inline: true },
-            { name: '📊 Tiền Tệ Bình Quân', value: `\`${currencySymbol}${avgTui.toLocaleString()}\``, inline: true },
-            { name: '💱 Ký Hiệu Tiền Tệ', value: `\`${currencySymbol}\``, inline: true },
-            { name: '📝 Tên Tiền Tệ', value: `\`${currencyName}\``, inline: true },
+            { name: '💰 Total in Circulation', value: `\`${currencySymbol}${totalInCirculation.toLocaleString()}\``, inline: true },
+            { name: '👥 Active Users', value: `\`${userCount.toLocaleString()}\``, inline: true },
+            { name: '📊 Average Balance', value: `\`${currencySymbol}${avgBalance.toLocaleString()}\``, inline: true },
+            { name: '💱 Currency Symbol', value: `\`${currencySymbol}\``, inline: true },
+            { name: '📝 Currency Name', value: `\`${currencyName}\``, inline: true },
         )
-        .setFooter({ text: 'Thiên Cơ Bảng sẽ tự đóng sau 10 phút không có Đạo Hữu thao tác' })
+        .setFooter({ text: 'Dashboard closes after 10 minutes of inactivity' })
         .setTimestamp();
 }
 
 function buildSelectMenu(guildId) {
     return new StringSelectMenuBuilder()
         .setCustomId(`economy_dashboard_${guildId}`)
-        .setPlaceholder('Chọn một thao tác...')
+        .setPlaceholder('Select an action...')
         .addOptions(
             new StringSelectMenuOptionBuilder()
-                .setLabel('Nạp Tiền')
-                .setDescription('Thêm tiền vào Túi Càn Khôn hoặc Tiền Trang của Đạo Hữu')
+                .setLabel('Add Currency')
+                .setDescription('Add currency to a user\'s wallet or bank')
                 .setValue('add_currency')
                 .setEmoji('💰'),
             new StringSelectMenuOptionBuilder()
-                .setLabel('Khấu Trừ Tiền')
-                .setDescription('Thu hồi tiền từ Túi Càn Khôn hoặc Tiền Trang của đạo hữu')
+                .setLabel('Remove Currency')
+                .setDescription('Remove currency from a user\'s wallet or bank')
                 .setValue('remove_currency')
                 .setEmoji('💸'),
             new StringSelectMenuOptionBuilder()
-                .setLabel('Đổi ký hiệu tiền tệ')
-                .setDescription('Đổi ký hiệu tiền tệ')
+                .setLabel('Change Currency Symbol')
+                .setDescription('Change the currency symbol (e.g., $, €, £)')
                 .setValue('change_currency')
                 .setEmoji('💱'),
             new StringSelectMenuOptionBuilder()
-                .setLabel('Đổi tên tiền tệ')
-                .setDescription('Đổi tên loại tiền tệ')
+                .setLabel('Change Currency Name')
+                .setDescription('Change the currency name (e.g., coins, credits)')
                 .setValue('change_name')
                 .setEmoji('📝'),
         );
@@ -131,10 +131,10 @@ async function updateConfigFile(currencySymbol, currencyName) {
         );
         
         await fs.writeFile(configPath, configContent, 'utf-8');
-        logger.info('Thiên Cơ Bảng đã được cập nhật thành công.');
+        logger.info('Config file updated successfully');
         return true;
     } catch (error) {
-        logger.error('Lỗi khi cập nhật Thiên Cơ Bảng:', error);
+        logger.error('Error updating config file:', error);
         return false;
     }
 }
@@ -178,15 +178,15 @@ export default {
                     }
                 } catch (error) {
                     if (error instanceof TitanBotError) {
-                        logger.debug(`Thiên Cơ Bảng xác thực thất bại: ${error.message}`);
+                        logger.debug(`Economy dashboard validation error: ${error.message}`);
                     } else {
-                        logger.error('Thiên Cơ Bảng phát sinh lỗi', error);
+                        logger.error('Unexpected economy dashboard error:', error);
                     }
 
                     const errorMessage =
                         error instanceof TitanBotError
-                            ? error.userMessage || 'Đã xảy ra lỗi khi xử lý lựa chọn của Đạo Hữu.'
-                            : 'Đã xảy ra lỗi bất thường khi xử lý lựa chọn của Đạo Hữu.';
+                            ? error.userMessage || 'An error occurred while processing your selection.'
+                            : 'An unexpected error occurred while processing your request.';
 
                     if (!selectInteraction.replied && !selectInteraction.deferred) {
                         await selectInteraction.deferUpdate().catch(() => {});
@@ -202,8 +202,8 @@ export default {
             collector.on('end', async (collected, reason) => {
                 if (reason === 'time') {
                     const timeoutEmbed = new EmbedBuilder()
-                        .setTitle('Thiên Cơ Bảng Hết Thời Hạn')
-                        .setDescription('Thiên Cơ Bảng đã tự đóng do quá lâu không có thao tác. Vui lòng tái khởi đạo lệnh để tiếp tục.')
+                        .setTitle('Dashboard Timed Out')
+                        .setDescription('This dashboard has been closed due to inactivity. Please run the command again to continue.')
                         .setColor(getColor('error'));
                     
                     await InteractionHelper.safeEditReply(interaction, {
@@ -214,11 +214,11 @@ export default {
             });
         } catch (error) {
             if (error instanceof TitanBotError) throw error;
-            logger.error('Thiên Cơ Bảng phát sinh lỗi', error);
+            logger.error('Unexpected error in economy_dashboard:', error);
             throw new TitanBotError(
-                `Thiên Cơ Bảng khởi động thất bại: ${error.message}`,
+                `Economy dashboard failed: ${error.message}`,
                 ErrorTypes.UNKNOWN,
-                'Thất bại khi cố mở Thiên Cơ Bảng',
+                'Failed to open the economy dashboard.',
             );
         }
     },
@@ -227,23 +227,23 @@ export default {
 async function handleAddCurrency(selectInteraction, rootInteraction, guild, client) {
     const modal = new ModalBuilder()
         .setCustomId(`economy_add_currency_${guild.id}`)
-        .setTitle('Nạp Tiền');
+        .setTitle('Add Currency');
 
     const userSelect = new UserSelectMenuBuilder()
         .setCustomId('target_user')
-        .setPlaceholder('Chọn một Đạo Hữu...')
+        .setPlaceholder('Select a user...')
         .setMinValues(1)
         .setMaxValues(1)
         .setRequired(true);
 
     const userLabel = new LabelBuilder()
-        .setLabel('Đạo Hữu')
-        .setDescription('Đạo Hữu cần chọn để trao tiền')
+        .setLabel('Target User')
+        .setDescription('User to add currency to')
         .setUserSelectMenuComponent(userSelect);
 
     const amountInput = new TextInputBuilder()
         .setCustomId('amount')
-        .setLabel('Số tiền muốn trao')
+        .setLabel('Amount to add')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('100')
         .setMinLength(1)
@@ -252,11 +252,11 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
 
     const typeInput = new TextInputBuilder()
         .setCustomId('type')
-        .setLabel('Nhập (wallet hoặc bank)')
+        .setLabel('Type (wallet or bank)')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('wallet')
         .setMinLength(1)
-        .setMaxLength(6)
+        .setMaxLength(5)
         .setRequired(true);
 
     modal.addLabelComponents(userLabel);
@@ -281,41 +281,41 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
     const type = submitted.fields.getTextInputValue('type').trim().toLowerCase();
 
     if (isNaN(amount) || amount <= 0) {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Chỉ có thể nhập số dương' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Amount must be a positive number.' });
         return;
     }
 
     if (type !== 'wallet' && type !== 'bank') {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Bắt buộc phải nhập đúng "wallet" hoặc "bank".' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Type must be either "wallet" or "bank".' });
         return;
     }
 
     const member = await guild.members.fetch(userId).catch(() => null);
     if (!member) {
-        await replyUserError(submitted, { type: ErrorTypes.USER_INPUT, message: 'Đạo Hữu được chỉ định không có trong server' });
+        await replyUserError(submitted, { type: ErrorTypes.USER_INPUT, message: 'The specified user is not in this server.' });
         return;
     }
 
     if (member.user.bot) {
-        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Không áp dụng với Bots' });
+        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Bots do not have economy accounts.' });
         return;
     }
 
-    const { newTui } = await addMoney(client, guild.id, userId, amount, type);
+    const { newBalance } = await addMoney(client, guild.id, userId, amount, type);
 
     const currencySymbol = BotConfig.economy.currency.symbol;
 
     await submitted.reply({
-        embeds: [successEmbed('Nạp Thành Công', `Đã thành công thêm ${currencySymbol}${amount.toLocaleString()} cho ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newTui.toLocaleString()}`)],
+        embeds: [successEmbed('Currency Added', `Successfully added ${currencySymbol}${amount.toLocaleString()} to ${member.user.tag}'s ${type}.\n**New Balance:** ${currencySymbol}${newBalance.toLocaleString()}`)],
         flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`[ECONOMY_DASHBOARD] Nạp Thành Công`, {
+    logger.info(`[ECONOMY_DASHBOARD] Currency added`, {
         adminId: submitted.user.id,
         targetUserId: userId,
         amount,
         type,
-        newTui,
+        newBalance,
     });
 
     await refreshDashboard(rootInteraction, guild, client);
@@ -324,23 +324,23 @@ async function handleAddCurrency(selectInteraction, rootInteraction, guild, clie
 async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, client) {
     const modal = new ModalBuilder()
         .setCustomId(`economy_remove_currency_${guild.id}`)
-        .setTitle('Khấu Trừ Tiền');
+        .setTitle('Remove Currency');
 
     const userSelect = new UserSelectMenuBuilder()
         .setCustomId('target_user')
-        .setPlaceholder('Chọn một Đạo Hữu...')
+        .setPlaceholder('Select a user...')
         .setMinValues(1)
         .setMaxValues(1)
         .setRequired(true);
 
     const userLabel = new LabelBuilder()
-        .setLabel('Đạo Hữu')
-        .setDescription('Đạo Hữu muốn trừ tiền')
+        .setLabel('Target User')
+        .setDescription('User to remove currency from')
         .setUserSelectMenuComponent(userSelect);
 
     const amountInput = new TextInputBuilder()
         .setCustomId('amount')
-        .setLabel('Số tiền muốn trừ')
+        .setLabel('Amount to remove')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('100')
         .setMinLength(1)
@@ -349,11 +349,11 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
 
     const typeInput = new TextInputBuilder()
         .setCustomId('type')
-        .setLabel('Nhập (wallet hoặc bank)')
+        .setLabel('Type (wallet or bank)')
         .setStyle(TextInputStyle.Short)
         .setPlaceholder('wallet')
         .setMinLength(1)
-        .setMaxLength(6)
+        .setMaxLength(5)
         .setRequired(true);
 
     modal.addLabelComponents(userLabel);
@@ -378,41 +378,41 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
     const type = submitted.fields.getTextInputValue('type').trim().toLowerCase();
 
     if (isNaN(amount) || amount <= 0) {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Bắt buộc phải nhập số dương' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Amount must be a positive number.' });
         return;
     }
 
     if (type !== 'wallet' && type !== 'bank') {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Bắt buộc phải là "wallet" hoặc "bank".' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Type must be either "wallet" or "bank".' });
         return;
     }
 
     const member = await guild.members.fetch(userId).catch(() => null);
     if (!member) {
-        await replyUserError(submitted, { type: ErrorTypes.USER_INPUT, message: 'Đạo Hữu được chỉ định không có trong server' });
+        await replyUserError(submitted, { type: ErrorTypes.USER_INPUT, message: 'The specified user is not in this server.' });
         return;
     }
 
     if (member.user.bot) {
-        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Không áp dụng với Bots' });
+        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Bots do not have economy accounts.' });
         return;
     }
 
-    const { newTui } = await removeMoney(client, guild.id, userId, amount, type);
+    const { newBalance } = await removeMoney(client, guild.id, userId, amount, type);
 
     const currencySymbol = BotConfig.economy.currency.symbol;
 
     await submitted.reply({
-        embeds: [successEmbed('Trừ Thành Công', `Đã trừ ${currencySymbol}${amount.toLocaleString()} từ ${member.user.tag}'s ${type}.\n**Số tiền hiện có:** ${currencySymbol}${newTui.toLocaleString()}`)],
+        embeds: [successEmbed('Currency Removed', `Successfully removed ${currencySymbol}${amount.toLocaleString()} from ${member.user.tag}'s ${type}.\n**New Balance:** ${currencySymbol}${newBalance.toLocaleString()}`)],
         flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`[ECONOMY_DASHBOARD] Trừ Thành Công`, {
+    logger.info(`[ECONOMY_DASHBOARD] Currency removed`, {
         adminId: submitted.user.id,
         targetUserId: userId,
         amount,
         type,
-        newTui,
+        newBalance,
     });
 
     await refreshDashboard(rootInteraction, guild, client);
@@ -421,16 +421,16 @@ async function handleRemoveCurrency(selectInteraction, rootInteraction, guild, c
 async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
     const modal = new ModalBuilder()
         .setCustomId(`economy_change_currency_${guild.id}`)
-        .setTitle('Đổi ký hiệu tiền tệ');
+        .setTitle('Change Currency Symbol');
 
     const symbolInput = new TextInputBuilder()
         .setCustomId('currency_symbol')
-        .setLabel('Ký Hiệu Mới')
+        .setLabel('New Currency Symbol')
         .setStyle(TextInputStyle.Short)
         .setValue(BotConfig.economy.currency.symbol)
         .setPlaceholder('$')
         .setMinLength(1)
-        .setMaxLength(30)
+        .setMaxLength(3)
         .setRequired(true);
 
     modal.addComponents(new ActionRowBuilder().addComponents(symbolInput));
@@ -448,24 +448,24 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
 
     const newSymbol = submitted.fields.getTextInputValue('currency_symbol').trim();
 
-    if (newSymbol.length === 0 || newSymbol.length > 30) {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Cần nhập ký hiệu lại' });
+    if (newSymbol.length === 0 || newSymbol.length > 3) {
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Currency symbol must be 1-3 characters long.' });
         return;
     }
 
     const success = await updateConfigFile(newSymbol, BotConfig.economy.currency.name);
 
     if (!success) {
-        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Không thể cập nhật Thiên Cơ. Vui lòng kiểm tra lại.' });
+        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Could not update the config file. Please check the logs.' });
         return;
     }
 
     await submitted.reply({
-        embeds: [successEmbed('Ký Hiệu Đã Được Cập Nhật', `Ký hiệu đã được đổi thành **${newSymbol}**.\n\n**Lưu ý:** Cần khởi động lại Tử Tiêu để thay đổi có hiệu lực.`)],
+        embeds: [successEmbed('Currency Symbol Updated', `Currency symbol changed to **${newSymbol}**.\n\n**Note:** The bot needs to be restarted for changes to take effect.`)],
         flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`[ECONOMY_DASHBOARD] Ký Hiệu Đã Được Cập Nhật`, {
+    logger.info(`[ECONOMY_DASHBOARD] Currency symbol changed`, {
         adminId: submitted.user.id,
         oldSymbol: BotConfig.economy.currency.symbol,
         newSymbol
@@ -475,14 +475,14 @@ async function handleChangeCurrency(selectInteraction, rootInteraction, guild) {
 async function handleChangeName(selectInteraction, rootInteraction, guild) {
     const modal = new ModalBuilder()
         .setCustomId(`economy_change_name_${guild.id}`)
-        .setTitle('Đổi tên tiền tệ');
+        .setTitle('Change Currency Name');
 
     const nameInput = new TextInputBuilder()
         .setCustomId('currency_name')
-        .setLabel('Tên Tiền Tệ Mới')
+        .setLabel('New Currency Name')
         .setStyle(TextInputStyle.Short)
         .setValue(BotConfig.economy.currency.name)
-        .setPlaceholder('xu')
+        .setPlaceholder('coins')
         .setMinLength(1)
         .setMaxLength(20)
         .setRequired(true);
@@ -503,23 +503,23 @@ async function handleChangeName(selectInteraction, rootInteraction, guild) {
     const newName = submitted.fields.getTextInputValue('currency_name').trim();
 
     if (newName.length === 0 || newName.length > 20) {
-        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Tên tiền cần 1-20 ký tự.' });
+        await replyUserError(submitted, { type: ErrorTypes.VALIDATION, message: 'Currency name must be 1-20 characters long.' });
         return;
     }
 
     const success = await updateConfigFile(BotConfig.economy.currency.symbol, newName);
 
     if (!success) {
-        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: '"Không thể cập nhật Thiên Cơ. Vui lòng kiểm tra lại."' });
+        await replyUserError(submitted, { type: ErrorTypes.UNKNOWN, message: 'Could not update the config file. Please check the logs.' });
         return;
     }
 
     await submitted.reply({
-        embeds: [successEmbed('Đã Cập Nhật Tên Mới', `Tên tiền tệ đã được đổi thành **${newName}**.\n\n**Lưu Ý:** Cần khởi động lại Tử Tiêu để thay đổi có hiệu lực.`)],
+        embeds: [successEmbed('Currency Name Updated', `Currency name changed to **${newName}**.\n\n**Note:** The bot needs to be restarted for changes to take effect.`)],
         flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`[ECONOMY_DASHBOARD] Đã Cập Nhật Tên Mới`, {
+    logger.info(`[ECONOMY_DASHBOARD] Currency name changed`, {
         adminId: submitted.user.id,
         oldName: BotConfig.economy.currency.name,
         newName
