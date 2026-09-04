@@ -19,12 +19,12 @@ class EconomyService {
   static DAILY_AMOUNT = 1000;
   static MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
 
-  static assertSafeBalance(value, context = {}) {
+  static assertSafeTui(value, context = {}) {
     if (!Number.isSafeInteger(value) || value < 0 || value > this.MAX_SAFE_INTEGER) {
       throw createError(
-        "Invalid balance state",
+        "Túi Càn Khôn đang kẹt",
         ErrorTypes.VALIDATION,
-        "Operation would create an invalid account balance.",
+        "Thao tác này sẽ ảnh hưởng đến số dư trong Túi Càn Khôn",
         { value, ...context }
       );
     }
@@ -63,7 +63,7 @@ class EconomyService {
 
     const earned = this.DAILY_AMOUNT;
     const nextWallet = (userData.wallet || 0) + earned;
-    this.assertSafeBalance(nextWallet, { operation: 'claimDaily', userId, guildId });
+    this.assertSafeTui(nextWallet, { operation: 'claimDaily', userId, guildId });
     userData.wallet = nextWallet;
     userData.lastDaily = now;
 
@@ -163,8 +163,8 @@ class EconomyService {
     const senderNext = (senderData.wallet || 0) - amount;
     const receiverNext = (receiverData.wallet || 0) + amount;
 
-    this.assertSafeBalance(senderNext, { operation: 'transfer.sender', senderId, amount });
-    this.assertSafeBalance(receiverNext, { operation: 'transfer.receiver', receiverId, amount });
+    this.assertSafeTui(senderNext, { operation: 'transfer.sender', senderId, amount });
+    this.assertSafeTui(receiverNext, { operation: 'transfer.receiver', receiverId, amount });
 
     senderData.wallet = senderNext;
     receiverData.wallet = receiverNext;
@@ -198,14 +198,14 @@ class EconomyService {
         receiverId,
         guildId,
         amount,
-        senderNewBalance: senderData.wallet,
-        receiverNewBalance: receiverData.wallet,
+        senderNewTui: senderData.wallet,
+        receiverNewTui: receiverData.wallet,
         timestamp: new Date().toISOString()
       });
 
       return {
-        senderNewBalance: senderData.wallet,
-        receiverNewBalance: receiverData.wallet
+        senderNewTui: senderData.wallet,
+        receiverNewTui: receiverData.wallet
       };
     } catch (error) {
       logger.error(`[ECONOMY_SERVICE] Transfer execution failed, DATA MAY BE INCONSISTENT`, error, {
@@ -239,9 +239,9 @@ class EconomyService {
     this.validateAmount(amount, { operation: 'addMoney', userId, source });
 
     const userData = await getEconomyData(client, guildId, userId);
-    const balanceBefore = userData.wallet || 0;
-    const nextWallet = balanceBefore + amount;
-    this.assertSafeBalance(nextWallet, { operation: 'addMoney', userId, source, amount });
+    const tuiBefore = userData.wallet || 0;
+    const nextWallet = tuiBefore + amount;
+    this.assertSafeTui(nextWallet, { operation: 'addMoney', userId, source, amount });
     userData.wallet = nextWallet;
 
     await setEconomyData(client, guildId, userId, userData);
@@ -251,8 +251,8 @@ class EconomyService {
       guildId,
       amount,
       source,
-      balanceBefore,
-      balanceAfter: userData.wallet,
+      tuiBefore,
+      tuiAfter: userData.wallet,
       delta: amount,
       timestamp: new Date().toISOString()
     });
@@ -273,18 +273,18 @@ class EconomyService {
     this.validateAmount(amount, { operation: 'removeMoney', userId, reason });
 
     const userData = await getEconomyData(client, guildId, userId);
-    const balanceBefore = userData.wallet || 0;
+    const tuiBefore = userData.wallet || 0;
 
-    if (balanceBefore < amount) {
+    if (tuiBefore < amount) {
       throw createError(
         "Insufficient funds",
         ErrorTypes.VALIDATION,
-        `You only have **$${balanceBefore.toLocaleString()}**.`,
-        { required: amount, available: balanceBefore, reason }
+        `You only have **$${tuiBefore.toLocaleString()}**.`,
+        { required: amount, available: tuiBefore, reason }
       );
     }
 
-    userData.wallet = balanceBefore - amount;
+    userData.wallet = tuiBefore - amount;
 
     await setEconomyData(client, guildId, userId, userData);
 
@@ -293,8 +293,8 @@ class EconomyService {
       guildId,
       amount,
       reason,
-      balanceBefore,
-      balanceAfter: userData.wallet,
+      tuiBefore,
+      tuiAfter: userData.wallet,
       delta: -amount,
       timestamp: new Date().toISOString()
     });
@@ -330,8 +330,8 @@ class EconomyService {
     const nextWallet = userData.wallet - amount;
     const nextBank = (userData.bank || 0) + amount;
 
-    this.assertSafeBalance(nextWallet, { operation: 'deposit.wallet', userId, amount });
-    this.assertSafeBalance(nextBank, { operation: 'deposit.bank', userId, amount });
+    this.assertSafetui(nextWallet, { operation: 'deposit.wallet', userId, amount });
+    this.assertSafetui(nextBank, { operation: 'deposit.bank', userId, amount });
 
     userData.wallet = nextWallet;
     userData.bank = nextBank;
@@ -358,9 +358,9 @@ class EconomyService {
 
     if (bank < amount) {
       throw createError(
-        "Insufficient bank balance",
+        "Số dư không đủ",
         ErrorTypes.VALIDATION,
-        `You only have **$${bank.toLocaleString()}** in your bank.`,
+        `Đạo Hữu chỉ có **${bank.toLocaleString()}<:lt1:1545082415033360495>** trong Tiền Trang`,
         { required: amount, available: bank }
       );
     }
@@ -368,8 +368,8 @@ class EconomyService {
     const nextWallet = (userData.wallet || 0) + amount;
     const nextBank = bank - amount;
 
-    this.assertSafeBalance(nextWallet, { operation: 'withdraw.wallet', userId, amount });
-    this.assertSafeBalance(nextBank, { operation: 'withdraw.bank', userId, amount });
+    this.assertSafetui(nextWallet, { operation: 'withdraw.wallet', userId, amount });
+    this.assertSafetui(nextBank, { operation: 'withdraw.bank', userId, amount });
 
     userData.wallet = nextWallet;
     userData.bank = nextBank;
