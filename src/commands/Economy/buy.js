@@ -10,7 +10,7 @@ const SHOP_ITEMS = shopItems;
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('buy')
+        .setName('mua')
         .setDescription('Mua vật phẩm từ Nhất Phẩm Các')
         .addStringOption(option =>
             option
@@ -20,7 +20,7 @@ export default {
         )
         .addIntegerOption(option =>
             option
-                .setName('quantity')
+                .setName('soluong')
                 .setDescription('Số lượng (Mặc định: 1)')
                 .setRequired(false)
                 .setMinValue(1)
@@ -34,7 +34,7 @@ export default {
             const userId = interaction.user.id;
             const guildId = interaction.guildId;
             const itemId = interaction.options.getString("item_id").toLowerCase();
-            const quantity = interaction.options.getInteger("quantity") || 1;
+            const soluong = interaction.options.getInteger("soluong") || 1;
 
             const item = SHOP_ITEMS.find(i => i.id === itemId);
 
@@ -47,16 +47,16 @@ export default {
                 );
             }
 
-            if (quantity < 1) {
+            if (soluong < 1) {
                 throw createError(
                     "Số Lượng Không Đúng",
                     ErrorTypes.VALIDATION,
                     "Chỉ được mua từ 1 kiện pháp khí trở lên.",
-                    { quantity }
+                    { soluong }
                 );
             }
 
-            const totalCost = item.price * quantity;
+            const totalCost = item.price * soluong;
 
             const guildConfig = await getGuildConfig(client, guildId);
             const PREMIUM_ROLE_ID = guildConfig.premiumRoleId;
@@ -67,8 +67,8 @@ export default {
                 throw createError(
                     "Linh Thạch Không Đủ",
                     ErrorTypes.VALIDATION,
-                    `Đạo hữu cần có **${totalCost.toLocaleString()}<:lt1:1545082415033360495>** để mua ${quantity}x **${item.name}**, nhưng Đạo Hữu chỉ có **${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>** trong người.`,
-                    { required: totalCost, current: userData.wallet, itemId, quantity }
+                    `Đạo hữu cần có **${totalCost.toLocaleString()}<:lt1:1545082415033360495>** để mua ${soluong}x **${item.name}**, nhưng Đạo Hữu chỉ có **${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>** trong người.`,
+                    { required: totalCost, current: userData.wallet, itemId, soluong }
                 );
             }
 
@@ -89,19 +89,19 @@ export default {
                         { itemId, roleId: PREMIUM_ROLE_ID }
                     );
                 }
-                if (quantity > 1) {
+                if (soluong > 1) {
                     throw createError(
                         "Một Đạo Ấn Duy Nhất",
                         ErrorTypes.VALIDATION,
                         `Đạo Hữu đã sở hữu Đạo Ấn **${item.name}** rồi`,
-                        { itemId, quantity }
+                        { itemId, soluong }
                     );
                 }
             }
 
             userData.wallet -= totalCost;
 
-            let successDescription = `Đạo Hữu đã thành công mua ${quantity}x **${item.name}** với **${totalCost.toLocaleString()}<:lt1:1545082415033360495>**!`;
+            let successDescription = `Đạo Hữu đã thành công mua ${soluong}x **${item.name}** với **${totalCost.toLocaleString()}<:lt1:1545082415033360495>**!`;
 
             if (item.type === "role" && itemId === "premium_role") {
                 const member = interaction.member;
@@ -138,16 +138,16 @@ export default {
                 successDescription += `\n\n**✨ Đạo Ấn đã khắc thành, thân phận chính thức sinh hiệu!**`;
             } else if (item.type === "consumable" || item.type === "tool") {
                 userData.inventory[itemId] =
-                    (userData.inventory[itemId] || 0) + quantity;
+                    (userData.inventory[itemId] || 0) + soluong;
                 if (item.type === "tool") {
-                    successDescription += `\n\n**🛠️ ${item.name} đã được thu vào Túi Càn Khôn của Đạo Hữu!**`;
+                    successDescription += `\n\n**${item.name} đã được thu vào Túi Càn Khôn của Đạo Hữu!**`;
                 }
             }
 
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                "💰 Thỉnh Bảo Thành Công",
+                "<:tvp2:1545082417012932639> Thỉnh Bảo Thành Công",
                 successDescription,
             ).addFields({
                 name: "Linh Khố",
@@ -156,5 +156,5 @@ export default {
             });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed], flags: [MessageFlags.Ephemeral] });
-    }, { command: 'buy' })
+    }, { command: 'mua' })
 };
