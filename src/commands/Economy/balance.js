@@ -7,7 +7,7 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('tui')
+        .setName('balance')
         .setDescription("Mở Túi Càn Khôn của bạn hoặc người khác")
         .addUserOption(option =>
             option
@@ -83,5 +83,5 @@ export default {
             logger.info(`[ECONOMY] Đã mở Túi`, { userId: targetUser.id, wallet, bank });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'tui' })
+    }, { command: 'balance' })
 };
