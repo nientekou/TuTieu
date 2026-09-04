@@ -8,36 +8,36 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 const SLUT_COOLDOWN = 45 * 60 * 1000;
 
 const SLUT_ACTIVITIES = [
-    { name: "Cam Stream", min: 120, max: 450, risk: 0.2 },
-    { name: "Private Dance Session", min: 220, max: 700, risk: 0.25 },
-    { name: "After-Hours Club Host", min: 320, max: 900, risk: 0.3 },
-    { name: "VIP Companion Booking", min: 550, max: 1400, risk: 0.35 },
-    { name: "Exclusive Livestream", min: 850, max: 2200, risk: 0.4 },
+    { name: "Bày Quán Bói Mệnh", min: 120, max: 450, risk: 0.2 },
+    { name: "Họa Phù Trấn Trạch", min: 220, max: 700, risk: 0.25 },
+    { name: "Luyện Đan Thuê", min: 320, max: 900, risk: 0.3 },
+    { name: "Hộ Tống Linh Vật", min: 550, max: 1400, risk: 0.35 },
+    { name: "Thăm Dò Bí Cảnh", min: 850, max: 2200, risk: 0.4 },
 ];
 
 const POSITIVE_OUTCOMES = [
-    "Your stream blew up and tips poured in.",
-    "A VIP booking paid far above average.",
-    "Your after-hours shift was packed and profitable.",
-    "Premium requests came through and your payout jumped.",
+    "Đạo Hữu gặp đại cơ duyên, thu được không ít Linh Thạch.",
+    "Một vị tiền bối hào phóng ban thưởng hậu hĩnh.",
+    "Chuyến hành đạo thuận buồm xuôi gió, thu hoạch vượt mong đợi.",
+    "Tình cờ khai mở một linh mạch, nhận được khoản Linh Thạch lớn.",
 ];
 
 const FINE_OUTCOMES = [
-    "Venue security issued a compliance fine.",
-    "A moderation strike triggered a platform fee.",
-    "You were flagged and had to pay a penalty.",
+    "Tuần tra của Tiên Minh phát hiện vi phạm, Đạo Hữu bị phạt Linh Thạch.",
+    "Phạm phải môn quy của địa phương, đành nộp một khoản phạt.",
+    "Chạm phải cấm chế trong bí cảnh, phải dùng Linh Thạch hóa giải.",
 ];
 
 const ROBBED_OUTCOMES = [
-    "A fake buyer chargeback wiped part of your earnings.",
-    "A scam booking cleaned out a chunk of your cash.",
-    "You got baited by a fraud account and lost money.",
+    "Bị tà tu lừa mất một phần Linh Thạch.",
+    "Giữa đường gặp cướp tu chân, Linh Thạch bị cướp đi không ít.",
+    "Tin nhầm thương nhân giả mạo, tổn thất một khoản Linh Thạch.",
 ];
 
 const LOSS_OUTCOMES = [
-    "The set flopped and you had to cover operating costs.",
-    "You burned budget on prep and made no return.",
-    "The shift went sideways and left you in the red.",
+    "Luyện đan thất bại, dược liệu cháy sạch, lỗ vốn.",
+    "Bày trận tiêu hao quá nhiều tài nguyên mà không thu được gì.",
+    "TChuyến hành đạo thất bại, hao tổn Linh Thạch mà không có thu hoạch.",
 ];
 
 function randomInt(min, max) {
@@ -169,11 +169,11 @@ export default {
             const amountLabel = `${outcome.delta >= 0 ? '+' : '-'}$${Math.abs(outcome.delta).toLocaleString()}`;
             const summaryLines = [
                 `${outcome.message}`,
-                `💸 **Net Result:** ${amountLabel}`,
-                `💳 **Current Balance:** $${userData.wallet.toLocaleString()}`,
-                `📊 **Total Sessions:** ${userData.totalSluts}`,
-                `💵 **Total Earned:** $${(userData.totalSlutEarnings || 0).toLocaleString()}`,
-                `🧾 **Total Lost:** $${(userData.totalSlutLosses || 0).toLocaleString()}`
+                `<a:qua2:1545398106986774528> **Linh Thạch Thu Hoạch:** ${amountLabel}`,
+                `<:tvp1:1545082419273801859> **Linh Thạch Hiện Có:** $${userData.wallet.toLocaleString()}`,
+                `<:vdl:1545397492831494144> **Số Lần Hành Đạo:** ${userData.totalSluts}`,
+                `<:lt1:1545082415033360495> **Tổng Linh Thạch Thu Được** $${(userData.totalSlutEarnings || 0).toLocaleString()}`,
+                `🧾 **Tổng Linh Thạch Hao Tổn:** $${(userData.totalSlutLosses || 0).toLocaleString()}`
             ];
 
             const embed = createEmbed({
