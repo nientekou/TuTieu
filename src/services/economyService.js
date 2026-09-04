@@ -14,7 +14,7 @@ class EconomyService {
   static ROB_COOLDOWN = 4 * 60 * 60 * 1000;
   static MINE_COOLDOWN = 60 * 60 * 1000;
   static FISH_COOLDOWN = 45 * 60 * 1000;
-  static anxin_COOLDOWN = 30 * 60 * 1000;
+  static ANXIN_COOLDOWN = 30 * 60 * 1000;
   
   static DAILY_AMOUNT = 1000;
   static MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
