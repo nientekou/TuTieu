@@ -45,8 +45,8 @@ export function getMaxBankCapacity(userData) {
         capacity = Math.floor(capacity * 1.5);
     }
 
-    const bankNotes = inventory['kheuoc'] || 0;
-    capacity += (bankNotes * 10000);
+    const kheuocs = inventory['kheuoc'] || 0;
+    capacity += (kheuocs * 10000);
     
     return capacity;
 }
