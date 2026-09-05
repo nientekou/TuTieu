@@ -8,7 +8,7 @@ import { replyUserError, ErrorTypes } from '../../../utils/errorHandler.js';
 export default {
     async execute(interaction, config, client) {
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild)) {
-            return await replyUserError(interaction, { type: ErrorTypes.PERMISSION, message: 'You need **Manage Server** permissions to set the premium role.' });
+            return await replyUserError(interaction, { type: ErrorTypes.PERMISSION, message: 'Đạo Hữu cần **Quyền Quản Lý** mới có thể cài đặt Premium Role' });
         }
 
         const role = interaction.options.getRole('role');
@@ -20,12 +20,12 @@ export default {
             await setGuildConfig(client, guildId, currentConfig);
 
             return InteractionHelper.safeReply(interaction, {
-                embeds: [successEmbed('Premium Role Set', `The **Premium Shop Role** has been set to ${role.toString()}. Members who purchase the Premium Role item will be granted this role.`)],
+                embeds: [successEmbed('Cài Đặt Role Cho Premium Role', `**Loan Vũ Bội · Kim Vân** đã được gán vào role ${role.toString()}. Đạo Hữu nào mua **Loan Vũ Bội** sẽ nhận được role đặc biệt này`)],
                 ephemeral: true,
             });
         } catch (error) {
             logger.error('shop_config_setrole error:', error);
-            return await replyUserError(interaction, { type: ErrorTypes.UNKNOWN, message: 'Could not save the guild configuration.' });
+            return await replyUserError(interaction, { type: ErrorTypes.UNKNOWN, message: 'Không thể lưu thông tin.' });
         }
     },
 };
