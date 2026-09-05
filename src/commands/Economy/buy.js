@@ -10,7 +10,7 @@ const SHOP_ITEMS = shopItems;
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('mua')
+        .setName('buy')
         .setDescription('Mua vật phẩm từ Nhất Phẩm Các')
         .addStringOption(option =>
             option
@@ -75,9 +75,9 @@ export default {
             if (item.type === "role" && itemId === "premium_role") {
                 if (!PREMIUM_ROLE_ID) {
                     throw createError(
-                        "Đạo Ấn **Đặc Phong Đạo Vị**",
+                        "Loan Vũ Bội**",
                         ErrorTypes.CONFIGURATION,
-                        "Tầng lâu giành riêng cho **Đặc Phong Đạo Vị** vẫn chưa được khai mở",
+                        "Đạo Hữu đã có tư cách bước lên Kim Vân Đài của Nhất Phẩm Các.",
                         { itemId }
                     );
                 }
@@ -156,5 +156,5 @@ export default {
             });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed], flags: [MessageFlags.Ephemeral] });
-    }, { command: 'mua' })
+    }, { command: 'buy' })
 };
