@@ -59,7 +59,7 @@ export default {
             const totalCost = item.price * quantity;
 
             const guildConfig = await getGuildConfig(client, guildId);
-            const PREMIUM_ROLE_ID = guildConfig.premiumRoleId;
+            const LOANVUBOI_ID = guildConfig.loanvuboiId;
 
             const userData = await getEconomyData(client, guildId, userId);
 
@@ -72,8 +72,8 @@ export default {
                 );
             }
 
-            if (item.type === "role" && itemId === "premium_role") {
-                if (!PREMIUM_ROLE_ID) {
+            if (item.type === "role" && itemId === "loanvuboi") {
+                if (!LOANVUBOI_ID) {
                     throw createError(
                         "Loan Vũ Bội**",
                         ErrorTypes.CONFIGURATION,
@@ -81,12 +81,12 @@ export default {
                         { itemId }
                     );
                 }
-                if (interaction.member.roles.cache.has(PREMIUM_ROLE_ID)) {
+                if (interaction.member.roles.cache.has(LOANVUBOI_ID)) {
                     throw createError(
                         "Đã Sở Hữu Đạo Ấn Thân Phận Này",
                         ErrorTypes.VALIDATION,
                         `Đạo Hữu đã sở hữu Đạo Ấn Thân Phận **${item.name}**`,
-                        { itemId, roleId: PREMIUM_ROLE_ID }
+                        { itemId, roleId: LOANVUBOI_ID }
                     );
                 }
                 if (quantity > 1) {
@@ -103,17 +103,17 @@ export default {
 
             let successDescription = `Đạo Hữu đã thành công mua ${quantity}x **${item.name}** với **${totalCost.toLocaleString()}<:lt1:1545082415033360495>**!`;
 
-            if (item.type === "role" && itemId === "premium_role") {
+            if (item.type === "role" && itemId === "loanvuboi") {
                 const member = interaction.member;
 
-                const role = interaction.guild.roles.cache.get(PREMIUM_ROLE_ID);
+                const role = interaction.guild.roles.cache.get(LOANVUBOI_ID);
 
                 if (!role) {
                     throw createError(
                         "Không Thấy Đạo Ấn",
                         ErrorTypes.CONFIGURATION,
                         "Nhất Phẩm Các đã ngừng nhận người lên Thiên Các",
-                        { roleId: PREMIUM_ROLE_ID }
+                        { roleId: LOANVUBOI_ID }
                     );
                 }
 
@@ -130,7 +130,7 @@ export default {
                         "Nhận Thất Bại",
                         ErrorTypes.DISCORD_API,
                         "Đã khấu trừ Linh Thạch, nhưng ban phong thất bại. Linh Thạch đã hoàn trả về Linh Khố.",
-                        { roleId: PREMIUM_ROLE_ID, originalError: roleError.message }
+                        { roleId: LOANVUBOI_ID, originalError: roleError.message }
                     );
                 }
             } else if (item.type === "upgrade") {
