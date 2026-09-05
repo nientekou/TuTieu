@@ -10,64 +10,64 @@ const BASE_MAX_REWARD = 900;
 const CANTHINHTRIEU_MULTIPLIER = 1.5;
 
 const FISH_TYPES = [
-    // Common
-    { name: 'Thanh Lân Ngư', emoji: '🐟', rarity: 'common' },
-    { name: 'Bạch Vân Ngư', emoji: '🐟', rarity: 'common' },
-    { name: 'Ngân Sa Ngư', emoji: '🐟', rarity: 'common' },
-    { name: 'Hồng Vĩ Ngư', emoji: '🐟', rarity: 'common' },
-    { name: 'Lam Văn Ngư', emoji: '🐟', rarity: 'common' },
-    { name: 'Thạch Giáp Giải', emoji: '🦀', rarity: 'common' },
-    { name: 'Thanh Xà Hà', emoji: '🦐', rarity: 'common' },
-    { name: 'Bích Hải Loa', emoji: '🐚', rarity: 'common' },
-    { name: 'Tử Hải Tảo', emoji: '🌿', rarity: 'common' },
-    { name: 'Linh Bối', emoji: '🐚', rarity: 'common' },
+    // Phàm
+    { name: 'Thanh Lân Ngư', emoji: '🐟', rarity: 'Phàm' },
+    { name: 'Bạch Vân Ngư', emoji: '🐟', rarity: 'Phàm' },
+    { name: 'Ngân Sa Ngư', emoji: '🐟', rarity: 'Phàm' },
+    { name: 'Hồng Vĩ Ngư', emoji: '🐟', rarity: 'Phàm' },
+    { name: 'Lam Văn Ngư', emoji: '🐟', rarity: 'Phàm' },
+    { name: 'Thạch Giáp Giải', emoji: '🦀', rarity: 'Phàm' },
+    { name: 'Thanh Xà Hà', emoji: '🦐', rarity: 'Phàm' },
+    { name: 'Bích Hải Loa', emoji: '🐚', rarity: 'Phàm' },
+    { name: 'Tử Hải Tảo', emoji: '🌿', rarity: 'Phàm' },
+    { name: 'Linh Bối', emoji: '🐚', rarity: 'Phàm' },
 
-    // Uncommon
-    { name: 'Xích Lân Ngư', emoji: '🐠', rarity: 'uncommon' },
-    { name: 'Kim Vĩ Ngư', emoji: '🐠', rarity: 'uncommon' },
-    { name: 'Hàn Tuyền Ngư', emoji: '🐟', rarity: 'uncommon' },
-    { name: 'Bích Ba Ngư', emoji: '🐟', rarity: 'uncommon' },
-    { name: 'Tử Vân Ngư', emoji: '🐟', rarity: 'uncommon' },
-    { name: 'Ngân Nguyệt Ngư', emoji: '🐠', rarity: 'uncommon' },
-    { name: 'Huyền Giáp Giải', emoji: '🦀', rarity: 'uncommon' },
-    { name: 'Kim Tu Hà', emoji: '🦐', rarity: 'uncommon' },
-    { name: 'Linh Châu Bối', emoji: '🐚', rarity: 'uncommon' },
-    { name: 'Hải Linh Sâm', emoji: '🪸', rarity: 'uncommon' },
+    // Linh
+    { name: 'Xích Lân Ngư', emoji: '🐠', rarity: 'Linh' },
+    { name: 'Kim Vĩ Ngư', emoji: '🐠', rarity: 'Linh' },
+    { name: 'Hàn Tuyền Ngư', emoji: '🐟', rarity: 'Linh' },
+    { name: 'Bích Ba Ngư', emoji: '🐟', rarity: 'Linh' },
+    { name: 'Tử Vân Ngư', emoji: '🐟', rarity: 'Linh' },
+    { name: 'Ngân Nguyệt Ngư', emoji: '🐠', rarity: 'Linh' },
+    { name: 'Huyền Giáp Giải', emoji: '🦀', rarity: 'Linh' },
+    { name: 'Kim Tu Hà', emoji: '🦐', rarity: 'Linh' },
+    { name: 'Linh Châu Bối', emoji: '🐚', rarity: 'Linh' },
+    { name: 'Hải Linh Sâm', emoji: '🪸', rarity: 'Linh' },
 
-    // Rare
-    { name: 'Ngọc Lân Ngư', emoji: '🐠', rarity: 'rare' },
-    { name: 'Thanh Minh Ngư', emoji: '🐟', rarity: 'rare' },
-    { name: 'Lưu Vân Ngư', emoji: '🐟', rarity: 'rare' },
-    { name: 'Huyền Băng Ngư', emoji: '🐟', rarity: 'rare' },
-    { name: 'Tử Điện Ngư', emoji: '🐠', rarity: 'rare' },
-    { name: 'Kim Lân Giải', emoji: '🦀', rarity: 'rare' },
-    { name: 'Huyền Tinh Hà', emoji: '🦐', rarity: 'rare' },
-    { name: 'Bích Ngọc Bối', emoji: '🐚', rarity: 'rare' },
-    { name: 'Hải Nguyệt Châu', emoji: '🦪', rarity: 'rare' },
-    { name: 'Cửu Tiết Hải Sâm', emoji: '🪸', rarity: 'rare' },
-    { name: 'Mặc Hải Tu', emoji: '🐙', rarity: 'rare' },
+    // Huyền
+    { name: 'Ngọc Lân Ngư', emoji: '🐠', rarity: 'Huyền' },
+    { name: 'Thanh Minh Ngư', emoji: '🐟', rarity: 'Huyền' },
+    { name: 'Lưu Vân Ngư', emoji: '🐟', rarity: 'Huyền' },
+    { name: 'Huyền Băng Ngư', emoji: '🐟', rarity: 'Huyền' },
+    { name: 'Tử Điện Ngư', emoji: '🐠', rarity: 'Huyền' },
+    { name: 'Kim Lân Giải', emoji: '🦀', rarity: 'Huyền' },
+    { name: 'Huyền Tinh Hà', emoji: '🦐', rarity: 'Huyền' },
+    { name: 'Bích Ngọc Bối', emoji: '🐚', rarity: 'Huyền' },
+    { name: 'Hải Nguyệt Châu', emoji: '🦪', rarity: 'Huyền' },
+    { name: 'Cửu Tiết Hải Sâm', emoji: '🪸', rarity: 'Huyền' },
+    { name: 'Mặc Hải Tu', emoji: '🐙', rarity: 'Huyền' },
 
-    // Epic
-    { name: 'Thiên Hà Linh Ngư', emoji: '🐠', rarity: 'epic' },
-    { name: 'Cửu Vân Ngư', emoji: '🐟', rarity: 'epic' },
-    { name: 'Huyền Lôi Ngư', emoji: '🐠', rarity: 'epic' },
-    { name: 'Bích Hải Long Ngư', emoji: '🐉', rarity: 'epic' },
-    { name: 'Tử Kim Lân', emoji: '🐟', rarity: 'epic' },
-    { name: 'Huyền Giáp Hải Quy', emoji: '🐢', rarity: 'epic' },
-    { name: 'Ngân Nguyệt Cự Giải', emoji: '🦀', rarity: 'epic' },
-    { name: 'U Minh Hải Tu', emoji: '🐙', rarity: 'epic' },
-    { name: 'Xích Viêm Hải Xà', emoji: '🐍', rarity: 'epic' },
-    { name: 'Linh Châu Hải Bối', emoji: '🦪', rarity: 'epic' },
+    // Địa
+    { name: 'Thiên Hà Linh Ngư', emoji: '🐠', rarity: 'Địa' },
+    { name: 'Cửu Vân Ngư', emoji: '🐟', rarity: 'Địa' },
+    { name: 'Huyền Lôi Ngư', emoji: '🐠', rarity: 'Địa' },
+    { name: 'Bích Hải Long Ngư', emoji: '🐉', rarity: 'Địa' },
+    { name: 'Tử Kim Lân', emoji: '🐟', rarity: 'Địa' },
+    { name: 'Huyền Giáp Hải Quy', emoji: '🐢', rarity: 'Địa' },
+    { name: 'Ngân Nguyệt Cự Giải', emoji: '🦀', rarity: 'Địa' },
+    { name: 'U Minh Hải Tu', emoji: '🐙', rarity: 'Địa' },
+    { name: 'Xích Viêm Hải Xà', emoji: '🐍', rarity: 'Địa' },
+    { name: 'Linh Châu Hải Bối', emoji: '🦪', rarity: 'Địa' },
 
-    // Legendary
-    { name: 'Thái Hư Kình', emoji: '🐋', rarity: 'legendary' },
-    { name: 'Cửu Thiên Hải Long', emoji: '🐉', rarity: 'legendary' },
-    { name: 'Huyền Minh Cự Ngư', emoji: '🐋', rarity: 'legendary' },
-    { name: 'Vạn Tượng Linh Ngư', emoji: '🐠', rarity: 'legendary' },
-    { name: 'Thương Hải Kình', emoji: '🐋', rarity: 'legendary' },
-    { name: 'Kim Lân Hải Hoàng', emoji: '🐉', rarity: 'legendary' },
-    { name: 'Tử Tiêu Lôi Kình', emoji: '🐋', rarity: 'legendary' },
-    { name: 'Cửu U Hải Xà', emoji: '🐍', rarity: 'legendary' },
+    // Thiên
+    { name: 'Thái Hư Kình', emoji: '🐋', rarity: 'Thiên' },
+    { name: 'Cửu Thiên Hải Long', emoji: '🐉', rarity: 'Thiên' },
+    { name: 'Huyền Minh Cự Ngư', emoji: '🐋', rarity: 'Thiên' },
+    { name: 'Vạn Tượng Linh Ngư', emoji: '🐠', rarity: 'Thiên' },
+    { name: 'Thương Hải Kình', emoji: '🐋', rarity: 'Thiên' },
+    { name: 'Kim Lân Hải Hoàng', emoji: '🐉', rarity: 'Thiên' },
+    { name: 'Tử Tiêu Lôi Kình', emoji: '🐋', rarity: 'Thiên' },
+    { name: 'Cửu U Hải Xà', emoji: '🐍', rarity: 'Thiên' },
 ];
 
 const CATCH_MESSAGES = [
@@ -184,19 +184,19 @@ export default {
             
             if (rand < 0.5) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'common')[Math.floor(Math.random() * 3)];
+                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Phàm')[Math.floor(Math.random() * 3)];
             } else if (rand < 0.75) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'uncommon')[Math.floor(Math.random() * 2)];
+                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Linh')[Math.floor(Math.random() * 2)];
             } else if (rand < 0.9) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'rare')[Math.floor(Math.random() * 2)];
+                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Huyền')[Math.floor(Math.random() * 2)];
             } else if (rand < 0.98) {
                 
-                fishCaught = FISH_TYPES.find(f => f.rarity === 'epic');
+                fishCaught = FISH_TYPES.find(f => f.rarity === 'Địa');
             } else {
                 
-                fishCaught = FISH_TYPES.find(f => f.rarity === 'legendary');
+                fishCaught = FISH_TYPES.find(f => f.rarity === 'Thiên');
             }
 
             const baseEarned = Math.floor(
@@ -219,11 +219,11 @@ export default {
             await setEconomyData(client, guildId, userId, userData);
 
             const rarityColors = {
-                common: '#95A5A6',
-                uncommon: '#2ECC71',
-                rare: '#3498DB',
-                epic: '#9B59B6',
-                legendary: '#F1C40F'
+                Phàm: '#95A5A6',
+                Linh: '#2ECC71',
+                Huyền: '#3498DB',
+                Địa: '#9B59B6',
+                Thiên: '#F1C40F'
             };
 
             const embed = createEmbed({
