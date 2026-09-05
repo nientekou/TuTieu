@@ -13,7 +13,7 @@ const FINE_PERCENTAGE = 0.1;
 export default {
     data: new SlashCommandBuilder()
         .setName('rob')
-        .setDescription('<:itrom:1545417233935630400> Phục kích Đạo Hữu khác để đoạt Linh Thạch. Thành bại đều do thời vận')
+        .setDescription('Phục kích Đạo Hữu khác để đoạt Linh Thạch. Thành bại đều do thời vận')
         .addUserOption(option =>
             option
                 .setName('user')
