@@ -13,7 +13,7 @@ const FINE_PERCENTAGE = 0.1;
 export default {
     data: new SlashCommandBuilder()
         .setName('rob')
-        .setDescription('Attempt to rob another user (very risky)')
+        .setDescription('<:itrom:1545417233935630400> Phục kích Đạo Hữu khác để đoạt Linh Thạch. Thành bại đều do thời vận')
         .addUserOption(option =>
             option
                 .setName('user')
@@ -32,18 +32,18 @@ export default {
 
             if (robberId === victimUser.id) {
                 throw createError(
-                    "Cannot rob self",
+                    "<:itrom:1545417233935630400> Không Thể Đoạt Tài Bản Thân",
                     ErrorTypes.VALIDATION,
-                    "You cannot rob yourself.",
+                    "Đạo Hữu không thể đoạt Linh Thạch của chính mình.",
                     { robberId, victimId: victimUser.id }
                 );
             }
             
             if (victimUser.bot) {
                 throw createError(
-                    "Cannot rob bot",
+                    "<:itrom:1545417233935630400> Không Thể Đoạt Tài Bot",
                     ErrorTypes.VALIDATION,
-                    "You cannot rob a bot.",
+                    "Bot không mang theo Linh Thạch để Đạo Hữu đoạt lấy.",
                     { victimId: victimUser.id, isBot: true }
                 );
             }
@@ -53,9 +53,9 @@ export default {
             
             if (!robberData || !victimData) {
                 throw createError(
-                    "Failed to load economy data",
+                    "<:itrom:1545417233935630400> Không Thể Đoạt",
                     ErrorTypes.DATABASE,
-                    "Failed to load economy data. Please try again later.",
+                    "Tạm thời không thể đoạt tài. Vui lòng thử lại sau.",
                     { robberId: !!robberData, victimId: !!victimData, guildId }
                 );
             }
@@ -68,23 +68,23 @@ export default {
                 const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
 
                 throw createError(
-                    "Robbery cooldown active",
+                    "<:itrom:1545417233935630400> Đang Lánh Mặt Sau Khi Đoạt Tài",
                     ErrorTypes.RATE_LIMIT,
-                    `You need to lay low. Wait **${hours}h ${minutes}m** before attempting another robbery.`,
+                    `Đạo Hữu vừa gây chuyện, tạm thời nên ẩn mình một thời gian. Hãy chờ **${hours}h ${minutes}m** rồi mới có thể Đoạt Tài lần nữa.`,
                     { remaining, hours, minutes, cooldownType: 'rob' }
                 );
             }
 
             if (victimData.wallet < 500) {
                 throw createError(
-                    "Victim too poor",
+                    "<:itrom:1545417233935630400> Nghèoooo",
                     ErrorTypes.VALIDATION,
-                    `${victimUser.username} is too poor. They need at least $500 cash to be worth robbing.`,
+                    `${victimUser.username} quá nghèo. Đạo Hữu chỉ có thể Đoạt Tài khi đối phương mang theo ít nhất **500**<:lt1:1545082415033360495> trong Linh Nang.`,
                     { victimWallet: victimData.wallet, required: 500 }
                 );
             }
 
-            const hasSafe = victimData.inventory["personal_safe"] || 0;
+            const hasSafe = victimData.inventory["cachdoatcam"] || 0;
 
             if (hasSafe > 0) {
                 robberData.lastRob = now;
@@ -93,8 +93,8 @@ export default {
                 return await InteractionHelper.safeEditReply(interaction, {
                     embeds: [
                         warningEmbed(
-                            'Robbery Blocked',
-                            `${victimUser.username} was prepared! Your attempt failed because they own a **Personal Safe**. You got away clean but didn't gain anything.`
+                            '<:itrom:1545417233935630400> Cách Đoạt Cấm đã đánh văng bạn!',
+                            `${victimUser.username} đã thi triển **Cách Đoạt Cấm** lên Linh Nang. Đạo Hữu không đoạt được <:lt1:1545082415033360495> nào và kịp thời rút lui.`
                         )
                     ],
                 });
@@ -110,8 +110,8 @@ export default {
                 victimData.wallet = (victimData.wallet || 0) - amountStolen;
 
                 resultEmbed = successEmbed(
-                    'Robbery Successful',
-                    `You successfully stole **$${amountStolen.toLocaleString()}** from ${victimUser.username}!`
+                    '<:itrom:1545417233935630400> Đoạt Tài Thành Công',
+                    `Đạo Hữu đã thành công đoạt lấy **${amountStolen.toLocaleString()}<:lt1:1545082415033360495>** từ ${victimUser.username}!`
                 );
             } else {
                 const fineAmount = Math.floor((robberData.wallet || 0) * FINE_PERCENTAGE);
@@ -123,9 +123,9 @@ export default {
                 }
 
                 resultEmbed = buildUserErrorEmbed(
-                    'unknown',
-                    `You failed the robbery and were caught! You were fined **$${fineAmount.toLocaleString()}** of your own cash.`,
-                    { titleOverride: 'Robbery Failed' }
+                    '<:itrom:1545417233935630400> Đoạt Tài Thất Bại',
+                    `Đạo Hữu ra tay bất thành, bị đối phương phát giác và phải bồi thường**${fineAmount.toLocaleString()}<:lt1:1545082415033360495>**`,
+                    { titleOverride: 'Đoạt Tài Thất Bại' }
                 );
             }
 
@@ -137,17 +137,17 @@ export default {
             resultEmbed
                 .addFields(
                     {
-                        name: `Your New Cash (${interaction.user.username})`,
-                        value: `$${robberData.wallet.toLocaleString()}`,
+                        name: `<:lt1:1545082415033360495> hiện có: (${interaction.user.username})`,
+                        value: `${robberData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
-                        name: `Victim's New Cash (${victimUser.username})`,
-                        value: `$${victimData.wallet.toLocaleString()}`,
+                        name: `<:lt1:1545082415033360495> hiện có: (${victimUser.username})`,
+                        value: `${victimData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                 )
-                .setFooter({ text: `Next robbery available in ${Math.ceil(ROB_COOLDOWN / (60 * 60 * 1000))} hours.` });
+                .setFooter({ text: `Sau ${Math.ceil(ROB_COOLDOWN / (60 * 60 * 1000))} có thế tiếp tục hành sự.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [resultEmbed] });
     }, { command: 'rob' })
