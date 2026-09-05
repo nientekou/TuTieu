@@ -69,7 +69,7 @@ export const GuildConfigSchema = z
     dmOnClose: z.boolean().optional(),
     reportChannelId: z.string().nullable().optional(),
     birthdayChannelId: z.string().nullable().optional(),
-    premiumRoleId: z.string().nullable().optional(),
+    loanvuboiId: z.string().nullable().optional(),
     logIgnore: LogIgnoreSchema.optional(),
     disabledCommands: z.record(z.boolean()).optional(),
     disabledCategories: z.record(z.boolean()).optional(),
