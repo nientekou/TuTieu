@@ -1,7 +1,7 @@
 export const shopItems = [
     {
         id: 'tranhailenh',
-        name: 'Trấn Hải Lệnh',
+        name: 'Trấn Hải Lệnh <:ithl:1545714181997863012>',
         price: 5000,
         description: 'Có thể dùng Lệnh bài này để nhận thêm nhiệm vụ từ Trấn Hải Các. `/nhiemvu`',
         type: 'consumable',
@@ -14,10 +14,10 @@ cooldown: 86400000,
         }
     },
     {
-        id: 'bank_upgrade_1',
-        name: 'Bank Upgrade I',
+        id: 'linhkho+',
+        name: 'Linh Khố + <:tvp1:1545082419273801859>',
         price: 15000,
-        description: 'Increases bank capacity and allows more funds to be deposited.',
+        description: 'Mở rộng dung lượng Linh Khố, cho phép tích trữ thêm Linh Thạch.',
         type: 'upgrade',
         maxLevel: 5,
         effect: {
@@ -26,10 +26,10 @@ cooldown: 86400000,
         }
     },
     {
-        id: 'diamond_pickaxe',
-        name: 'Diamond Pickaxe',
+        id: 'bancophu',
+        name: 'Bàn Cổ Phủ <:bcp:1545728177169502288>',
         price: 50000,
-        description: 'Increases yield from `/mine`',
+        description: 'Gia tăng sản lượng Linh Thạch thu được từ /mine.',
         type: 'tool',
         durability: 100,
         effect: {
@@ -38,10 +38,10 @@ cooldown: 86400000,
         }
     },
     {
-        id: 'premium_role',
-        name: 'Premium Server Role',
+        id: 'loanvuboi',
+        name: 'Loan Vũ Bội <:ilvb:1545714174112563240>',
         price: 15000,
-        description: 'A special role granting a fancy color and a 10% daily bonus.',
+        description: 'Cổ bội được luyện từ một chiếc linh vũ của Thần Loan Điểu. Chỉ người có duyên mới được Nhất Phẩm Các ban cho, mở lối tiến vào Kim Vân Đài.',
         type: 'role',
 roleId: null,
         effect: {
@@ -50,10 +50,10 @@ roleId: null,
         }
     },
     {
-        id: 'lucky_clover',
-        name: 'Lucky Clover',
+        id: 'tulinhthao',
+        name: 'Tụ Linh Thảo <:tlt:1545730351693828147>',
         price: 10000,
-        description: 'Increases the chance of winning a higher payout on `/gamble` once.',
+        description: 'Gia tăng cơ duyên nhận được phần thưởng cao hơn khi sử dụng /gamble một lần.',
         type: 'consumable',
         maxQuantity: 10,
         effect: {
@@ -63,10 +63,10 @@ roleId: null,
         }
     },
     {
-        id: 'fishing_rod',
+        id: 'canthinhtrieu',
         name: '🎣 Fishing Rod',
         price: 5000,
-        description: 'Used for fishing commands',
+        description: 'Triều Sinh Vạn Tượng đã mở. Triều dâng sinh vạn tượng. Sao còn chần chờ chưa vác cần đến đó kiếm một ít cơ duyên? Mang theo Cần Thính Triều, người câu không chỉ nhìn phao mà nghe con nước, thuận theo thủy thế.',
         type: 'tool',
         durability: 100,
         effect: {
@@ -75,10 +75,10 @@ roleId: null,
         }
     },
     {
-        id: 'pickaxe',
-        name: '⛏️ Pickaxe',
+        id: 'cuockhailinh',
+        name: 'Cuốc Khai Linh <:icuoc:1545714179581943868>',
         price: 7500,
-        description: 'Used for mining commands',
+        description: 'Sơn Tàng Vạn Ngọc đã mở. Núi giấu chứa muôn ngọc. Mau mang cuốc tới mà đào Linh Thạch thôi!',
         type: 'tool',
         durability: 100,
         effect: {
@@ -87,10 +87,10 @@ roleId: null,
         }
     },
     {
-        id: 'laptop',
-        name: '💻 Laptop',
+        id: 'nhanngauthanh',
+        name: 'Nhẫn Ngẫu Thành <:nhannt:1545735909067063356>',
         price: 15000,
-        description: 'Increases work earnings',
+        description: 'Nhẫn đem lại những cuộc gặp và kết quả ngoài dự liệu, tăng thêm linh thạch khi làm Nhiệm Vụ',
         type: 'tool',
         durability: 200,
         effect: {
@@ -99,10 +99,10 @@ roleId: null,
         }
     },
     {
-        id: 'lucky_charm',
-        name: '🍀 Lucky Charm',
+        id: 'buathienkhuoc',
+        name: 'Bùa Thiên Khước <:buatk:1545735911675797504>',
         price: 10000,
-        description: 'Increases luck for gambling. Has 3 uses before being consumed.',
+        description: 'Gia tăng cơ duyên khi /gamble. Có thể sử dụng 3 lần.',
         type: 'consumable',
         maxQuantity: 10,
         effect: {
@@ -112,10 +112,10 @@ roleId: null,
         }
     },
     {
-        id: 'bank_note',
-        name: '📜 Bank Note',
+        id: 'kheuoc',
+        name: 'Khế Ước Thông Bảo Trang <:kheuoc:1545739667368972338>',
         price: 25000,
-        description: 'Increases bank capacity by 10,000. Can be purchased multiple times.',
+        description: 'Gia tăng giới hạn Linh Thạch mà Đạo Hữu có thể ký gửi vào Thông Bảo Trang. Có thể thỉnh nhiều lần.',
         type: 'tool',
         durability: null,
         effect: {
@@ -124,10 +124,10 @@ roleId: null,
         }
     },
     {
-        id: 'personal_safe',
-        name: '🔒 Personal Safe',
-        price: 30000,
-        description: 'Protects your money from theft. Prevents others from robbing you.',
+        id: 'cachdoatcam',
+        name: 'Cách Đoạt Cấm <:camche:1545741664159662181>',
+        price: 50000000,
+        description: 'Cấm chế bảo hộ Linh Nang, ngăn người khác cướp đoạt Linh Thạch của Đạo Hữu.',
         type: 'tool',
         durability: null,
         effect: {
@@ -153,7 +153,7 @@ export function getItemPrice(itemId) {
 export function validatePurchase(itemId, userData) {
     const item = getItemById(itemId);
     if (!item) {
-        return { valid: false, reason: 'Item not found' };
+        return { valid: false, reason: 'Không tìm thấy vật phẩm' };
     }
 
     const inventory = userData.inventory || {};
@@ -164,7 +164,7 @@ export function validatePurchase(itemId, userData) {
         if (currentQuantity >= item.maxQuantity) {
             return { 
                 valid: false, 
-                reason: `You can only have a maximum of ${item.maxQuantity} ${item.name}s` 
+                reason: `Đạo Hữu chỉ có thể sở hữu ${item.maxQuantity} ${item.name}s` 
             };
         }
     }
@@ -174,7 +174,7 @@ export function validatePurchase(itemId, userData) {
         if (upgrades[itemId]) {
             return { 
                 valid: false, 
-                reason: `You've already purchased ${item.name}` 
+                reason: `Đạo Hữu đã có ${item.name}` 
             };
         }
     }
@@ -182,10 +182,10 @@ export function validatePurchase(itemId, userData) {
     if (item.type === 'tool') {
         
         const currentQuantity = inventory[itemId] || 0;
-        if (itemId !== 'bank_note' && currentQuantity > 0) {
+        if (itemId !== 'kheuoc' && currentQuantity > 0) {
             return { 
                 valid: false, 
-                reason: `You already have a ${item.name}` 
+                reason: `Đạo Hữu đã có ${item.name}` 
             };
         }
     }
@@ -194,7 +194,7 @@ export function validatePurchase(itemId, userData) {
         if (userData.roles?.includes(item.roleId)) {
             return { 
                 valid: false, 
-                reason: `You already have the ${item.name} role` 
+                reason: `Đạo Hữu đã sở hữu ${item.name}` 
             };
         }
     }
