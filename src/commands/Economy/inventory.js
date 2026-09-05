@@ -40,15 +40,15 @@ export default {
             if (Object.keys(inventory).length > 0) {
                 inventoryDescription = Object.entries(inventory)
                     .filter(
-                        ([itemId, quantity]) => {
+                        ([itemId, soluong]) => {
                             const item = SHOP_ITEMS.find(i => i.id === itemId);
-                            return quantity > 0 && item;
+                            return soluong > 0 && item;
                         }
                     )
                     .map(
-                        ([itemId, quantity]) => {
+                        ([itemId, soluong]) => {
                             const item = SHOP_ITEMS.find(i => i.id === itemId);
-                            return `**${item.name}:** ${quantity}x`;
+                            return `**${item.name}:** ${soluong}x`;
                         }
                     )
                     .join("\n");
