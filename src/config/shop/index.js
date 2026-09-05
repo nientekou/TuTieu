@@ -136,7 +136,7 @@ export function getCurrentPrice(itemId, { quantity = 1, userData = null } = {}) 
     }
     
     if (userData) {
-        if (userData.roles?.includes('premium')) {
+        if (userData.roles?.includes('loanvuboi')) {
             discount += 0.1;
         }
         
