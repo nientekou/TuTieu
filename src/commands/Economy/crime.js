@@ -50,7 +50,7 @@ export default {
                 throw createError(
                     "<:itrom:1545417233935630400> Đang Bị Giam Giữ",
                     ErrorTypes.RATE_LIMIT,
-                    `Đạo Hữu đang bị **Tiên Minh Chấp Pháp Ty** giam giữ tại **Lạc Tiên Uyên**. Còn ${timeLeft} mới được thả.`,
+                    `Đạo Hữu đang bị **Tiên Minh Chấp Pháp Ty** giam giữ tại **Lạc Tiên Uyên**. Còn ${timeLeft} phút mới được thả.`,
                     { jailTimeRemaining: userData.jailedUntil - now }
                 );
             }
@@ -60,7 +60,7 @@ export default {
                 throw createError(
                     "<:itrom:1545417233935630400> Đang Lánh Mặt Sau Phi Vụ",
                     ErrorTypes.RATE_LIMIT,
-                    `Phi vụ vừa rồi đã gây động tĩnh quá lớn. Hãy chờ ${timeLeft} rồi hẵng hành sự tiếp.`,
+                    `Phi vụ vừa rồi đã gây động tĩnh quá lớn. Hãy chờ ${timeLeft} phút rồi hẵng hành sự tiếp.`,
                     { remaining: lastCrime + CRIME_COOLDOWN - now, cooldownType: 'crime' }
                 );
             }
