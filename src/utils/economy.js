@@ -41,11 +41,11 @@ export function getMaxBankCapacity(userData) {
     const upgrades = userData.upgrades || {};
     const inventory = userData.inventory || {};
 
-    if (upgrades['bank_upgrade_1']) {
+    if (upgrades['linhkho+']) {
         capacity = Math.floor(capacity * 1.5);
     }
 
-    const bankNotes = inventory['bank_note'] || 0;
+    const bankNotes = inventory['kheuoc'] || 0;
     capacity += (bankNotes * 10000);
     
     return capacity;
@@ -346,52 +346,52 @@ export const removeMoney = wrapServiceBoundary(async function removeMoney(client
 }, {
     service: 'economy',
     operation: 'removeMoney',
-    userMessage: 'Failed to remove money. Please try again.',
+    userMessage: 'Thao tác thất bại, hãy thử lại',
 });
 
 export function getShopInventory() {
     return [
         {
-            id: 'fishing_rod',
-            name: 'Fishing Rod',
+            id: 'canthinhtrieu',
+            name: 'Cần Thính Triều',
             emoji: '🎣',
             price: 500,
-            description: 'Catch fish to sell for profit!',
+            description: 'Triều Sinh Vạn Tượng đã mở. Triều dâng sinh vạn tượng. Sao còn chần chờ chưa vác cần đến đó kiếm một ít cơ duyên? Mang theo Cần Thính Triều, người câu không chỉ nhìn phao mà nghe con nước, thuận theo thủy thế.',
             type: 'tool'
         },
         {
-            id: 'hunting_rifle',
-            name: 'Hunting Rifle',
-            emoji: '🔫',
+            id: 'cungliepthu',
+            name: 'Cung Liệp Thú',
+            emoji: '<:cunglt:1545746554483384340>',
             price: 1000,
-            description: 'Hunt animals for meat and fur!',
+            description: 'Dùng để săn thú, thu lấy thịt và da.',
             type: 'tool'
         },
         {
-            id: 'laptop',
-            name: 'Laptop',
-            emoji: '💻',
+            id: 'nhanngauthanh',
+            name: 'Nhẫn Ngẫu Thành',
+            emoji: '<:nhannt:1545735909067063356>',
             price: 2000,
-            description: 'Work as a programmer for higher pay!',
+            description: 'Nhẫn đem lại những cuộc gặp và kết quả ngoài dự liệu, tăng thêm linh thạch khi làm Nhiệm Vụ',
             type: 'tool',
             workMultiplier: 1.5
         },
         {
-            id: 'bank_loan',
-            name: 'Bank Loan',
-            emoji: '🏦',
+            id: 'khengan',
+            name: 'Khế Ngân',
+            emoji: '<:kheuoc:1545739667368972338>',
             price: 5000,
-            description: 'Increases your bank capacity by 50,000!',
+            description: 'Gia tăng 50,000 giới hạn Linh Thạch mà Đạo Hữu có thể ký gửi vào Thông Bảo Trang',
             type: 'upgrade',
             effect: 'bank_capacity',
             value: 50000
         },
         {
-            id: 'lottery_ticket',
-            name: 'Lottery Ticket',
-            emoji: '🎫',
+            id: 'phieuvan',
+            name: 'Phiếu Kỳ Vận',
+            emoji: '<:phieuvan:1545745617823993976>',
             price: 100,
-            description: 'A chance to win big!',
+            description: 'Một tấm phiếu lĩnh vận, thử xem hôm nay Đạo Hữu có được thiên ý chiếu cố.',
             type: 'consumable',
             use: 'gamble'
         }
