@@ -18,7 +18,7 @@ export default {
                 const embed = new EmbedBuilder()
                     .setTitle('Store')
                     .setColor(getColor('primary'))
-                    .setDescription('Dùng lệnh `/mua item_id:<id> soluong:<số lượng>` để mua vật phẩm.');
+                    .setDescription('Dùng lệnh `/mua item_id:<id> quantity:<số lượng>` để mua vật phẩm.');
                 pageItems.forEach(item => {
                     embed.addFields({
                         name: `${item.name} (${item.id})`,
