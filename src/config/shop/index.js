@@ -4,46 +4,46 @@ import { botConfig } from '../bot.js';
 const { currency } = botConfig.economy;
 
 export const shopConfig = {
-    name: 'Nhất Phẩm Các',
+    name: 'TitanBot Shop',
     currency: currency.name,
     currencyName: currency.name,
     currencyNamePlural: currency.namePlural || `${currency.name}s`,
-    currencySymbol: currency.symbol || '<:lt1:1545082415033360495>',
+    currencySymbol: currency.symbol || '💵',
     
     categories: [
         {
-            id: 'vattu',
-            name: 'Vật Tư',
-            description: 'Các vật phẩm, vật tư tiêu hao.',
-            icon: '<:dan:1545087228815081472>',
-            itemTypes: ['vattu']
+            id: 'consumables',
+            name: 'Consumables',
+            description: 'One-time use items that provide temporary benefits',
+            icon: '🍯',
+            itemTypes: ['consumable']
         },
         {
-            id: 'dotpha',
-            name: 'Đột Phá',
-            description: 'Vật phẩm giúp nâng cao tu vi và năng lực một cách vĩnh viễn.',
-            icon: '<:idp:1545419934186610699>',
-            itemTypes: ['dotpha']
+            id: 'upgrades',
+            name: 'Upgrades',
+            description: 'Permanent upgrades that enhance your abilities',
+            icon: '⚡',
+            itemTypes: ['upgrade']
         },
         {
-            id: 'phapkhi',
-            name: 'Pháp Khí',
-            description: 'Pháp khí hỗ trợ Đạo Hữu thu thập tài nguyên hiệu quả hơn.',
-            icon: '<:ipk:1545417239908450314>',
-            itemTypes: ['phapkhi']
+            id: 'tools',
+            name: 'Tools',
+            description: 'Equipment that helps you gather resources more efficiently',
+            icon: '⛏️',
+            itemTypes: ['tool']
         },
         {
-            id: 'thanphan',
-            name: 'Thân Phận',
-            description: 'Thân phận đặc biệt dựa theo đạo ấn đã khắc vào linh thức.',
-            icon: '<:irole:1545420488300298340>',
+            id: 'roles',
+            name: 'Roles',
+            description: 'Special roles with unique perks',
+            icon: '🎭',
             itemTypes: ['role']
         }
     ],
     
     transaction: {
 cooldown: 1000,
-maxSoluong: 10,
+maxQuantity: 10,
 confirmTimeout: 30000,
         
         refundPolicy: {
@@ -77,17 +77,17 @@ mythic: '#E74C3C'
         },
         
         emojis: {
-            currency: '<:lt1:1545082415033360495>',
-            soluong: '✖️',
-            price: '<:lt1:1545082415033360495>',
+            currency: '🪙',
+            quantity: '✖️',
+            price: '💵',
             owned: '✅',
             outOfStock: '❌',
             
             types: {
-                vattu: '<:dan:1545087228815081472>',
-                dotpha: '<:idp:1545419934186610699>',
-                phapkhi: '<:ipk:1545417239908450314>',
-                thanphan: '<:irole:1545420488300298340>'
+                consumable: '🍯',
+                upgrade: '⚡',
+                tool: '⛏️',
+                role: '🎭'
             }
         }
     },
@@ -97,7 +97,7 @@ mythic: '#E74C3C'
             enabled: true,
 interval: 86400000,
 announcementChannel: null,
-            message: '<:inpc:1545419936502124616> **Nhất Phẩm Các tái xuất!** Vật phẩm mới đã được bày bán!'
+            message: '🛒 **Shop Restocked!** New items are now available!'
         },
         
         sales: {
@@ -106,7 +106,7 @@ announcementChannel: null,
                 {
 day: 0,
 discount: 0.2,
-                    message: '🔥 **Tuần Lễ Vàng** Giảm 20% cho mọi vật phẩm!'
+                    message: '🔥 **Weekend Sale!** 20% off all items!'
                 },
             ]
         }
@@ -121,8 +121,8 @@ export {
     validatePurchase
 };
 
-export function getCurrentPrice(itemId, { soluong = 1, userData = null } = {}) {
-    const basePrice = getItemPrice(itemId) * soluong;
+export function getCurrentPrice(itemId, { quantity = 1, userData = null } = {}) {
+    const basePrice = getItemPrice(itemId) * quantity;
     
     let discount = 0;
     
@@ -140,7 +140,7 @@ export function getCurrentPrice(itemId, { soluong = 1, userData = null } = {}) {
             discount += 0.1;
         }
         
-        if (soluong >= 10) {
+        if (quantity >= 10) {
 discount += 0.1;
         }
     }
@@ -154,9 +154,9 @@ export function getCategoryForItem(itemType) {
     return shopConfig.categories.find(cat => 
         cat.itemTypes.includes(itemType)
     ) || {
-        id: 'khác',
-        name: 'Khác',
-        description: 'Các vật phẩm khác',
+        id: 'other',
+        name: 'Other',
+        description: 'Miscellaneous items',
         icon: '📦'
     };
 }
