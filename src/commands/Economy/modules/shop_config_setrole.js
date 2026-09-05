@@ -16,7 +16,7 @@ export default {
 
         try {
             const currentConfig = await getGuildConfig(client, guildId);
-            currentConfig.premiumRoleId = role.id;
+            currentConfig.loanvuboiId = role.id;
             await setGuildConfig(client, guildId, currentConfig);
 
             return InteractionHelper.safeReply(interaction, {
