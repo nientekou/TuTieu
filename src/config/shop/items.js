@@ -1,9 +1,9 @@
 export const shopItems = [
     {
-        id: 'extra_work',
-        name: 'Extra Work Shift',
+        id: 'tranhailenh',
+        name: 'Trấn Hải Lệnh',
         price: 5000,
-        description: 'Allows 1 extra use of the `/work` command.',
+        description: 'Có thể dùng Lệnh bài này để nhận thêm nhiệm vụ từ Trấn Hải Các. `/nhiemvu`',
         type: 'consumable',
         maxQuantity: 5,
 cooldown: 86400000,
