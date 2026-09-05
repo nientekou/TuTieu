@@ -17,7 +17,7 @@ export default {
         .addUserOption(option =>
             option
                 .setName('user')
-                .setDescription('User to rob')
+                .setDescription('Người mang Linh Thạch mà Đạo Hữu muốn nhắm tới.')
                 .setRequired(true)
         ),
 
