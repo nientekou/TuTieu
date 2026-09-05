@@ -59,7 +59,7 @@ export function formatCurrency(amount) {
 export async function getEconomyData(client, guildId, userId) {
     try {
         if (!client.db || typeof client.db.get !== 'function') {
-            throw new Error('Database not available');
+            throw new Error('Dữ liệu không tồn tại');
         }
 
         const key = getEconomyKey(guildId, userId);
@@ -71,7 +71,7 @@ export async function getEconomyData(client, guildId, userId) {
         
         return normalizeEconomyData(data, defaults);
     } catch (error) {
-        logger.error(`Error getting economy data for user ${userId}`, error);
+        logger.error(`Không thể tìm thấy thông tin của ${userId}`, error);
         return normalizeEconomyData({}, DEFAULT_ECONOMY_DATA);
     }
 }
@@ -79,7 +79,7 @@ export async function getEconomyData(client, guildId, userId) {
 export async function setEconomyData(client, guildId, userId, data) {
     try {
         if (!client.db || typeof client.db.set !== 'function') {
-            throw new Error('Database not available');
+            throw new Error('Dữ liệu không tồn tại');
         }
 
         const key = getEconomyKey(guildId, userId);
@@ -87,7 +87,7 @@ export async function setEconomyData(client, guildId, userId, data) {
         await client.db.set(key, normalized);
         return true;
     } catch (error) {
-        logger.error(`Error saving economy data for user ${userId}`, error);
+        logger.error(`Không thể lưu thông tin của ${userId}`, error);
         return false;
     }
 }
@@ -149,16 +149,16 @@ function formatCooldown(ms) {
 export function getWorkReward() {
     const amount = Math.floor(Math.random() * (WORK_MAX - WORK_MIN + 1)) + WORK_MIN;
     const jobs = [
-        'worked at a fast food restaurant',
-        'worked as a programmer',
-        'worked as a construction worker',
-        'worked as a doctor',
-        'worked as a streamer',
-        'worked as a YouTuber',
-        'worked as a teacher',
-        'worked as a cashier',
-        'worked as a delivery driver',
-        'worked as a freelancer'
+        'truy tìm linh dược trong núi',
+        'áp tải linh thạch đến phường thị',
+        'trừ yêu thú quanh sơn môn',
+        'thu thập linh thảo',
+        'hộ tống đệ tử xuống núi',
+        'điều tra dị động nơi hoang sơn',
+        'khai thác linh thạch',
+        'đưa thư đến một vị đạo hữu',
+        'giúp đỡ phàm nhân giải quyết phiền nhiễu',
+        'thu hồi pháp khí thất lạc'
     ];
     
     const job = jobs[Math.floor(Math.random() * jobs.length)];
@@ -166,7 +166,7 @@ export function getWorkReward() {
     return {
         amount,
         job,
-        message: `You ${job} and earned ${formatCurrency(amount)}!`
+        message: `Đạo Hữu ${job} và nhận được ${formatCurrency(amount)}!`
     };
 }
 
@@ -175,32 +175,32 @@ export function getCrimeOutcome() {
         {
             success: true,
             amount: Math.floor(Math.random() * 200) + 50,
-            message: 'You successfully robbed a bank and got away with {amount}!' 
+            message: 'Đạo Hữu đã thành công đoạt lấy {amount} Linh Thạch rồi ung dung rời đi!' 
         },
         {
             success: true,
             amount: Math.floor(Math.random() * 100) + 20,
-            message: 'You pickpocketed someone and stole {amount}!' 
+            message: 'Đạo Hữu thừa lúc đối phương sơ ý, thuận tay lấy đi {amount} Linh Thạch!' 
         },
         {
             success: true,
             amount: Math.floor(Math.random() * 150) + 30,
-            message: 'You hacked into a bank account and transferred {amount} to yourself!' 
+            message: 'Đạo Hữu lặng lẽ phá giải cấm chế, lấy được {amount} Linh Thạch!' 
         },
         {
             success: false,
             fine: Math.floor(Math.random() * 100) + 50,
-            message: 'You got caught and had to pay a fine of {fine}!' 
+            message: 'Đạo Hữu hành sự bất cẩn, bị người phát giác và phải bồi thường {fine} Linh Thạch!' 
         },
         {
             success: false,
             fine: Math.floor(Math.random() * 150) + 50,
-            message: 'The police caught you! You paid {fine} to get out of jail.' 
+            message: 'Đạo Hữu vừa ra tay đã bị bắt tại trận, đành giao nộp {fine} Linh Thạch để giải quyết!' 
         },
         {
             success: false,
             fine: 0,
-            message: 'Your attempt failed, but you managed to escape!' 
+            message: 'Đạo Hữu ra tay bất thành, may mà kịp thời rút lui nên không mất gì.' 
         }
     ];
     
@@ -212,7 +212,7 @@ export function getRobOutcome(targetBalance) {
         return {
             success: false,
             amount: 0,
-            message: 'The target has no money to steal!'
+            message: 'Đạo Hữu chẳng tìm thấy Linh Thạch nào trên người đối phương!'
         };
     }
     
@@ -227,7 +227,7 @@ Math.floor(Math.random() * (targetBalance * 0.3)) + 1,
         return {
             success: true,
             amount,
-            message: `You successfully robbed them and got away with {amount}!`
+            message: `Đạo Hữu ra tay thần không biết quỷ không hay, đoạt được {amount} Linh Thạch rồi toàn thân trở lui!`
         };
     } else {
         const fine = Math.floor(Math.random() * 200) + 100;
@@ -236,7 +236,7 @@ Math.floor(Math.random() * (targetBalance * 0.3)) + 1,
             success: false,
             amount: 0,
             fine,
-            message: `You got caught! You had to pay a fine of {fine}.`
+            message: `Đạo Hữu bị đối phương phát giác, chẳng những không đoạt được gì mà còn phải bồi thường {fine} Linh Thạch!`
         };
     }
 }
@@ -249,18 +249,18 @@ export const addMoney = wrapServiceBoundary(async function addMoney(client, guil
     const validAmount = validateNumber(amount, 'amount');
     if (validAmount === null || validAmount <= 0) {
         throw createError(
-            'Invalid amount',
+            'Số Không Đúng',
             ErrorTypes.VALIDATION,
-            'Amount must be a positive number.',
+            'Phải là số dương',
             { guildId, userId, amount, operation: 'addMoney' }
         );
     }
 
     if (type !== 'wallet' && type !== 'bank') {
         throw createError(
-            'Invalid money type',
+            'Nhập Sai Thông Tin',
             ErrorTypes.VALIDATION,
-            'Type must be "wallet" or "bank".',
+            'Bắt buộc phải nhập "wallet" hoặc "bank".',
             { guildId, userId, type, operation: 'addMoney' }
         );
     }
@@ -271,9 +271,9 @@ export const addMoney = wrapServiceBoundary(async function addMoney(client, guil
         const maxBank = getMaxBankCapacity(userData);
         if ((userData.bank || 0) + validAmount > maxBank) {
             throw createError(
-                'Bank capacity exceeded',
+                'Thông Bảo Khố Vượt Hạn Mức',
                 ErrorTypes.VALIDATION,
-                `Bank capacity exceeded. Current: ${userData.bank || 0}, Max: ${maxBank}.`,
+                `Thông Bảo Khố đã đạt giới hạn chứa Linh Thạch. Hiện có ${userData.bank || 0}, Max: ${maxBank}.`,
                 { guildId, userId, current: userData.bank || 0, max: maxBank, operation: 'addMoney' }
             );
         }
@@ -291,25 +291,25 @@ export const addMoney = wrapServiceBoundary(async function addMoney(client, guil
 }, {
     service: 'economy',
     operation: 'addMoney',
-    userMessage: 'Failed to add money. Please try again.',
+    userMessage: 'Không thể thêm Linh Thạch. Hãy thử lại.',
 });
 
 export const removeMoney = wrapServiceBoundary(async function removeMoney(client, guildId, userId, amount, type = 'wallet') {
     const validAmount = validateNumber(amount, 'amount');
     if (validAmount === null || validAmount <= 0) {
         throw createError(
-            'Invalid amount',
+            'Số Không Đúng',
             ErrorTypes.VALIDATION,
-            'Amount must be a positive number.',
+            'Bắt buộc phải là số dương',
             { guildId, userId, amount, operation: 'removeMoney' }
         );
     }
 
     if (type !== 'wallet' && type !== 'bank') {
         throw createError(
-            'Invalid money type',
+            'Nhập Sai Thông Tin',
             ErrorTypes.VALIDATION,
-            'Type must be "wallet" or "bank".',
+            'Bắt buộc phải nhập "wallet" hoặc "bank".',
             { guildId, userId, type, operation: 'removeMoney' }
         );
     }
@@ -319,9 +319,9 @@ export const removeMoney = wrapServiceBoundary(async function removeMoney(client
     if (type === 'bank') {
         if ((userData.bank || 0) < validAmount) {
             throw createError(
-                'Insufficient bank funds',
+                'Không Đủ Số Dư Linh Thạch',
                 ErrorTypes.VALIDATION,
-                `Insufficient funds in bank. You have ${userData.bank || 0}, need ${validAmount}.`,
+                `Số dư trong Thông Bảo Khố không đủ. Hiện có: ${userData.bank || 0}, need ${validAmount}.`,
                 { guildId, userId, current: userData.bank || 0, required: validAmount, operation: 'removeMoney' }
             );
         }
@@ -329,9 +329,9 @@ export const removeMoney = wrapServiceBoundary(async function removeMoney(client
     } else {
         if ((userData.wallet || 0) < validAmount) {
             throw createError(
-                'Insufficient wallet funds',
+                'Không Đủ Linh Thạch',
                 ErrorTypes.VALIDATION,
-                `Insufficient funds in wallet. You have ${userData.wallet || 0}, need ${validAmount}.`,
+                `Linh Nang không có đủ Linh Thạch. Hiện có: ${userData.wallet || 0}, need ${validAmount}.`,
                 { guildId, userId, current: userData.wallet || 0, required: validAmount, operation: 'removeMoney' }
             );
         }
