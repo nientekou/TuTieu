@@ -9,28 +9,28 @@ const JAIL_TIME = 2 * 60 * 60 * 1000;
 const FINE_RATE = 0.2;
 
 const CRIME_TYPES = [
-    { name: "Pickpocketing", min: 100, max: 500, risk: 0.3 },
-    { name: "Burglary", min: 300, max: 1000, risk: 0.4 },
-    { name: "Bank Heist", min: 1000, max: 5000, risk: 0.6 },
-    { name: "Art Theft", min: 2000, max: 10000, risk: 0.7 },
-    { name: "Cybercrime", min: 5000, max: 20000, risk: 0.8 },
+    { name: "Thuận Thủ Khiên Dương", min: 100, max: 500, risk: 0.30 },
+    { name: "Đột Nhập Thương Khố", min: 300, max: 1000, risk: 0.40 },
+    { name: "Kiếp Linh Khố", min: 1000, max: 5000, risk: 0.60 },
+    { name: "Đoạt Dị Bảo", min: 2000, max: 10000, risk: 0.70 },
+    { name: "Xâm Nhập Trận Các", min: 5000, max: 20000, risk: 0.80 },
 ];
 
 export default {
     data: new SlashCommandBuilder()
         .setName('crime')
-        .setDescription('Commit a crime to earn money (risky)')
+        .setDescription('Thực hiện một phi vụ để kiếm Linh Thạch (rủi ro rất cao)')
         .addStringOption(option =>
             option
                 .setName('type')
-                .setDescription('Type of crime to commit')
+                .setDescription('Chọn phi vụ muốn thực hiện')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Pickpocketing', value: 'pickpocketing' },
-                    { name: 'Burglary', value: 'burglary' },
-                    { name: 'Bank Heist', value: 'bank-heist' },
-                    { name: 'Art Theft', value: 'art-theft' },
-                    { name: 'Cybercrime', value: 'cybercrime' },
+                    { name: 'Thuận Thủ Khiên Dương', value: 'thuan-thu' },
+                    { name: 'Đột Nhập Thương Khố', value: 'dot-nhap-thuong-kho' },
+                    { name: 'Kiếp Linh Khố', value: 'kiep-linh-kho' },
+                    { name: 'Đoạt Dị Bảo', value: 'doat-di-bao' },
+                    { name: 'Xâm Nhập Trận Các', value: 'xam-nhap-tran-cac' },
                 )
         ),
 
@@ -48,9 +48,9 @@ export default {
             if (isJailed) {
                 const timeLeft = Math.ceil((userData.jailedUntil - now) / (1000 * 60));
                 throw createError(
-                    "User is in jail",
+                    "<:itrom:1545417233935630400> Đang Bị Giam Giữ",
                     ErrorTypes.RATE_LIMIT,
-                    `You're in jail for ${timeLeft} more minutes!`,
+                    `Đạo Hữu đang bị **Tiên Minh Chấp Pháp Ty** giam giữ tại **Lạc Tiên Uyên**. Còn ${timeLeft} mới được thả.`,
                     { jailTimeRemaining: userData.jailedUntil - now }
                 );
             }
@@ -58,9 +58,9 @@ export default {
             if (now < lastCrime + CRIME_COOLDOWN) {
                 const timeLeft = Math.ceil((lastCrime + CRIME_COOLDOWN - now) / (1000 * 60));
                 throw createError(
-                    "Crime cooldown active",
+                    "<:itrom:1545417233935630400> Đang Lánh Mặt Sau Phi Vụ",
                     ErrorTypes.RATE_LIMIT,
-                    `You need to wait ${timeLeft} more minutes before committing another crime.`,
+                    `Phi vụ vừa rồi đã gây động tĩnh quá lớn. Hãy chờ ${timeLeft} rồi hẵng hành sự tiếp.`,
                     { remaining: lastCrime + CRIME_COOLDOWN - now, cooldownType: 'crime' }
                 );
             }
@@ -72,9 +72,9 @@ export default {
 
             if (!crime) {
                 throw createError(
-                    "Invalid crime type",
+                    "<:itrom:1545417233935630400> Phi Vụ Không Tồn Tại",
                     ErrorTypes.VALIDATION,
-                    "Please select a valid crime type.",
+                    "Hãy chọn một phi vụ hợp lệ trên Bảng Huyền Thưởng.",
                     { crimeType }
                 );
             }
@@ -93,8 +93,8 @@ export default {
                 await setEconomyData(client, guildId, userId, userData);
                 
                 const embed = successEmbed(
-                    "🕵️ Crime Successful!",
-                    `You successfully committed ${crime.name} and earned **${amountEarned}** coins!`
+                    "🗡️ Phi Vụ Thành Công!",
+                    `Đạo Hữu đã hoàn thành ${crime.name} và thu được **${amountEarned}**<:lt1:1545082415033360495>`
                 );
                 
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
@@ -108,9 +108,9 @@ export default {
                 await setEconomyData(client, guildId, userId, userData);
                 
                 const embed = warningEmbed(
-                    "🚔 Crime Failed!",
-                    `You were caught while attempting ${crime.name} and have been sent to jail! ` +
-                    `You were fined ${fine.toLocaleString()} coins and will be in jail for 2 hours.`
+                    "⛓️ Phi Vụ Thất Bại!",
+                    `${crime.name} bất thành! Đao Hữu đã bị **Chấp Pháp Ty** bắt giữ đem về **Lạc Tiên Uyên**` +
+                    `Bồi thường ${fine.toLocaleString()}<:lt1:1545082415033360495> và bị giam trong 1 canh giờ.`
                 );
                 
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
