@@ -15,7 +15,7 @@ const PREMIUM_BONUS_PERCENTAGE = 0.1;
 export default {
     data: new SlashCommandBuilder()
         .setName('daily')
-        .setDescription('Claim your daily cash reward'),
+        .setDescription('Nhận phần thưởng Linh Thạch hôm nay.'),
 
     execute: withErrorHandling(async (interaction, config, client) => {
         const deferred = await InteractionHelper.safeDefer(interaction);
@@ -25,15 +25,15 @@ export default {
             const guildId = interaction.guildId;
             const now = Date.now();
 
-            logger.debug(`[ECONOMY] Daily claimed started for ${userId}`, { userId, guildId });
+            logger.debug(`[ECONOMY] Đã bắt đầu nhận thưởng hằng ngày cho ${userId}`, { userId, guildId });
 
             const userData = await getEconomyData(client, guildId, userId);
             
             if (!userData) {
                 throw createError(
-                    "Failed to load economy data for daily",
+                    "Không thể tải dữ liệu Linh Thạch của Đạo Hữu",
                     ErrorTypes.DATABASE,
-                    "Failed to load your economy data. Please try again later.",
+                    "Không thể tải dữ liệu Linh Thạch của Đạo Hữu. Vui lòng thử lại sau.",
                     { userId, guildId }
                 );
             }
@@ -43,31 +43,31 @@ export default {
             if (now < lastDaily + DAILY_COOLDOWN) {
                 const timeRemaining = lastDaily + DAILY_COOLDOWN - now;
                 throw createError(
-                    "Daily cooldown active",
+                    "Chưa Thể Nhận Thưởng",
                     ErrorTypes.RATE_LIMIT,
-                    `You need to wait before claiming daily again. Try again in **${formatDuration(timeRemaining)}**.`,
+                    `Phần thưởng hôm nay đã được nhận. Vui lòng chờ **${formatDuration(timeRemaining)}** rồi nhận lại.`,
                     { timeRemaining, cooldownType: 'daily' }
                 );
             }
 
             const guildConfig = await getGuildConfig(client, guildId);
-            const PREMIUM_ROLE_ID = guildConfig.premiumRoleId;
+            const LOANVUBOI_ID = guildConfig.loanvuboiId;
 
             let earned = DAILY_AMOUNT;
             let bonusMessage = "";
-            let hasPremiumRole = false;
+            let hasLoanvuboi = false;
 
             if (
-                PREMIUM_ROLE_ID &&
+                LOANVUBOI_ID &&
                 interaction.member &&
-                interaction.member.roles.cache.has(PREMIUM_ROLE_ID)
+                interaction.member.roles.cache.has(LOANVUBOI_ID)
             ) {
                 const bonusAmount = Math.floor(
                     DAILY_AMOUNT * PREMIUM_BONUS_PERCENTAGE,
                 );
                 earned += bonusAmount;
-                bonusMessage = `\n✨ **Premium Bonus:** +$${bonusAmount.toLocaleString()}`;
-                hasPremiumRole = true;
+                bonusMessage = `\n<:ilvb:1545714174112563240> **Thưởng thêm từ Loan Vũ Bội:** +${bonusAmount.toLocaleString()}<:lt1:1545082415033360495>`;
+                hasLoanvuboi = true;
             }
 
             userData.wallet = (userData.wallet || 0) + earned;
@@ -75,28 +75,28 @@ export default {
 
             await setEconomyData(client, guildId, userId, userData);
 
-            logger.info(`[ECONOMY_TRANSACTION] Daily claimed`, {
+            logger.info(`[ECONOMY_TRANSACTION] Đã Nhận Thưởng Hôm Nay`, {
                 userId,
                 guildId,
                 amount: earned,
                 newWallet: userData.wallet,
-                hasPremium: hasPremiumRole,
+                hasPremium: hasLoanvuboi,
                 timestamp: new Date().toISOString()
             });
 
             const embed = successEmbed(
-                "✅ Daily Claimed!",
-                `You have claimed your daily **$${earned.toLocaleString()}**!${bonusMessage}`
+                "✅ Đã nhận thưởng hằng ngày!",
+                `Đạo Hữu đã nhận được **${earned.toLocaleString()}<:lt1:1545082415033360495>**!${bonusMessage}`
             )
                 .addFields({
-                    name: "New Cash Balance",
-                    value: `$${userData.wallet.toLocaleString()}`,
+                    name: "<:lt1:1545082415033360495> hiện có:",
+                    value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                     inline: true,
                 })
                 .setFooter({
-                    text: hasPremiumRole
-                        ? `Next claim in 24 hours. (Premium Active)`
-                        : `Next claim in 24 hours.`,
+                    text: hasLoanvuboi
+                        ? `Có thể nhận thưởng lại sau 24 giờ. (Đang sở hữu Loan Vũ Bội)`
+                        : `Có thể nhận thưởng lại sau 24 giờ.`,
                 });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
