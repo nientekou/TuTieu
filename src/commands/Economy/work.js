@@ -51,7 +51,7 @@ export default {
 
             const lastWork = userData.lastWork || 0;
             const inventory = userData.inventory || {};
-            const extraWorkShifts = inventory["extra_work"] || 0;
+            const extraWorkShifts = inventory["tranhailenh"] || 0;
             const hasLaptop = inventory["laptop"] || 0;
 
             let cooldownActive = now < lastWork + WORK_COOLDOWN;
@@ -59,7 +59,7 @@ export default {
 
             if (cooldownActive) {
                 if (extraWorkShifts > 0) {
-                    inventory["extra_work"] = (inventory["extra_work"] || 0) - 1;
+                    inventory["tranhailenh"] = (inventory["tranhailenh"] || 0) - 1;
                     usedConsumable = true;
                 } else {
                     const remaining = lastWork + WORK_COOLDOWN - now;
