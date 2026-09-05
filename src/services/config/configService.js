@@ -14,7 +14,7 @@ const CONFIG_HISTORY_LIMIT = 100;
 const CONFIG_VALIDATION_RULES = {
     logChannelId: { type: 'channel', required: false },
     reportChannelId: { type: 'channel', required: false },
-    premiumRoleId: { type: 'role', required: false },
+    loanvuboiId: { type: 'role', required: false },
     autoRole: { type: 'role', required: false },
     modRole: { type: 'role', required: false },
     adminRole: { type: 'role', required: false },
@@ -39,7 +39,7 @@ const LEGACY_LOGGING_KEY_MAP = {
 const ConfigValueSchemas = Object.freeze({
     logChannelId: z.union([z.string().min(1), z.object({ id: z.string().min(1) }), z.null()]),
     reportChannelId: z.union([z.string().min(1), z.object({ id: z.string().min(1) }), z.null()]),
-    premiumRoleId: z.union([z.string().min(1), z.object({ id: z.string().min(1) })]),
+    loanvuboiId: z.union([z.string().min(1), z.object({ id: z.string().min(1) })]),
     autoRole: z.union([z.string().min(1), z.object({ id: z.string().min(1) })]),
     modRole: z.union([z.string().min(1), z.object({ id: z.string().min(1) })]),
     adminRole: z.union([z.string().min(1), z.object({ id: z.string().min(1) })]),
