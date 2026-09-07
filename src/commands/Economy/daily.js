@@ -43,7 +43,7 @@ export default {
             if (now < lastDaily + DAILY_COOLDOWN) {
                 const timeRemaining = lastDaily + DAILY_COOLDOWN - now;
                 throw createError(
-                    "<:a2:1546550423882694766> CHƯA THỂ NHẬN THƯỞNG",
+                    "### <:a2:1546550423882694766> CHƯA THỂ NHẬN THƯỞNG",
                     ErrorTypes.RATE_LIMIT,
                     `Phần thưởng hôm nay đã được nhận. Vui lòng chờ **${formatDuration(timeRemaining)}** rồi nhận lại.`,
                     { timeRemaining, cooldownType: 'daily' }
@@ -85,7 +85,7 @@ export default {
             });
 
             const embed = successEmbed(
-                "<:a3:1546550421944799292> ĐÃ NHẬN ĐƯỢC THƯỞNG!",
+                "### <:a3:1546550421944799292> ĐÃ NHẬN ĐƯỢC THƯỞNG!",
                 `${bonusMessage} \nĐạo Hữu đã nhận được **${earned.toLocaleString()}<:lt1:1545082415033360495>**!`
             )
                 .addFields({
