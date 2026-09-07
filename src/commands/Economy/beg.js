@@ -26,9 +26,9 @@ export default {
             
             if (!userData) {
                 throw createError(
-                    "Túi Càn Khôn bị kẹt",
+                    "Linh Nang bị kẹt",
                     ErrorTypes.DATABASE,
-                    "Túi Càn Khôn của bạn không thể mở ra được, hãy mở lại sau",
+                    "Linh Nang của bạn không thể mở ra được, hãy mở lại sau",
                     { userId, guildId }
                 );
             }
@@ -64,7 +64,7 @@ export default {
 
                 const successMessages = [
                     `Một vị Đạo Hữu nào đó đã ném **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** vào cái bát mẻ của bạn`,
-                    `Ai mà hớ hênh quá! Bạn la lên rồi lủm túi tiền có chứa **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** rồi chạy mất.`,
+                    `Ai mà hớ hênh quá! Đạo Hữu thì thầm rồi thó túi tiền chứa **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** chạy mất.`,
                     `Có người thấy bạn thật đáng thương nên cho bạn **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!`,
                     `Bạn tìm thấy **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** dưới ghế quán trà bên lề đường.`,
                 ];
