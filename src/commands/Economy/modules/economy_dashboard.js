@@ -58,8 +58,8 @@ async function buildDashboardEmbed(guild, client) {
     const avgBalance = userCount > 0 ? Math.floor(totalInCirculation / userCount) : 0;
 
     return new EmbedBuilder()
-        .setTitle('💰 Thiên Cơ Linh Khố')
-        .setDescription(`Quản lý Linh Khố của **${guild.name}**.\n Chọn một mục bên dưới để thực hiện thao tác.`)
+        .setTitle('💰 Thiên Cơ Thương Bảo Khố')
+        .setDescription(`Quản lý Linh Thạch của **${guild.name}**.\n Chọn một mục bên dưới để thực hiện thao tác.`)
         .setColor(getColor('economy'))
         .addFields(
             { name: '💰 Tổng Tiền Tệ Lưu Hành', value: `\`${currencySymbol}${totalInCirculation.toLocaleString()}\``, inline: true },
@@ -79,12 +79,12 @@ function buildSelectMenu(guildId) {
         .addOptions(
             new StringSelectMenuOptionBuilder()
                 .setLabel('Nạp Tiền')
-                .setDescription('Thêm tiền vào Túi Càn Khôn hoặc Tiền Trang của Đạo Hữu')
+                .setDescription('Thêm tiền vào Linh Nang hoặc Tiền Trang của Đạo Hữu')
                 .setValue('add_currency')
                 .setEmoji('💰'),
             new StringSelectMenuOptionBuilder()
                 .setLabel('Khấu Trừ Tiền')
-                .setDescription('Thu hồi tiền từ Túi Càn Khôn hoặc Tiền Trang của đạo hữu')
+                .setDescription('Thu hồi tiền từ Linh Nang hoặc Tiền Trang của đạo hữu')
                 .setValue('remove_currency')
                 .setEmoji('💸'),
             new StringSelectMenuOptionBuilder()
