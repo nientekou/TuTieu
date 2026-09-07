@@ -140,7 +140,7 @@ export default {
                 userData.inventory[itemId] =
                     (userData.inventory[itemId] || 0) + quantity;
                 if (item.type === "tool") {
-                    successDescription += `\n\n**${item.name} đã được thu vào Túi Càn Khôn của Đạo Hữu!**`;
+                    successDescription += `\n\n**${item.name} đã được thu vào Túi Càn Khôn <:tvp2:1545082417012932639> của Đạo Hữu!**`;
                 }
             }
 
