@@ -114,7 +114,7 @@ export default {
                 );
 
                 throw createError(
-                    "Chưa thể tiếp tục khai khoáng",
+                    "CHƯA THỂ KHAI KHOÁNG!",
                     ErrorTypes.RATE_LIMIT,
                     `Tay bạn đào khoáng đến run lên, không thể nhấc nổi nữa. Vui lòng chờ **${hours}giờ ${minutes}phút** để hồi phục thể lực.`,
                     { remaining, cooldownType: 'mine' }
@@ -148,8 +148,8 @@ userData.lastMine = now;
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                "<:icuoc:1545714179581943868> Khai Khoáng Thành Công!",
-                `Đạo Hữu đã thăm dò **${location}**\n${multiplierMessage}
+                "<:icuoc:1545714179581943868> KHAI KHOÁNG THÀNH CÔNG!",
+                `Đạo Hữu đã thăm dò **${location}** ${multiplierMessage}
                 ### <:a1:1546550426063741058> THU HOẠCH
                 ㅤ└ ${finalEarned.toLocaleString()}<:lt1:1545082415033360495>
                 `,
