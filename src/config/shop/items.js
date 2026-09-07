@@ -13,6 +13,30 @@ cooldown: 86400000,
             uses: 1
         }
     },
+      {
+        id: 'canthinhtrieu',
+        name: 'Cần Thính Triều 🎣',
+        price: 5000,
+        description: 'Triều Sinh Vạn Tượng đã mở. Triều dâng sinh vạn tượng. Sao còn chần chờ chưa vác cần đến đó kiếm một ít cơ duyên? Mang theo Cần Thính Triều, người câu không chỉ nhìn phao mà nghe con nước, thuận theo thủy thế.',
+        type: 'tool',
+        durability: 100,
+        effect: {
+            type: 'fishing_yield',
+            multiplier: 1.0
+        }
+    },
+    {
+        id: 'cuockhailinh',
+        name: 'Cuốc Khai Linh <:icuoc:1545714179581943868>',
+        price: 7500,
+        description: 'Sơn Tàng Vạn Ngọc đã mở. Núi giấu chứa muôn ngọc. Mau mang cuốc tới mà đào Linh Thạch thôi!',
+        type: 'tool',
+        durability: 100,
+        effect: {
+            type: 'mining_yield',
+            multiplier: 1.2
+        }
+    },
     {
         id: 'linhkho+',
         name: 'Linh Khố + <:tvp1:1545082419273801859>',
@@ -62,30 +86,7 @@ roleId: null,
             uses: 1
         }
     },
-    {
-        id: 'canthinhtrieu',
-        name: 'Cần Thính Triều 🎣',
-        price: 5000,
-        description: 'Triều Sinh Vạn Tượng đã mở. Triều dâng sinh vạn tượng. Sao còn chần chờ chưa vác cần đến đó kiếm một ít cơ duyên? Mang theo Cần Thính Triều, người câu không chỉ nhìn phao mà nghe con nước, thuận theo thủy thế.',
-        type: 'tool',
-        durability: 100,
-        effect: {
-            type: 'fishing_yield',
-            multiplier: 1.0
-        }
-    },
-    {
-        id: 'cuockhailinh',
-        name: 'Cuốc Khai Linh <:icuoc:1545714179581943868>',
-        price: 7500,
-        description: 'Sơn Tàng Vạn Ngọc đã mở. Núi giấu chứa muôn ngọc. Mau mang cuốc tới mà đào Linh Thạch thôi!',
-        type: 'tool',
-        durability: 100,
-        effect: {
-            type: 'mining_yield',
-            multiplier: 1.2
-        }
-    },
+  
     {
         id: 'nhanngauthanh',
         name: 'Nhẫn Ngẫu Thành <:nhannt:1545735909067063356>',
