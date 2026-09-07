@@ -87,14 +87,14 @@ export default {
                 cashChange = amountWon - betAmount;
 
                 resultEmbed = successEmbed(
-                    "<:idovan:1546543420569288816> THẮNG VẬN!",
+                    "### <:idovan:1546543420569288816> THẮNG VẬN!",
                     `Đạo Hữu thắng Đổ Vận! **${betAmount.toLocaleString()}<:lt1:1545082415033360495>** đã thành **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!${tulinhthaoMessage}`,
                 );
             } else {
 cashChange = -betAmount;
 
                 resultEmbed = warningEmbed(
-                    "<:idovan:1546543420569288816> BẠI VẬN...",
+                    "### <:idovan:1546543420569288816> BẠI VẬN...",
                     `Thời vận không đứng về phía Đạo Hữu. Đã mất **${betAmount.toLocaleString()}<:lt1:1545082415033360495>**`,
                 );
             }
@@ -107,7 +107,7 @@ userData.lastGamble = now;
             const newCash = userData.wallet;
 
             resultEmbed.addFields({
-                name: "<:lt1:1545082415033360495> hiện có:",
+                name: "<:lt1:1545082415033360495> Hiện Có:",
                 value: `${newCash.toLocaleString()}<:lt1:1545082415033360495>`,
                 inline: true,
             });
