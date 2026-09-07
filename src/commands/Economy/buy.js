@@ -122,7 +122,7 @@ export default {
                         role,
                         `Nhận Đạo Ấn: ${item.name}`,
                     );
-                    successDescription += `\n\n**👑 Đạo Ấn ${role.toString()} đã được trao cho Đạo Hữu**`;
+                    successDescription += `\n**👑 Đạo Ấn ${role.toString()} đã được trao cho Đạo Hữu**`;
                 } catch (roleError) {
                     userData.wallet += totalCost;
                     await setEconomyData(client, guildId, userId, userData);
@@ -135,12 +135,12 @@ export default {
                 }
             } else if (item.type === "upgrade") {
                 userData.upgrades[itemId] = true;
-                successDescription += `\n\n**✨ Đạo Ấn đã khắc thành, thân phận chính thức sinh hiệu!**`;
+                successDescription += `\n**✨ Đạo Ấn đã khắc thành, thân phận chính thức sinh hiệu!**`;
             } else if (item.type === "consumable" || item.type === "tool") {
                 userData.inventory[itemId] =
                     (userData.inventory[itemId] || 0) + quantity;
                 if (item.type === "tool") {
-                    successDescription += `\n\n**${item.name} đã được thu vào Túi Càn Khôn <:tvp2:1545082417012932639> của Đạo Hữu!**`;
+                    successDescription += `\n${item.name} đã được thu vào Túi Càn Khôn <:tvp2:1545082417012932639> của Đạo Hữu!`;
                 }
             }
 
