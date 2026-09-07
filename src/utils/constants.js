@@ -16,7 +16,7 @@ export const DEFAULT_ECONOMY_DATA = {
     dailyStreak: 0,
     lastWeekly: 0,
     lastGuitien: 0,
-    lastWithdraw: 0,
+    lastRuttien: 0,
     inventory: {},
     upgrades: {},
     cooldowns: {}
