@@ -64,7 +64,7 @@ export default {
                 const emoji = rankEmoji[i] || `**#${rank}**`;
 
                 bxhtaiphuEntries.push(
-                    `${emoji} <@${user.userId}> - <:tientrang:1545104597901774948> ${user.net_worth.toLocaleString()}`,
+                    `${emoji} <@${user.userId}> - ${user.net_worth.toLocaleString()}<:lt1:1545082415033360495>`,
                 );
             }
 
