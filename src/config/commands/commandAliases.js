@@ -15,7 +15,7 @@ export const commandAliases = {
     'gamble': 'gamble',
     'bet': 'gamble',
     'rob': 'rob',
-    'crime': 'crime',
+    'phivu': 'phivu',
     'pay': 'pay',
     'give': 'pay',
     'send': 'pay',
