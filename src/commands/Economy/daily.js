@@ -43,7 +43,7 @@ export default {
             if (now < lastDaily + DAILY_COOLDOWN) {
                 const timeRemaining = lastDaily + DAILY_COOLDOWN - now;
                 throw createError(
-                    "<:a2:1546550423882694766> Chưa Thể Nhận Thưởng",
+                    "<:a2:1546550423882694766> CHƯA THỂ NHẬN THƯỞNG",
                     ErrorTypes.RATE_LIMIT,
                     `Phần thưởng hôm nay đã được nhận. Vui lòng chờ **${formatDuration(timeRemaining)}** rồi nhận lại.`,
                     { timeRemaining, cooldownType: 'daily' }
@@ -66,7 +66,7 @@ export default {
                     DAILY_AMOUNT * PREMIUM_BONUS_PERCENTAGE,
                 );
                 earned += bonusAmount;
-                bonusMessage = `\n<:ilvb:1545714174112563240> **Thưởng thêm từ Loan Vũ Bội:** +${bonusAmount.toLocaleString()}<:lt1:1545082415033360495>`;
+                bonusMessage = `<:ilvb:1545714174112563240> *Thưởng thêm từ Loan Vũ Bội:* +${bonusAmount.toLocaleString()}<:lt1:1545082415033360495>`;
                 hasLoanvuboi = true;
             }
 
@@ -75,7 +75,7 @@ export default {
 
             await setEconomyData(client, guildId, userId, userData);
 
-            logger.info(`[ECONOMY_TRANSACTION] Đã Nhận Thưởng Hôm Nay`, {
+            logger.info(`[ECONOMY_TRANSACTION] ĐÃ NHẬN THƯỞNG HÔM NAY`, {
                 userId,
                 guildId,
                 amount: earned,
@@ -85,11 +85,11 @@ export default {
             });
 
             const embed = successEmbed(
-                "<:a3:1546550421944799292> Đã nhận thưởng hằng ngày!",
-                `Đạo Hữu đã nhận được **${earned.toLocaleString()}<:lt1:1545082415033360495>**!${bonusMessage}`
+                "<:a3:1546550421944799292> ĐÃ NHẬN ĐƯỢC THƯỞNG!",
+                `${bonusMessage} \nĐạo Hữu đã nhận được **${earned.toLocaleString()}<:lt1:1545082415033360495>**!`
             )
                 .addFields({
-                    name: "<:lt1:1545082415033360495> hiện có:",
+                    name: "<:lt1:1545082415033360495> Hiện Có:",
                     value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                     inline: true,
                 })
