@@ -8,11 +8,16 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 const SLUT_COOLDOWN = 45 * 60 * 1000;
 
 const SLUT_ACTIVITIES = [
-    { name: "Bày Quán Bói Mệnh", min: 120, max: 450, risk: 0.2 },
+    { name: "Bày Quán Bói Mệnh", min: 120, max: 450, risk: 0.20 },
+    { name: "Xem Phong Thủy Cho Thôn Dân", min: 150, max: 500, risk: 0.22 },
     { name: "Họa Phù Trấn Trạch", min: 220, max: 700, risk: 0.25 },
-    { name: "Luyện Đan Thuê", min: 320, max: 900, risk: 0.3 },
+    { name: "Khai Quang Pháp Khí", min: 260, max: 760, risk: 0.28 },
+    { name: "Luyện Đan Thuê", min: 320, max: 900, risk: 0.30 },
+    { name: "Trấn Áp Tà Khí Trong Cổ Trạch", min: 450, max: 1300, risk: 0.35 },
     { name: "Hộ Tống Linh Vật", min: 550, max: 1400, risk: 0.35 },
-    { name: "Thăm Dò Bí Cảnh", min: 850, max: 2200, risk: 0.4 },
+    { name: "Thu Phục Linh Thú Hoang", min: 700, max: 1800, risk: 0.38 },
+    { name: "Thăm Dò Bí Cảnh", min: 850, max: 2200, risk: 0.40 },
+    { name: "Tìm Kiếm Linh Tuyền Thất Lạc", min: 900, max: 2500, risk: 0.42 },
 ];
 
 const POSITIVE_OUTCOMES = [
@@ -37,7 +42,7 @@ const ROBBED_OUTCOMES = [
 const LOSS_OUTCOMES = [
     "Luyện đan thất bại, dược liệu cháy sạch, lỗ vốn.",
     "Bày trận tiêu hao quá nhiều tài nguyên mà không thu được gì.",
-    "TChuyến hành đạo thất bại, hao tổn Linh Thạch mà không có thu hoạch.",
+    "Chuyến hành đạo thất bại, hao tổn Linh Thạch mà không có thu hoạch.",
 ];
 
 function randomInt(min, max) {
