@@ -174,11 +174,11 @@ export default {
             const amountLabel = `${outcome.delta >= 0 ? '+' : '-'}$${Math.abs(outcome.delta).toLocaleString()}`;
             const summaryLines = [
                 `${outcome.message}`,
-                `<a:qua2:1545398106986774528> **Linh Thạch Thu Hoạch:** ${amountLabel}`,
-                `<:tvp1:1545082419273801859> **Linh Thạch Hiện Có:** $${userData.wallet.toLocaleString()}`,
-                `<:vdl:1545397492831494144> **Số Lần Hành Đạo:** ${userData.totalSluts}`,
-                `<:lt1:1545082415033360495> **Tổng Linh Thạch Thu Được** $${(userData.totalSlutEarnings || 0).toLocaleString()}`,
-                `🧾 **Tổng Linh Thạch Hao Tổn:** $${(userData.totalSlutLosses || 0).toLocaleString()}`
+                `/n<a:qua2:1545398106986774528> Thu Hoạch: ${amountLabel}<:lt1:1545082415033360495>`,
+                `<:tvp1:1545082419273801859> Hiện Có: ${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
+                `<:vdl:1545397492831494144> Số Lần Hành Đạo: ${userData.totalSluts}`,
+                `<:lt1:1545082415033360495> Tổng Thu: ${(userData.totalSlutEarnings || 0).toLocaleString()}<:lt1:1545082415033360495>`,
+                `🧾 Tổng Linh Thạch Hao Tổn: ${(userData.totalSlutLosses || 0).toLocaleString()}<:lt1:1545082415033360495>`
             ];
 
             const embed = createEmbed({
