@@ -208,7 +208,7 @@ export default {
 
             if (hasCanthinhtrieu > 0) {
                 finalEarned = Math.floor(baseEarned * CANTHINHTRIEU_MULTIPLIER);
-                multiplierMessage = `\n:fishing_pole_and_fish:  **Thưởng thêm từ Cần Thính Triều: +50%**`;
+                multiplierMessage = `\n:fishing_pole_and_fish:  *Thưởng thêm từ Cần Thính Triều: +50%*`;
             }
 
             const catchMessage = CATCH_MESSAGES[Math.floor(Math.random() * CATCH_MESSAGES.length)];
@@ -228,7 +228,9 @@ export default {
 
             const embed = createEmbed({
                 title: ':fishing_pole_and_fish: Câu Cá Thành Công!',
-                description: ` ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**! Thu hoạch được **${finalEarned.toLocaleString()}<:lt1:1545082415033360495>**!${multiplierMessage}`,
+                description: ` ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**!\n${multiplierMessage}
+                ## THU HOẠCH
+                ㅤ└ ${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
                 color: rarityColors[fishCaught.rarity]
             })
                 .addFields(
