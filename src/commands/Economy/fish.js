@@ -228,7 +228,7 @@ export default {
 
             const embed = createEmbed({
                 title: ':fishing_pole_and_fish: Câu Cá Thành Công!',
-                description: `## ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**! Thu hoạch được **${finalEarned.toLocaleString()}<:lt1:1545082415033360495>**!${multiplierMessage}`,
+                description: ` ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**! Thu hoạch được **${finalEarned.toLocaleString()}<:lt1:1545082415033360495>**!${multiplierMessage}`,
                 color: rarityColors[fishCaught.rarity]
             })
                 .addFields(
