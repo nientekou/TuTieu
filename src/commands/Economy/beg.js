@@ -81,7 +81,7 @@ export default {
                     "Khất thực chỉ được nửa cái bánh, còn bị Chấp Pháp Ty đá như trái banh",
                     "Có tiếng la vang vọng, 'Không làm mà đòi có ăn, thì chỉ có...', bạn không kịp nghe những từ cuối",
                     "<:truc2:1546511482320068638> Một con cáo có hình dạng như trái chuối lao từ đâu đến và tha cái chén ăn xin của Đạo Hữu đi mất",
-                    "Bạn thử đặt chén mẻ ra, nhưng quá ngại để mở lời",
+                    "Đạo Hữu đặt chén mẻ trước mắt, rồi hít một hơi sâu lấy giọng... Sau đó im lặng ngồi như vậy cả chiều nhìn người ta đi qua đi lại",
                 ];
 
                 replyEmbed = warningEmbed(
