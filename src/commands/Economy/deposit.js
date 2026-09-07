@@ -122,12 +122,12 @@ export default {
             )
                 .addFields(
                     {
-                        name: "<:tvp1:1545082419273801859> Linh Nang:",
+                        name: "<:tvp1:1545082419273801859> Linh Nang",
                         value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
-                        name: "<:tientrang:1545104597901774948> Thương Bảo Khố:",
+                        name: "<:tientrang:1545104597901774948> Thương Bảo Khố",
                         value: `${userData.bank.toLocaleString()}<:lt1:1545082415033360495> / ${maxBank.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
