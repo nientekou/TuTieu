@@ -114,7 +114,7 @@ export default {
                 );
 
                 throw createError(
-                    "CHƯA THỂ KHAI KHOÁNG!",
+                    "<:icuoc:1545714179581943868> CHƯA THỂ KHAI KHOÁNG!",
                     ErrorTypes.RATE_LIMIT,
                     `Tay bạn đào khoáng đến run lên, không thể nhấc nổi nữa. Vui lòng chờ **${hours}giờ ${minutes}phút** để hồi phục thể lực.`,
                     { remaining, cooldownType: 'mine' }
@@ -129,10 +129,10 @@ export default {
             let finalEarned = baseEarned;
             let multiplierMessage = "";
 
-            if (hasBancophu > 0) {
+            if (hasDiamondPickaxe > 0) {
                 finalEarned = Math.floor(baseEarned * BANCOPHU_MULTIPLIER);
                 multiplierMessage = `\n<:bcp:1545728177169502288> *Thưởng thêm từ Bàn Cổ Phủ: +100%*`;
-            } else if (hasCuockhailinh > 0) {
+            } else if (hasPickaxe > 0) {
                 finalEarned = Math.floor(baseEarned * CUOCKHAILINH_MULTIPLIER);
                 multiplierMessage = `\n<:icuoc:1545714179581943868> *Thưởng thêm từ Cuốc Khai Linh: +20%*`;
             }
@@ -149,16 +149,16 @@ userData.lastMine = now;
 
             const embed = successEmbed(
                 "<:icuoc:1545714179581943868> KHAI KHOÁNG THÀNH CÔNG!",
-                 `Đạo Hữu đã thăm dò **${location}** ${multiplierMessage}
-                 ### <:a1:1546550426063741058> THU HOẠCH
-                ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
+                `Đạo Hữu đã thăm dò **${location}** 
+                ### <:a1:1546550426063741058> THU HOẠCH
+                ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495> ${multiplierMessage}`,
             )
                 .addFields({
                     name: "<:lt1:1545082415033360495> Hiện Có",
                     value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                     inline: true,
                 })
-                .setFooter({ text: `Có thể tiếp tục khai khoáng sau ${hours}giờ ${minutes}phút.` });
+                .setFooter({ text: `Có thể tiếp tục khai khoáng sau 1 giờ.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'mine' })
