@@ -42,7 +42,7 @@ export default {
                 const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
                 throw createError(
-                    "<:idovan:1546543420569288816> Đổ Vận đang trong thời gian chờ",
+                    "<:idovan:1546543420569288816> CHƯA TỚI THỜI GIAN",
                     ErrorTypes.RATE_LIMIT,
                     `Đạo Hữu vừa Đổ Vận xong. Hãy chờ **${minutes}m ${seconds}s** rồi tiếp tục.`,
                     { remaining, cooldownType: 'gamble' }
@@ -51,7 +51,7 @@ export default {
 
             if (userData.wallet < betAmount) {
                 throw createError(
-                    "<:idovan:1546543420569288816> Không Đủ Linh Thạch",
+                    "<:idovan:1546543420569288816> KHÔNG ĐỦ LINH THẠCH",
                     ErrorTypes.VALIDATION,
                     `Đạo Hữu chỉ có ${userData.wallet.toLocaleString()}<:lt1:1545082415033360495> không đủ ${betAmount.toLocaleString()}<:tlt:1545730351693828147>.`,
                     { required: betAmount, current: userData.wallet }
@@ -87,14 +87,14 @@ export default {
                 cashChange = amountWon - betAmount;
 
                 resultEmbed = successEmbed(
-                    "<:idovan:1546543420569288816> Thắng Vận!",
+                    "<:idovan:1546543420569288816> THẮNG VẬN!",
                     `Đạo Hữu thắng Đổ Vận! **${betAmount.toLocaleString()}<:lt1:1545082415033360495>** đã thành **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!${tulinhthaoMessage}`,
                 );
             } else {
 cashChange = -betAmount;
 
                 resultEmbed = warningEmbed(
-                    "<:idovan:1546543420569288816> Bại Vận...",
+                    "<:idovan:1546543420569288816> BẠI VẬN...",
                     `Thời vận không đứng về phía Đạo Hữu. Đã mất **${betAmount.toLocaleString()}<:lt1:1545082415033360495>**`,
                 );
             }
