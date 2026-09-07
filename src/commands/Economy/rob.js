@@ -32,7 +32,7 @@ export default {
 
             if (robberId === victimUser.id) {
                 throw createError(
-                    "<:itrom:1545417233935630400> Không Thể Đoạt Tài Bản Thân",
+                    "### <:itrom:1545417233935630400> Không Thể Đoạt Tài Bản Thân",
                     ErrorTypes.VALIDATION,
                     "Đạo Hữu không thể đoạt Linh Thạch của chính mình.",
                     { robberId, victimId: victimUser.id }
@@ -41,7 +41,7 @@ export default {
             
             if (victimUser.bot) {
                 throw createError(
-                    "<:itrom:1545417233935630400> Không Thể Đoạt Tài Bot",
+                    "### <:itrom:1545417233935630400> Không Thể Đoạt Tài Bot",
                     ErrorTypes.VALIDATION,
                     "Bot không mang theo Linh Thạch để Đạo Hữu đoạt lấy.",
                     { victimId: victimUser.id, isBot: true }
@@ -53,7 +53,7 @@ export default {
             
             if (!robberData || !victimData) {
                 throw createError(
-                    "<:itrom:1545417233935630400> Không Thể Đoạt",
+                    "### <:itrom:1545417233935630400> Không Thể Đoạt",
                     ErrorTypes.DATABASE,
                     "Tạm thời không thể đoạt tài. Vui lòng thử lại sau.",
                     { robberId: !!robberData, victimId: !!victimData, guildId }
@@ -68,7 +68,7 @@ export default {
                 const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
 
                 throw createError(
-                    "<:itrom:1545417233935630400> Đang Lánh Mặt Sau Khi Đoạt Tài",
+                    "### <:itrom:1545417233935630400> Đang Lánh Mặt Sau Khi Đoạt Tài",
                     ErrorTypes.RATE_LIMIT,
                     `Đạo Hữu vừa gây chuyện, tạm thời nên ẩn mình một thời gian. Hãy chờ **${hours}h ${minutes}m** rồi mới có thể Đoạt Tài lần nữa.`,
                     { remaining, hours, minutes, cooldownType: 'rob' }
@@ -93,7 +93,7 @@ export default {
                 return await InteractionHelper.safeEditReply(interaction, {
                     embeds: [
                         warningEmbed(
-                            '<:itrom:1545417233935630400> Cách Đoạt Cấm đã đánh văng bạn!',
+                            '### <:itrom:1545417233935630400> Cách Đoạt Cấm đã đánh văng bạn!',
                             `${victimUser.username} đã thi triển **Cách Đoạt Cấm** lên Linh Nang. Đạo Hữu không đoạt được <:lt1:1545082415033360495> nào và kịp thời rút lui.`
                         )
                     ],
@@ -110,7 +110,7 @@ export default {
                 victimData.wallet = (victimData.wallet || 0) - amountStolen;
 
                 resultEmbed = successEmbed(
-                    '<:itrom:1545417233935630400> Đoạt Tài Thành Công',
+                    '### <:itrom:1545417233935630400> Đoạt Tài Thành Công',
                     `Đạo Hữu đã thành công đoạt lấy **${amountStolen.toLocaleString()}<:lt1:1545082415033360495>** từ ${victimUser.username}!`
                 );
             } else {
@@ -123,7 +123,7 @@ export default {
                 }
 
                 resultEmbed = buildUserErrorEmbed(
-                    '<:itrom:1545417233935630400> Đoạt Tài Thất Bại',
+                    '### <:itrom:1545417233935630400> Đoạt Tài Thất Bại',
                     `Đạo Hữu ra tay bất thành, bị đối phương phát giác và phải bồi thường**${fineAmount.toLocaleString()}<:lt1:1545082415033360495>**`,
                     { titleOverride: 'Đoạt Tài Thất Bại' }
                 );
