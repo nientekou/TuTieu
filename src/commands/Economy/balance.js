@@ -55,7 +55,7 @@ export default {
         const bank = typeof userData.bank === 'number' ? userData.bank : 0;
 
             const embed = createEmbed({
-                title: `Linh Nang của ${targetUser.username}`,
+                title: `<:tvp1:1545082419273801859> Linh Nang của ${targetUser.username}`,
                 description: `Bên trong Linh Nang của ${targetUser.username}.`,
             })
                 .addFields(
@@ -70,7 +70,7 @@ export default {
                         inline: true,
                     },
                     {
-                        name: "<:tvp1:1545082419273801859> Tổng",
+                        name: "Tổng",
                         value: `${(wallet + bank).toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     }
