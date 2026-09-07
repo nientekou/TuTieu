@@ -63,6 +63,7 @@ export default {
                 newCash += amountWon;
 
                 const successMessages = [
+                    `Có một tên ăn xin Chúc Bảo gần đó nhìn bạn, đánh giá bạn đáng thương hơn hắn, thương hại cho bạn... **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**`,
                     `Một vị Đạo Hữu nào đó đã ném **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** vào cái bát mẻ của bạn`,
                     `Ai mà hớ hênh quá! Đạo Hữu thì thầm rồi thó túi tiền chứa **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** chạy mất.`,
                     `Có người thấy bạn thật đáng thương nên cho bạn **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!`,
