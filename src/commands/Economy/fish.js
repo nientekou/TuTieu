@@ -174,7 +174,7 @@ export default {
                 throw createError(
                     ":fishing_pole_and_fish: Chưa Thể Thả Câu",
                     ErrorTypes.RATE_LIMIT,
-                    `Khúc nước này vừa bị đánh bắt quá nhiều, đàn cá đã tản đi. Hãy quay lại sau **${hours}h ${minutes}m**`,
+                    `Khúc nước này vừa bị đánh bắt quá nhiều, đàn cá đã tản đi. Hãy quay lại sau **${hours}giờ ${minutes}phút**`,
                     { remaining, cooldownType: 'fish' }
                 );
             }
