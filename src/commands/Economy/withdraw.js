@@ -75,7 +75,7 @@ export default {
                     },
                     {
                         name: "<:tientrang:1545104597901774948> Thương Bảo Khố",
-                        value: `$${userData.bank.toLocaleString()}`,
+                        value: `${userData.bank.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                 );
