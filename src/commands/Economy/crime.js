@@ -74,7 +74,7 @@ export default {
                 throw createError(
                     "<:itrom:1545417233935630400> Phi Vụ Không Tồn Tại",
                     ErrorTypes.VALIDATION,
-                    "Hãy chọn một phi vụ hợp lệ trên Bảng Huyền Thưởng.",
+                    "Cái phi vụ này không có thành đâu, hay là thử làm cái khác đi.",
                     { crimeType }
                 );
             }
