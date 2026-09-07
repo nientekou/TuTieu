@@ -350,8 +350,8 @@ class EconomyService {
     return userData;
   }
 
-  static async withdrawFromBank(client, guildId, userId, amount) {
-    this.validateAmount(amount, { operation: 'withdraw', userId });
+  static async ruttienFromBank(client, guildId, userId, amount) {
+    this.validateAmount(amount, { operation: 'ruttien', userId });
 
     const userData = await getEconomyData(client, guildId, userId);
     const bank = userData.bank || 0;
@@ -368,15 +368,15 @@ class EconomyService {
     const nextWallet = (userData.wallet || 0) + amount;
     const nextBank = bank - amount;
 
-    this.assertSafeBalance(nextWallet, { operation: 'withdraw.wallet', userId, amount });
-    this.assertSafeBalance(nextBank, { operation: 'withdraw.bank', userId, amount });
+    this.assertSafeBalance(nextWallet, { operation: 'ruttien.wallet', userId, amount });
+    this.assertSafeBalance(nextBank, { operation: 'ruttien.bank', userId, amount });
 
     userData.wallet = nextWallet;
     userData.bank = nextBank;
 
     await setEconomyData(client, guildId, userId, userData);
 
-    logger.info(`[ECONOMY_TRANSACTION] Money withdrawn from bank`, {
+    logger.info(`[ECONOMY_TRANSACTION] RÚT TIỀN`, {
       userId,
       guildId,
       amount,
