@@ -15,7 +15,7 @@ export const DEFAULT_ECONOMY_DATA = {
     lastCauca: 0,
     dailyStreak: 0,
     lastWeekly: 0,
-    lastDeposit: 0,
+    lastGuitien: 0,
     lastWithdraw: 0,
     inventory: {},
     upgrades: {},
