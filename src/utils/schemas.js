@@ -89,7 +89,7 @@ export const EconomyDataSchema = z
     lastDaily: z.number().int().nonnegative().default(0),
     lastWeekly: z.number().int().nonnegative().default(0),
     lastWork: z.number().int().nonnegative().default(0),
-    lastCrime: z.number().int().nonnegative().default(0),
+    lastPhivu: z.number().int().nonnegative().default(0),
     lastRob: z.number().int().nonnegative().default(0),
     lastDeposit: z.number().int().nonnegative().default(0),
     lastWithdraw: z.number().int().nonnegative().default(0),
