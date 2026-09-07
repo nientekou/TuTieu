@@ -149,7 +149,10 @@ userData.lastMine = now;
 
             const embed = successEmbed(
                 "⛏️ Khai Khoáng Thành Công!",
-                `Đạo Hữu đã thăm dò **${location}** và tìm được khoáng thạch trị giá **${finalEarned.toLocaleString()}<:lt1:1545082415033360495>**!${multiplierMessage}`,
+                `Đạo Hữu đã thăm dò **${location}** 
+                ${multiplierMessage}
+                 ## <:a1:1546550426063741058> THU HOẠCH
+                ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
             )
                 .addFields({
                     name: "Linh Thạch Hiện Có",
