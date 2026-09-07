@@ -42,7 +42,7 @@ export default {
                 const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
                 throw createError(
-                    "Đổ Vận đang trong thời gian chờ",
+                    "<:idovan:1546543420569288816> Đổ Vận đang trong thời gian chờ",
                     ErrorTypes.RATE_LIMIT,
                     `Đạo Hữu vừa Đổ Vận xong. Hãy chờ **${minutes}m ${seconds}s** rồi tiếp tục.`,
                     { remaining, cooldownType: 'gamble' }
@@ -51,7 +51,7 @@ export default {
 
             if (userData.wallet < betAmount) {
                 throw createError(
-                    "Không Đủ Linh Thạch",
+                    "<:idovan:1546543420569288816> Không Đủ Linh Thạch",
                     ErrorTypes.VALIDATION,
                     `Đạo Hữu chỉ có ${userData.wallet.toLocaleString()}<:lt1:1545082415033360495> không đủ ${betAmount.toLocaleString()}<:tlt:1545730351693828147>.`,
                     { required: betAmount, current: userData.wallet }
@@ -87,14 +87,14 @@ export default {
                 cashChange = amountWon - betAmount;
 
                 resultEmbed = successEmbed(
-                    "🎉 Thắng Vận!",
+                    "<:idovan:1546543420569288816> Thắng Vận!",
                     `Đạo Hữu thắng Đổ Vận! **${betAmount.toLocaleString()}<:lt1:1545082415033360495>** đã thành **${amountWon.toLocaleString()}<:lt1:1545082415033360495>**!${tulinhthaoMessage}`,
                 );
             } else {
 cashChange = -betAmount;
 
                 resultEmbed = warningEmbed(
-                    "💔 Bại Vận...",
+                    "<:idovan:1546543420569288816> Bại Vận...",
                     `Thời vận không đứng về phía Đạo Hữu. Đã mất **${betAmount.toLocaleString()}<:lt1:1545082415033360495>**`,
                 );
             }
@@ -122,7 +122,7 @@ userData.lastGamble = now;
                 });
             } else {
                 resultEmbed.setFooter({
-                    text: `Có thể Đổ Vận tiếp sau 5 phút. Tỷ lệ thắng cơ bản: ${Math.round(BASE_WIN_CHANCE * 100)}%.`,
+                    text: `Có thể Đổ Vận <:idovan:1546543420569288816> tiếp sau 5 phút. Tỷ lệ thắng cơ bản: ${Math.round(BASE_WIN_CHANCE * 100)}%.`,
                 });
             }
 
