@@ -131,10 +131,10 @@ export default {
 
             if (hasBancophu > 0) {
                 finalEarned = Math.floor(baseEarned * BANCOPHU_MULTIPLIER);
-                multiplierMessage = `\n<:bcp:1545728177169502288> **Thưởng thêm từ Bàn Cổ Phủ: +100%**`;
+                multiplierMessage = `\n<:bcp:1545728177169502288> *Thưởng thêm từ Bàn Cổ Phủ: +100%*`;
             } else if (hasCuockhailinh > 0) {
                 finalEarned = Math.floor(baseEarned * CUOCKHAILINH_MULTIPLIER);
-                multiplierMessage = `\n<:icuoc:1545714179581943868> **Thưởng thêm từ Cuốc Khai Linh: +20%**`;
+                multiplierMessage = `\n<:icuoc:1545714179581943868> *Thưởng thêm từ Cuốc Khai Linh: +20%*`;
             }
 
             const location =
@@ -149,7 +149,7 @@ userData.lastMine = now;
 
             const embed = successEmbed(
                 "<:icuoc:1545714179581943868> Khai Khoáng Thành Công!",
-                `Đạo Hữu đã thăm dò **${location}** ${multiplierMessage}
+                `Đạo Hữu đã thăm dò **${location}** \n${multiplierMessage}
                  ### <:a1:1546550426063741058> THU HOẠCH
                 ㅤ└ ${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
             )
