@@ -302,8 +302,8 @@ class EconomyService {
     return userData;
   }
 
-  static async depositToBank(client, guildId, userId, amount) {
-    this.validateAmount(amount, { operation: 'deposit', userId });
+  static async guitienToBank(client, guildId, userId, amount) {
+    this.validateAmount(amount, { operation: 'guitien', userId });
 
     const userData = await getEconomyData(client, guildId, userId);
     const maxBank = getMaxBankCapacity(userData);
@@ -330,15 +330,15 @@ class EconomyService {
     const nextWallet = userData.wallet - amount;
     const nextBank = (userData.bank || 0) + amount;
 
-    this.assertSafeBalance(nextWallet, { operation: 'deposit.wallet', userId, amount });
-    this.assertSafeBalance(nextBank, { operation: 'deposit.bank', userId, amount });
+    this.assertSafeBalance(nextWallet, { operation: 'guitien.wallet', userId, amount });
+    this.assertSafeBalance(nextBank, { operation: 'guitien.bank', userId, amount });
 
     userData.wallet = nextWallet;
     userData.bank = nextBank;
 
     await setEconomyData(client, guildId, userId, userData);
 
-    logger.info(`[ECONOMY_TRANSACTION] Money deposited to bank`, {
+    logger.info(`[ECONOMY_TRANSACTION] TIỀN GỬI`, {
       userId,
       guildId,
       amount,
