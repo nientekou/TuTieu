@@ -7,11 +7,11 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
         .setName('deposit')
-        .setDescription('Gửi Linh Thạch từ Linh Nang vào Thương Bảo Khố.')
+        .setDescription('Deposit money from your wallet into your bank')
         .addStringOption(option =>
             option
                 .setName('amount')
-                .setDescription('Số Linh Thạch muốn gửi hoặc nhập "all" để gửi toàn bộ.')
+                .setDescription('Amount to deposit (number or "all")')
                 .setRequired(true)
         ),
 
@@ -27,9 +27,9 @@ export default {
             
             if (!userData) {
                 throw createError(
-                    "Không thể bước vào Thương Bảo Khố",
+                    "Failed to load economy data",
                     ErrorTypes.DATABASE,
-                    "Thương Bảo Khố đông người tấp nập. Hay là quay lại sau.",
+                    "Failed to load your economy data. Please try again later.",
                     { userId, guildId }
                 );
             }
@@ -44,9 +44,9 @@ export default {
 
                 if (isNaN(depositAmount) || depositAmount <= 0) {
                     throw createError(
-                        "Số lượng gửi không hợp lệ",
+                        "Invalid deposit amount",
                         ErrorTypes.VALIDATION,
-                        `Hãy nhập một số hợp lệ hoặc **all** để gửi toàn bộ Linh Thạch. Đạo Hữu đã nhập: \`${amountInput}\``,
+                        `Please enter a valid number or 'all'. You entered: \`${amountInput}\``,
                         { amountInput, userId }
                     );
                 }
@@ -54,9 +54,9 @@ export default {
 
             if (depositAmount === 0) {
                 throw createError(
-                    "Linh Nang Trống",
+                    "Zero deposit amount",
                     ErrorTypes.VALIDATION,
-                    "Linh Nang của Đạo Hữu không có Linh Thạch để gửi vào Thương Bảo Khố.",
+                    "You have no cash to deposit.",
                     { userId, walletBalance: userData.wallet }
                 );
             }
@@ -67,7 +67,7 @@ export default {
                     embeds: [
                         buildUserErrorEmbed(
                             'validation',
-                            `Đạo Hữu không mang đủ số Linh Thạch đó. Tự động gửi toàn bộ **${depositAmount.toLocaleString()}**<:lt1:1545082415033360495>`
+                            `You tried to deposit more than you have. Depositing your remaining cash: **$${depositAmount.toLocaleString()}**`
                         )
                     ],
                     flags: MessageFlags.Ephemeral,
@@ -78,9 +78,9 @@ export default {
 
             if (availableSpace <= 0) {
                 throw createError(
-                    "Thương Bảo Khố đã đầy",
+                    "Bank is full",
                     ErrorTypes.VALIDATION,
-                    `Thương Bảo Khố đã đạt hạn mức chứa (${maxBank.toLocaleString()}<:lt1:1545082415033360495>). Hãy sử dụng **Khế Ngân** để mở rộng hạn mức.`,
+                    `Your bank is currently full (Max Capacity: $${maxBank.toLocaleString()}). Purchase a **Bank Upgrade** to increase your limit.`,
                     { maxBank, currentBank: userData.bank, userId }
                 );
             }
@@ -94,7 +94,7 @@ export default {
                         embeds: [
                             buildUserErrorEmbed(
                                 'validation',
-                                `Thương Bảo Khố chỉ còn đủ chỗ cho **${depositAmount.toLocaleString()}<:lt1:1545082415033360495>** (Giới hạn: ${maxBank.toLocaleString()}<:lt1:1545082415033360495>). Phần còn lại vẫn được giữ trong Linh Nang.`
+                                `You only had space for **$${depositAmount.toLocaleString()}** in your bank account (Max: $${maxBank.toLocaleString()}). The rest remains in your cash.`
                             )
                         ],
                         flags: MessageFlags.Ephemeral,
@@ -104,9 +104,9 @@ export default {
 
             if (depositAmount === 0) {
                 throw createError(
-                    "Không thể gửi Linh Thạch",
+                    "No space or cash for deposit",
                     ErrorTypes.VALIDATION,
-                    "Thương Bảo Khố không còn chỗ trống hoặc số Linh Thạch muốn gửi không hợp lệ.",
+                    "The amount you tried to deposit was either 0 or exceeded your bank capacity after checking your cash balance.",
                     { depositAmount, availableSpace, walletBalance: userData.wallet }
                 );
             }
@@ -117,18 +117,18 @@ export default {
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                '<:tientrang:1545104597901774948> Gửi Vào Thương Bảo Khố Thành Công',
-                `Đạo Hữu đã gửi thành công **${depositAmount.toLocaleString()}**<:lt1:1545082415033360495> vào Thương Bảo Khố`
+                'Deposit Successful',
+                `You successfully deposited **$${depositAmount.toLocaleString()}** into your bank.`
             )
                 .addFields(
                     {
-                        name: "<:lt1:1545082415033360495> Hiện Có:",
-                        value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
+                        name: "New Cash Balance",
+                        value: `$${userData.wallet.toLocaleString()}`,
                         inline: true,
                     },
                     {
-                        name: "<:tientrang:1545104597901774948> Hiện Có:",
-                        value: `${userData.bank.toLocaleString()}<:lt1:1545082415033360495> / ${maxBank.toLocaleString()}<:lt1:1545082415033360495>`,
+                        name: "New Bank Balance",
+                        value: `$${userData.bank.toLocaleString()} / $${maxBank.toLocaleString()}`,
                         inline: true,
                     },
                 );
