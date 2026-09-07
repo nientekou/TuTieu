@@ -85,7 +85,7 @@ const MINE_LOCATIONS = [
     "cổ khoáng trường đã cạn",
     "linh mạch sắp khô kiệt",
     "mỏ quặng nằm giữa vùng đất chết",
-    "khoáng động bị bỏ lại từ thời cổ"
+    "khoáng động bị bỏ lại từ thời cổ",
 ];
 
 export default {
