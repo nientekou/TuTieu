@@ -148,15 +148,15 @@ userData.lastMine = now;
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                "<:icuoc:1545714179581943868> KHAI KHOÁNG THÀNH CÔNG!",
+                "💰 Mining Expedition Successful!",
                 `You explored a **${location}** and managed to find minerals worth **$${finalEarned.toLocaleString()}**!${multiplierMessage}`,
             )
                 .addFields({
-                    name: "<:lt1:1545082415033360495> Hiện Có",
-                    value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
+                    name: "New Cash Balance",
+                    value: `$${userData.wallet.toLocaleString()}`,
                     inline: true,
                 })
-                .setFooter({ text: `Có thể tiếp tục khai khoáng sau 1 giờ.` });
+                .setFooter({ text: `Next mine available in 1 hour.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'mine' })
