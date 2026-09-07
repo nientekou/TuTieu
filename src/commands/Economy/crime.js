@@ -96,7 +96,7 @@ export default {
                 const embed = successEmbed(
                     "🗡️ Phi Vụ Thành Công!",
                     `Đạo Hữu đã hoàn thành ${phivu.name}
-                     ## <:a1:1546550426063741058> THU HOẠCH
+                     ### <:a1:1546550426063741058> THU HOẠCH
                     ㅤ└**${amountEarned}**<:lt1:1545082415033360495>`
                 );
                 
