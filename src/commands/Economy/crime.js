@@ -28,7 +28,7 @@ export default {
                 .addChoices(
                     { name: 'Thuận Thủ Khiên Dương', value: 'thuận-thủ-khiên-dương' },
                     { name: 'Đột Nhập Thương Khố', value: 'đột-nhập-thương-khố' },
-                    { name: 'Kiếp Linh Khố', value: 'kiếp-linh-khố },
+                    { name: 'Kiếp Linh Khố', value: 'kiếp-linh-khố' },
                     { name: 'Đoạt Dị Bảo', value: 'đoạt-dị-bảo' },
                     { name: 'Xâm Nhập Trận Các', value: 'xâm-nhập-trận-các' },
                 )
