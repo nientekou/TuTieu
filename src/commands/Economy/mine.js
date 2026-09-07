@@ -151,7 +151,7 @@ userData.lastMine = now;
                 "<:icuoc:1545714179581943868> KHAI KHOÁNG THÀNH CÔNG!",
                  `Đạo Hữu đã thăm dò **${location}** ${multiplierMessage}
                  ### <:a1:1546550426063741058> THU HOẠCH
-                ㅤ└${finalEarned.toLocaleString()}`,
+                ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
             )
                 .addFields({
                     name: "<:lt1:1545082415033360495> Hiện Có",
