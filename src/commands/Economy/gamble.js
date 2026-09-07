@@ -44,7 +44,7 @@ export default {
                 throw createError(
                     "<:idovan:1546543420569288816> CHƯA TỚI THỜI GIAN",
                     ErrorTypes.RATE_LIMIT,
-                    `Đạo Hữu vừa Đổ Vận xong. Hãy chờ **${minutes}m ${seconds}s** rồi tiếp tục.`,
+                    `Đạo Hữu vừa Đổ Vận xong. Hãy chờ **${minutes}phút ${seconds}giây** rồi tiếp tục.`,
                     { remaining, cooldownType: 'gamble' }
                 );
             }
@@ -66,14 +66,14 @@ export default {
             if (tulinhthaoCount > 0) {
                 winChance += TULINHTHAO_WIN_BONUS;
                 userData.inventory["tulinhthao"] -= 1;
-                tulinhthaoMessage = `\n<:tlt:1545730351693828147> **Tụ Linh Thảo đã được kích hoạt:** Cơ hội thắng Đổ Vận được tăng lên!`;
+                tulinhthaoMessage = `\n<:tlt:1545730351693828147> *Tụ Linh Thảo đã được kích hoạt:* Cơ hội thắng Đổ Vận được tăng lên!`;
                 usedTulinhthao = true;
             }
             
             else if (buathienkhuocCount > 0) {
                 winChance += BUATHIENKHUOC_WIN_BONUS;
                 userData.inventory["buathienkhuoc"] -= 1;
-                tulinhthaoMessage = `\n<:buatk:1545735911675797504> **Bùa Thiên Khước đã được kích hoạt (${buathienkhuocCount - 1} lượt còn lại):** Cơ hội thắng Đổ Vận được tăng lên!`;
+                tulinhthaoMessage = `\n<:buatk:1545735911675797504> *Bùa Thiên Khước đã được kích hoạt (${buathienkhuocCount - 1} lượt còn lại):* Cơ hội thắng Đổ Vận được tăng lên!`;
                 usedBuathienkhuoc = true;
             }
 
