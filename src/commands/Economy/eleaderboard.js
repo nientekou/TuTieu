@@ -64,7 +64,7 @@ export default {
                 const emoji = rankEmoji[i] || `**#${rank}**`;
 
                 leaderboardEntries.push(
-                    `${emoji} <@${user.userId}> - 🏦 ${user.net_worth.toLocaleString()}`,
+                    `${emoji} <@${user.userId}> - <:tientrang:1545104597901774948> ${user.net_worth.toLocaleString()}`,
                 );
             }
 
