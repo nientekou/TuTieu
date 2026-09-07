@@ -79,7 +79,7 @@ export default {
                 const failMessages = [
                     "Quan binh truy sát, bạn bị đá văng",
                     "Có tiếng la vang vọng, 'Không làm mà đòi có ăn, thì chỉ có...', bạn không kịp nghe những từ cuối",
-                    "Con sóc nhỏ ngậm linh thạch mà bạn cố gắng cả ngày đi mất",
+                    "<:truc2:1546511482320068638> Một con cáo có hình dạng như trái chuối lao từ đâu đến và tha cái chén ăn xin của Đạo Hữu đi mất",
                     "Bạn thử đặt chén mẻ ra, nhưng quá ngại để mở lời",
                 ];
 
