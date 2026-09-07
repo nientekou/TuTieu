@@ -76,10 +76,10 @@ export default {
 
             const description = bxhtaiphuEntries.length > 0
                 ? bxhtaiphuEntries.join("\n")
-                : "Bảng Tài Phú";
+                : "BẢNG TÀI PHÚ";
 
             const embed = createEmbed({
-                title: `Bảng Tài Phú`,
+                title: `<:lt1:1545082415033360495> BẢNG TÀI PHÚ <:lt1:1545082415033360495>`,
                 description,
                 footer: `Thứ hạng của Đạo Hữu:  ${userRank > 0 ?`#${userRank}`: "Chưa có thứ hạng"}`,
             });
