@@ -8,7 +8,7 @@ export const DEFAULT_ECONOMY_DATA = {
     level: 1,
     lastDaily: 0,
     lastWork: 0,
-    lastCrime: 0,
+    lastPhivu: 0,
     lastRob: 0,
     lastMine: 0,
     lastGamble: 0,
