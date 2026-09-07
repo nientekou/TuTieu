@@ -172,7 +172,7 @@ export default {
                 );
 
                 throw createError(
-                    "Chưa Thể Thả Câu",
+                    ":fishing_pole_and_fish: Chưa Thể Thả Câu",
                     ErrorTypes.RATE_LIMIT,
                     `Khúc nước này vừa bị đánh bắt quá nhiều, đàn cá đã tản đi. Hãy quay lại sau **${hours}h ${minutes}m**`,
                     { remaining, cooldownType: 'fish' }
@@ -227,7 +227,7 @@ export default {
             };
 
             const embed = createEmbed({
-                title: ':fishing_pole_and_fish:  Câu Cá Thành Công!',
+                title: ':fishing_pole_and_fish: Câu Cá Thành Công!',
                 description: `## ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**! Thu hoạch được **${finalEarned.toLocaleString()}<:lt1:1545082415033360495>**!${multiplierMessage}`,
                 color: rarityColors[fishCaught.rarity]
             })
