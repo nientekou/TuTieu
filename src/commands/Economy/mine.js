@@ -116,7 +116,7 @@ export default {
                 throw createError(
                     "Chưa thể tiếp tục khai khoáng",
                     ErrorTypes.RATE_LIMIT,
-                    `Tay bạn đào khoáng đến run lên, không thể nhấc nổi nữa. Vui lòng chờ **${hours}h ${minutes}m** để hồi phục thể lực.`,
+                    `Tay bạn đào khoáng đến run lên, không thể nhấc nổi nữa. Vui lòng chờ **${hours}giờ ${minutes}phút** để hồi phục thể lực.`,
                     { remaining, cooldownType: 'mine' }
                 );
             }
@@ -151,7 +151,7 @@ userData.lastMine = now;
                 "<:icuoc:1545714179581943868> Khai Khoáng Thành Công!",
                 `Đạo Hữu đã thăm dò **${location}** 
                 ${multiplierMessage}
-                 ## <:a1:1546550426063741058> THU HOẠCH
+                 ### <:a1:1546550426063741058> THU HOẠCH
                 ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
             )
                 .addFields({
@@ -159,7 +159,7 @@ userData.lastMine = now;
                     value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                     inline: true,
                 })
-                .setFooter({ text: `Có thể tiếp tục khai khoáng sau 1 giờ.` });
+                .setFooter({ text: `Có thể tiếp tục khai khoáng sau ${hours}giờ ${minutes}phút.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'mine' })
