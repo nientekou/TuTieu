@@ -4,12 +4,12 @@ import { getEconomyData, setEconomyData } from '../../utils/economy.js';
 import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHandler.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const FISH_COOLDOWN = 45 * 60 * 1000; 
+const CAUCA_COOLDOWN = 45 * 60 * 1000; 
 const BASE_MIN_REWARD = 300;
 const BASE_MAX_REWARD = 900;
 const CANTHINHTRIEU_MULTIPLIER = 1.5;
 
-const FISH_TYPES = [
+const CAUCA_TYPES = [
     // Phàm
     { name: 'Thanh Lân Ngư', emoji: ':fish:', rarity: 'Phàm' },
     { name: 'Bạch Vân Ngư', emoji: ':fish:', rarity: 'Phàm' },
@@ -149,7 +149,7 @@ const CATCH_MESSAGES = [
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('fish')
+        .setName('cauca')
         .setDescription('Câu cá, bắt Linh Ngư và kiếm Linh Thạch'),
 
     execute: withErrorHandling(async (interaction, config, client) => {
@@ -161,11 +161,11 @@ export default {
             const now = Date.now();
 
             const userData = await getEconomyData(client, guildId, userId);
-            const lastFish = userData.lastFish || 0;
+            const lastCauca = userData.lastCauca || 0;
             const hasCanthinhtrieu = userData.inventory["canthinhtrieu"] || 0;
 
-            if (now < lastFish + FISH_COOLDOWN) {
-                const remaining = lastFish + FISH_COOLDOWN - now;
+            if (now < lastCauca + CAUCA_COOLDOWN) {
+                const remaining = lastCauca + CAUCA_COOLDOWN - now;
                 const hours = Math.floor(remaining / (1000 * 60 * 60));
                 const minutes = Math.floor(
                     (remaining % (1000 * 60 * 60)) / (1000 * 60),
@@ -175,28 +175,28 @@ export default {
                     ":fishing_pole_and_fish: Chưa Thể Thả Câu",
                     ErrorTypes.RATE_LIMIT,
                     `Khúc nước này vừa bị đánh bắt quá nhiều, đàn cá đã tản đi. Hãy quay lại sau **${hours}giờ ${minutes}phút**`,
-                    { remaining, cooldownType: 'fish' }
+                    { remaining, cooldownType: 'cauca' }
                 );
             }
 
             const rand = Math.random();
-            let fishCaught;
+            let caucaCaught;
             
             if (rand < 0.5) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Phàm')[Math.floor(Math.random() * 3)];
+                caucaCaught = CAUCA_TYPES.filter(f => f.rarity === 'Phàm')[Math.floor(Math.random() * 3)];
             } else if (rand < 0.75) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Linh')[Math.floor(Math.random() * 2)];
+                caucaCaught = CAUCA_TYPES.filter(f => f.rarity === 'Linh')[Math.floor(Math.random() * 2)];
             } else if (rand < 0.9) {
                 
-                fishCaught = FISH_TYPES.filter(f => f.rarity === 'Huyền')[Math.floor(Math.random() * 2)];
+                caucaCaught = CAUCA_TYPES.filter(f => f.rarity === 'Huyền')[Math.floor(Math.random() * 2)];
             } else if (rand < 0.98) {
                 
-                fishCaught = FISH_TYPES.find(f => f.rarity === 'Địa');
+                caucaCaught = CAUCA_TYPES.find(f => f.rarity === 'Địa');
             } else {
                 
-                fishCaught = FISH_TYPES.find(f => f.rarity === 'Thiên');
+                caucaCaught = CAUCA_TYPES.find(f => f.rarity === 'Thiên');
             }
 
             const baseEarned = Math.floor(
@@ -214,7 +214,7 @@ export default {
             const catchMessage = CATCH_MESSAGES[Math.floor(Math.random() * CATCH_MESSAGES.length)];
 
             userData.wallet += finalEarned;
-            userData.lastFish = now;
+            userData.lastCauca = now;
 
             await setEconomyData(client, guildId, userId, userData);
 
@@ -228,10 +228,10 @@ export default {
 
             const embed = createEmbed({
                 title: ':fishing_pole_and_fish: Câu Cá Thành Công!',
-                description: ` ${catchMessage}\nĐạo Hữu đã câu được **${fishCaught.emoji} ${fishCaught.name}**!${multiplierMessage}
+                description: ` ${catchMessage}\nĐạo Hữu đã câu được **${caucaCaught.emoji} ${caucaCaught.name}**!${multiplierMessage}
                 ### <:a1:1546550426063741058> THU HOẠCH
                 ㅤ└ ${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
-                color: rarityColors[fishCaught.rarity]
+                color: rarityColors[caucaCaught.rarity]
             })
                 .addFields(
                     {
@@ -241,12 +241,12 @@ export default {
                     },
                     {
                         name: "Phẩm Cấp",
-                        value: fishCaught.rarity.charAt(0).toUpperCase() + fishCaught.rarity.slice(1),
+                        value: caucaCaught.rarity.charAt(0).toUpperCase() + caucaCaught.rarity.slice(1),
                         inline: true,
                     }
                 )
                 .setFooter({ text: `Sau 45 phút có thể tiếp tục thả câu.` });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'fish' })
+    }, { command: 'cauca' })
 };
