@@ -6,7 +6,7 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('deposit')
+        .setName('guitien')
         .setDescription('Gửi Linh Thạch từ Linh Nang vào Thương Bảo Khố.')
         .addStringOption(option =>
             option
@@ -35,14 +35,14 @@ export default {
             }
             
             const maxBank = getMaxBankCapacity(userData);
-            let depositAmount;
+            let guitienAmount;
 
             if (amountInput.toLowerCase() === "all") {
-                depositAmount = userData.wallet;
+                guitienAmount = userData.wallet;
             } else {
-                depositAmount = parseInt(amountInput);
+                guitienAmount = parseInt(amountInput);
 
-                if (isNaN(depositAmount) || depositAmount <= 0) {
+                if (isNaN(guitienAmount) || guitienAmount <= 0) {
                     throw createError(
                         "Số lượng gửi không hợp lệ",
                         ErrorTypes.VALIDATION,
@@ -52,7 +52,7 @@ export default {
                 }
             }
 
-            if (depositAmount === 0) {
+            if (guitienAmount === 0) {
                 throw createError(
                     "Linh Nang Trống",
                     ErrorTypes.VALIDATION,
@@ -61,13 +61,13 @@ export default {
                 );
             }
 
-            if (depositAmount > userData.wallet) {
-                depositAmount = userData.wallet;
+            if (guitienAmount > userData.wallet) {
+                guitienAmount = userData.wallet;
                 await interaction.followUp({
                     embeds: [
                         buildUserErrorEmbed(
                             'validation',
-                            `Đạo Hữu không mang đủ số Linh Thạch đó. Tự động gửi toàn bộ **${depositAmount.toLocaleString()}**<:lt1:1545082415033360495>`
+                            `Đạo Hữu không mang đủ số Linh Thạch đó. Tự động gửi toàn bộ **${guitienAmount.toLocaleString()}**<:lt1:1545082415033360495>`
                         )
                     ],
                     flags: MessageFlags.Ephemeral,
@@ -85,16 +85,16 @@ export default {
                 );
             }
 
-            if (depositAmount > availableSpace) {
-                const originalDepositAmount = depositAmount;
-                depositAmount = availableSpace;
+            if (guitienAmount > availableSpace) {
+                const originalGuitienAmount = guitienAmount;
+                guitienAmount = availableSpace;
 
                 if (amountInput.toLowerCase() !== "all") {
                     await interaction.followUp({
                         embeds: [
                             buildUserErrorEmbed(
                                 'validation',
-                                `Thương Bảo Khố chỉ còn đủ chỗ cho ${depositAmount.toLocaleString()} <:lt1:1545082415033360495> (Giới hạn: ${maxBank.toLocaleString()}). Phần còn lại vẫn được giữ trong Linh Nang.`
+                                `Thương Bảo Khố chỉ còn đủ chỗ cho ${guitienAmount.toLocaleString()} <:lt1:1545082415033360495> (Giới hạn: ${maxBank.toLocaleString()}). Phần còn lại vẫn được giữ trong Linh Nang.`
                             )
                         ],
                         flags: MessageFlags.Ephemeral,
@@ -102,23 +102,23 @@ export default {
                 }
             }
 
-            if (depositAmount === 0) {
+            if (guitienAmount === 0) {
                 throw createError(
                     "Không thể gửi Linh Thạch",
                     ErrorTypes.VALIDATION,
                     "Thương Bảo Khố không còn chỗ trống hoặc số Linh Thạch muốn gửi không hợp lệ.",
-                    { depositAmount, availableSpace, walletBalance: userData.wallet }
+                    { guitienAmount, availableSpace, walletBalance: userData.wallet }
                 );
             }
 
-            userData.wallet -= depositAmount;
-            userData.bank += depositAmount;
+            userData.wallet -= guitienAmount;
+            userData.bank += guitienAmount;
 
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
                 '### <:tientrang:1545104597901774948> Gửi Vào Thương Bảo Khố Thành Công',
-                `Đạo Hữu đã gửi thành công ${depositAmount.toLocaleString()}<:lt1:1545082415033360495> vào Thương Bảo Khố.`
+                `Đạo Hữu đã gửi thành công ${guitienAmount.toLocaleString()}<:lt1:1545082415033360495> vào Thương Bảo Khố.`
             )
                 .addFields(
                     {
@@ -134,5 +134,5 @@ export default {
                 );
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'deposit' })
+    }, { command: 'guitien' })
 };
