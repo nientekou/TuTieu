@@ -26,11 +26,11 @@ export default {
                 .setDescription('Type of crime to commit')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Thuận Thủ Khiên Dương', value: 'pickpocketing' },
-                    { name: 'Đột Nhập Thương Khố', value: 'burglary' },
-                    { name: 'Kiếp Linh Khố', value: 'bank-heist' },
-                    { name: 'Đoạt Dị Bảo', value: 'art-theft' },
-                    { name: 'Xâm Nhập Trận Các', value: 'Xâm Nhập Trận Các' },
+                    { name: 'Thuận Thủ Khiên Dương', value: 'thuận-thủ-khiên-dương' },
+                    { name: 'Đột Nhập Thương Khố', value: 'đột-nhập-thương-khố' },
+                    { name: 'Kiếp Linh Khố', value: 'kiếp-linh-khố },
+                    { name: 'Đoạt Dị Bảo', value: 'đoạt-dị-bảo' },
+                    { name: 'Xâm Nhập Trận Các', value: 'xâm-nhập-trận-các' },
                 )
         ),
 
