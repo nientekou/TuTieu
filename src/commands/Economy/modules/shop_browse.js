@@ -22,7 +22,7 @@ export default {
                 pageItems.forEach(item => {
                     embed.addFields({
                         name: `${item.name} (${item.id})`,
-                        value: `**Nhập:** ${item.type}\n **Giá:** $${item.price.toLocaleString()}\n${item.description}`,
+                        value: `**Loại:** ${item.type}\n **Giá:** $${item.price.toLocaleString()}\n${item.description}`,
                         inline: false,
                     });
                 });
