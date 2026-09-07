@@ -70,7 +70,7 @@ export default {
                     `Bạn tìm thấy **${amountWon.toLocaleString()}<:lt1:1545082415033360495>** dưới ghế quán trà bên lề đường.`,
                 ];
 
-                replyEmbed = createEmbed(
+                replyEmbed = successEmbed(
                     '### <:ianxin:1545417228147757147> KHẤT LINH THÀNH CÔNG',
                     successMessages[
                         Math.floor(Math.random() * successMessages.length)
@@ -84,7 +84,7 @@ export default {
                     "Đạo Hữu đặt chén mẻ trước mắt, rồi hít một hơi sâu lấy giọng... Sau đó im lặng ngồi như vậy cả chiều nhìn người ta đi qua đi lại",
                 ];
 
-                replyEmbed = createEmbed(
+                replyEmbed = warningEmbed(
                     '### <:ianxin:1545417228147757147> Vẫn Là Nên Tự Lực Cánh Sinh',
                     failMessages[Math.floor(Math.random() * failMessages.length)]
                 );
