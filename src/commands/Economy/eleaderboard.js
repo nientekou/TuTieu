@@ -7,7 +7,7 @@ import { getEconomyPrefix } from '../../utils/database.js';
 
 export default {
     data: new SlashCommandBuilder()
-        .setName("eleaderboard")
+        .setName("bxhtaiphu")
         .setDescription("Xem bảng xếp hạng 10 Đạo Hữu có tổng tài sản Linh Thạch cao nhất.")
         .setDMPermission(false),
 
@@ -56,14 +56,14 @@ export default {
                 allUserData.findIndex((u) => u.userId === interaction.user.id) +
                 1;
             const rankEmoji = ["<:taiphu1:1546542226937610300>", "<:taiphu2:1546542223053561976>", "<:taiphu3:1546542220784443532>"];
-            const leaderboardEntries = [];
+            const bxhtaiphuEntries = [];
 
             for (let i = 0; i < topUsers.length; i++) {
                 const user = topUsers[i];
                 const rank = i + 1;
                 const emoji = rankEmoji[i] || `**#${rank}**`;
 
-                leaderboardEntries.push(
+                bxhtaiphuEntries.push(
                     `${emoji} <@${user.userId}> - <:tientrang:1545104597901774948> ${user.net_worth.toLocaleString()}`,
                 );
             }
@@ -74,8 +74,8 @@ export default {
                 userRank 
             });
 
-            const description = leaderboardEntries.length > 0
-                ? leaderboardEntries.join("\n")
+            const description = bxhtaiphuEntries.length > 0
+                ? bxhtaiphuEntries.join("\n")
                 : "Bảng Tài Phú";
 
             const embed = createEmbed({
@@ -85,5 +85,5 @@ export default {
             });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'eleaderboard' })
+    }, { command: 'bxhtaiphu' })
 };
