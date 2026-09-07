@@ -6,12 +6,12 @@ import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHan
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
-        .setName('withdraw')
-        .setDescription('Withdraw money from your bank to your wallet')
+        .setName('ruttien')
+        .setDescription('Rút Linh Thạch từ Thương Bảo Khố về Linh Nang.')
         .addIntegerOption(option =>
             option
                 .setName('amount')
-                .setDescription('Amount to withdraw')
+                .setDescription('Số Linh Thạch muốn rút.')
                 .setRequired(true)
                 .setMinValue(1)
         ),
@@ -27,59 +27,59 @@ export default {
             
             if (!userData) {
                 throw createError(
-                    "Failed to load economy data",
+                    "Thương Bảo Khố quá đông đúc",
                     ErrorTypes.DATABASE,
-                    "Failed to load your economy data. Please try again later.",
+                    "Thương Bảo Khố người người nườm nượp, hay là đợi chút nữa.",
                     { userId, guildId }
                 );
             }
 
-            let withdrawAmount = amountInput;
+            let ruttienAmount = amountInput;
 
-            if (withdrawAmount <= 0) {
+            if (ruttienAmount <= 0) {
                 throw createError(
-                    "Invalid withdrawal amount",
+                    "Số lượng rút không hợp lệ.",
                     ErrorTypes.VALIDATION,
-                    "You must withdraw a positive amount.",
-                    { amount: withdrawAmount, userId }
+                    "Đạo Hữu chỉ có thể rút số Linh Thạch lớn hơn 0.",
+                    { amount: ruttienAmount, userId }
                 );
             }
 
-            if (withdrawAmount > userData.bank) {
-                withdrawAmount = userData.bank;
+            if (ruttienAmount > userData.bank) {
+                ruttienAmount = userData.bank;
             }
 
-            if (withdrawAmount === 0) {
+            if (ruttienAmount === 0) {
                 throw createError(
-                    "Empty bank account",
+                    "Thương Bảo Khố trống",
                     ErrorTypes.VALIDATION,
-                    "Your bank account is empty.",
+                    "Thương Bảo Khố của Đạo Hữu không còn Linh Thạch để rút.",
                     { userId, bankBalance: userData.bank }
                 );
             }
 
-            userData.wallet += withdrawAmount;
-            userData.bank -= withdrawAmount;
+            userData.wallet += ruttienAmount;
+            userData.bank -= ruttienAmount;
 
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                'Withdrawal Successful',
-                `You successfully withdrew **$${withdrawAmount.toLocaleString()}** from your bank.`
+                '### <:tientrang:1545104597901774948> Rút Linh Thạch Thành Công',
+                `Đạo Hữu đã rút thành công **${ruttienAmount.toLocaleString()}<:lt1:1545082415033360495>** từ Thương Bảo Khố.`
             )
                 .addFields(
                     {
-                        name: "New Cash Balance",
-                        value: `$${userData.wallet.toLocaleString()}`,
+                        name: "<:tvp1:1545082419273801859> Linh Nang",
+                        value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
-                        name: "New Bank Balance",
+                        name: "<:tientrang:1545104597901774948> Thương Bảo Khố",
                         value: `$${userData.bank.toLocaleString()}`,
                         inline: true,
                     },
                 );
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'withdraw' })
+    }, { command: 'ruttien' })
 };
