@@ -92,7 +92,7 @@ export const EconomyDataSchema = z
     lastPhivu: z.number().int().nonnegative().default(0),
     lastRob: z.number().int().nonnegative().default(0),
     lastGuitien: z.number().int().nonnegative().default(0),
-    lastWithdraw: z.number().int().nonnegative().default(0),
+    lastRuttien: z.number().int().nonnegative().default(0),
     xp: z.number().int().nonnegative().default(0),
     level: z.number().int().nonnegative().default(1),
     inventory: z.record(z.any()).default({}),
