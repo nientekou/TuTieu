@@ -4,11 +4,11 @@ import { getEconomyData, setEconomyData } from '../../utils/economy.js';
 import { withErrorHandling, createError, ErrorTypes } from '../../utils/errorHandler.js';
 import { InteractionHelper } from '../../utils/interactionHelper.js';
 
-const CRIME_COOLDOWN = 60 * 60 * 1000;
+const PHIVU_COOLDOWN = 60 * 60 * 1000;
 const JAIL_TIME = 2 * 60 * 60 * 1000;
 const FINE_RATE = 0.2;
 
-const CRIME_TYPES = [
+const PHIVU_TYPES = [
     { name: "Thuận Thủ Khiên Dương", min: 100, max: 500, risk: 0.3 },
     { name: "Đột Nhập Thương Khố", min: 300, max: 1000, risk: 0.4 },
     { name: "Kiếp Linh Khố", min: 1000, max: 5000, risk: 0.6 },
@@ -18,7 +18,7 @@ const CRIME_TYPES = [
 
 export default {
     data: new SlashCommandBuilder()
-        .setName('crime')
+        .setName('phivu')
         .setDescription('Thực hiện một phi vụ để kiếm Linh Thạch (rủi ro rất cao)')
         .addStringOption(option =>
             option
@@ -42,7 +42,7 @@ export default {
             const now = Date.now();
 
             const userData = await getEconomyData(client, guildId, userId);
-            const lastCrime = userData.cooldowns?.crime || 0;
+            const lastPhivu = userData.cooldowns?.phivu || 0;
             const isJailed = userData.jailedUntil && userData.jailedUntil > now;
 
             if (isJailed) {
@@ -56,37 +56,37 @@ export default {
                 );
             }
 
-            if (now < lastCrime + CRIME_COOLDOWN) {
-                const timeLeft = Math.ceil((lastCrime + CRIME_COOLDOWN - now) / (1000 * 60));
+            if (now < lastPhivu + PHIVU_COOLDOWN) {
+                const timeLeft = Math.ceil((lastPhivu + PHIVU_COOLDOWN - now) / (1000 * 60));
                 throw createError(
                     "<:itrom:1545417233935630400> Đang Lánh Mặt Sau Phi Vụ",
                     ErrorTypes.RATE_LIMIT,
                     `Phi vụ vừa rồi đã gây động tĩnh quá lớn. Hãy chờ ${timeLeft} phút rồi hẵng hành sự tiếp.`,
-                    { remaining: lastCrime + CRIME_COOLDOWN - now, cooldownType: 'crime' }
+                    { remaining: lastPhivu + PHIVU_COOLDOWN - now, cooldownType: 'phivu' }
                 );
             }
 
-            const crimeType = interaction.options.getString("type").toLowerCase();
-            const crime = CRIME_TYPES.find(
-                c => c.name.toLowerCase().replace(/\s+/g, '-') === crimeType
+            const phivuType = interaction.options.getString("type").toLowerCase();
+            const phivu = PHIVU_TYPES.find(
+                c => c.name.toLowerCase().replace(/\s+/g, '-') === phivuType
             );
 
-            if (!crime) {
+            if (!phivu) {
                 throw createError(
                     "<:itrom:1545417233935630400> Phi Vụ Không Tồn Tại",
                     ErrorTypes.VALIDATION,
                     "Cái phi vụ này không có thành đâu, hay là thử làm cái khác đi.",
-                    { crimeType }
+                    { phivuType }
                 );
             }
 
-            const isSuccess = Math.random() > crime.risk;
+            const isSuccess = Math.random() > phivu.risk;
             const amountEarned = isSuccess
-                ? Math.floor(Math.random() * (crime.max - crime.min + 1)) + crime.min
+                ? Math.floor(Math.random() * (phivu.max - phivu.min + 1)) + phivu.min
                 : 0;
 
             userData.cooldowns = userData.cooldowns || {};
-            userData.cooldowns.crime = now;
+            userData.cooldowns.phivu = now;
 
             if (isSuccess) {
                 userData.wallet = (userData.wallet || 0) + amountEarned;
@@ -95,7 +95,7 @@ export default {
                 
                 const embed = successEmbed(
                     "🗡️ Phi Vụ Thành Công!",
-                    `Đạo Hữu đã hoàn thành ${crime.name}
+                    `Đạo Hữu đã hoàn thành ${phivu.name}
                      ## <:a1:1546550426063741058> THU HOẠCH
                     ㅤ└**${amountEarned}**<:lt1:1545082415033360495>`
                 );
@@ -103,7 +103,7 @@ export default {
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
             } else {
                 // Fine is based on the potential haul of the attempted crime
-                const potentialHaul = Math.floor((crime.min + crime.max) / 2);
+                const potentialHaul = Math.floor((phivu.min + phivu.max) / 2);
                 const fine = Math.min(Math.floor(potentialHaul * FINE_RATE), userData.wallet || 0);
                 userData.wallet = Math.max(0, (userData.wallet || 0) - fine);
                 userData.jailedUntil = now + JAIL_TIME;
@@ -112,12 +112,12 @@ export default {
                 
                 const embed = warningEmbed(
                     "⛓️ Phi Vụ Thất Bại!",
-                    `${crime.name} bất thành! Đạo Hữu đã bị **Chấp Pháp Ty** bắt giữ đem về **Lạc Tiên Uyên**` +
+                    `${phivu.name} bất thành! Đạo Hữu đã bị **Chấp Pháp Ty** bắt giữ đem về **Lạc Tiên Uyên**` +
                      `
                      Bồi thường ${fine.toLocaleString()}<:lt1:1545082415033360495> và bị giam trong ${timeLeft}.`
                 );
                 
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
             }
-    }, { command: 'crime' })
+    }, { command: 'phivu' })
 };
