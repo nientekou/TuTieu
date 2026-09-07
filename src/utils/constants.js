@@ -12,7 +12,7 @@ export const DEFAULT_ECONOMY_DATA = {
     lastRob: 0,
     lastMine: 0,
     lastGamble: 0,
-    lastFish: 0,
+    lastCauca: 0,
     dailyStreak: 0,
     lastWeekly: 0,
     lastDeposit: 0,
