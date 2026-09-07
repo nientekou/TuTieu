@@ -11,7 +11,7 @@ const SHOP_ITEMS = shopItems;
 export default {
     data: new SlashCommandBuilder()
         .setName('inventory')
-        .setDescription('View your economy inventory'),
+        .setDescription('Xem các vật phẩm đang cất giữ trong Túi Càn Khôn.'),
 
     execute: withErrorHandling(async (interaction, config, client) => {
         const deferred = await InteractionHelper.safeDefer(interaction);
@@ -20,22 +20,22 @@ export default {
             const userId = interaction.user.id;
             const guildId = interaction.guildId;
 
-            logger.debug(`[ECONOMY] Inventory requested for ${userId}`, { userId, guildId });
+            logger.debug(`[ECONOMY] Túi Càn Khôn của ${userId}`, { userId, guildId });
 
             const userData = await getEconomyData(client, guildId, userId);
 
             if (!userData) {
                 throw createError(
-                    "Failed to load economy data for inventory",
+                    "Túi Càn Khôn bị kẹt",
                     ErrorTypes.DATABASE,
-                    "Failed to load your economy data. Please try again later.",
+                    "Túi Càn Khôn kẹt mất rồi, cố mở lại lần nữa vậy.",
                     { userId, guildId }
                 );
             }
 
             const inventory = userData.inventory || {};
 
-            let inventoryDescription = "Your inventory is currently empty.";
+            let inventoryDescription = "Túi Càn Khôn hiện đang trống.";
 
             if (Object.keys(inventory).length > 0) {
                 inventoryDescription = Object.entries(inventory)
@@ -54,14 +54,14 @@ export default {
                     .join("\n");
             }
 
-            logger.info(`[ECONOMY] Inventory retrieved`, { 
+            logger.info(`[ECONOMY] Túi Càn Khôn mở`, { 
                 userId, 
                 guildId,
                 itemCount: Object.keys(inventory).length
             });
 
             const embed = createEmbed({ 
-                title: `🎒 ${interaction.user.username}'s Inventory`, 
+                title: `<:tvp2:1545082417012932639> Túi Càn Khôn của ${interaction.user.username}`, 
                 description: inventoryDescription, 
             }).setThumbnail(interaction.user.displayAvatarURL());
 
