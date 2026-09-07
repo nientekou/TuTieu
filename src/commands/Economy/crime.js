@@ -110,7 +110,7 @@ export default {
                 const embed = warningEmbed(
                     "⛓️ Phi Vụ Thất Bại!",
                     `${crime.name} bất thành! Đao Hữu đã bị **Chấp Pháp Ty** bắt giữ đem về **Lạc Tiên Uyên**` +
-                    `Bồi thường ${fine.toLocaleString()}<:lt1:1545082415033360495> và bị giam trong 1 canh giờ.`
+                    \N`Bồi thường ${fine.toLocaleString()}<:lt1:1545082415033360495> và bị giam trong 1 canh giờ.`
                 );
                 
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
