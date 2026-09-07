@@ -9,7 +9,7 @@ export const commandAliases = {
     'cash': 'balance',
 
     'gui': 'guitien',
-    'with': 'withdraw',
+    'rut': 'ruttien',
     'work': 'work',
     'daily': 'daily',
     'gamble': 'gamble',
