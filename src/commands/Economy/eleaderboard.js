@@ -7,8 +7,8 @@ import { getEconomyPrefix } from '../../utils/database.js';
 
 export default {
     data: new SlashCommandBuilder()
-        .setName("eleaderboard")
-        .setDescription("View the server's top 10 richest users.")
+        .setName("bxhtaiphu")
+        .setDescription("Xem bảng xếp hạng 10 Đạo Hữu có tổng tài sản Linh Thạch cao nhất.")
         .setDMPermission(false),
 
     execute: withErrorHandling(async (interaction, config, client) => {
@@ -17,7 +17,7 @@ export default {
 
             const guildId = interaction.guildId;
 
-            logger.debug(`[ECONOMY] Leaderboard requested`, { guildId });
+            logger.debug(`[ECONOMY] BXH Tài Phú`, { guildId });
 
             const prefix = getEconomyPrefix(guildId);
 
@@ -29,9 +29,9 @@ export default {
 
             if (allKeys.length === 0) {
                 throw createError(
-                    "No economy data found",
+                    "Chưa có vị Đạo Hữu nào",
                     ErrorTypes.VALIDATION,
-                    "No economy data found for this server."
+                    "Chưa có vị Đạo Hữu nào xuất hiện."
                 );
             }
 
@@ -55,7 +55,7 @@ export default {
             const userRank =
                 allUserData.findIndex((u) => u.userId === interaction.user.id) +
                 1;
-            const rankEmoji = ["🥇", "🥈", "🥉"];
+            const rankEmoji = ["<:taiphu1:1546542226937610300>", "<:taiphu2:1546542223053561976>", "<:taiphu3:1546542220784443532>"];
             const leaderboardEntries = [];
 
             for (let i = 0; i < topUsers.length; i++) {
@@ -76,14 +76,14 @@ export default {
 
             const description = leaderboardEntries.length > 0
                 ? leaderboardEntries.join("\n")
-                : "No economy data is available for this server yet.";
+                : "Bảng Tài Phú";
 
             const embed = createEmbed({
                 title: `Economy Leaderboard`,
                 description,
-                footer: `Your Rank: ${userRank > 0 ?`#${userRank}`: "No ranking data available"}`,
+                footer: `Thứ hạng của Đạo Hữu:  ${userRank > 0 ?`#${userRank}`: "Chưa có thứ hạng"}`,
             });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
-    }, { command: 'eleaderboard' })
+    }, { command: 'bxhtaiphu' })
 };
