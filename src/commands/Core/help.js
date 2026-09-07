@@ -101,7 +101,7 @@ export async function createInitialHelpMenu(client) {
             },
             {
                 name: '\u200B',
-                value: `-# ${botName} (https://discord.com/oauth2/authorize?client_id=1544697004150755398&permissions=8&integration_type=0&scope=bot)`,
+                value: `-# [${botName}](https://discord.com/oauth2/authorize?client_id=1544697004150755398&permissions=8&integration_type=0&scope=bot)`,
                 inline: false,
             },
         ],
