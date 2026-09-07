@@ -23,14 +23,14 @@ export default {
         .addStringOption(option =>
             option
                 .setName('type')
-                .setDescription('Chọn phi vụ muốn thực hiện')
+                .setDescription('Type of crime to commit')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Thuận Thủ Khiên Dương', value: 'thuan-thu' },
-                    { name: 'Đột Nhập Thương Khố', value: 'dot-nhap-thuong-kho' },
-                    { name: 'Kiếp Linh Khố', value: 'kiep-linh-kho' },
-                    { name: 'Đoạt Dị Bảo', value: 'doat-di-bao' },
-                    { name: 'Xâm Nhập Trận Các', value: 'xam-nhap-tran-cac' },
+                    { name: 'Thuận Thủ Khiên Dương', value: 'pickpocketing' },
+                    { name: 'Đột Nhập Thương Khố', value: 'burglary' },
+                    { name: 'Kiếp Linh Khố', value: 'bank-heist' },
+                    { name: 'Đoạt Dị Bảo', value: 'art-theft' },
+                    { name: 'Xâm Nhập Trận Các', value: 'Xâm Nhập Trận Các' },
                 )
         ),
 
