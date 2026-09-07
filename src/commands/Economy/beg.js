@@ -44,7 +44,7 @@ export default {
                     minutes > 0 ? `${minutes} minute(s)` : `${seconds} second(s)`;
 
                 throw createError(
-                    "<:ianxin:1545417228147757147> Bạn đã ăn xin quá nhiều rồi",
+                    "### <:ianxin:1545417228147757147> Bạn đã ăn xin quá nhiều rồi",
                     ErrorTypes.RATE_LIMIT,
                     `Không ai thèm hữu duyên cho bạn vài đồng, hãy chờ thêm **${timeMessage}**.`,
                     { remainingTime, minutes, seconds, cooldownType: 'anxin' }
@@ -71,7 +71,7 @@ export default {
                 ];
 
                 replyEmbed = successEmbed(
-                    '<:ianxin:1545417228147757147> KHẤT LINH THÀNH CÔNG',
+                    '### <:ianxin:1545417228147757147> KHẤT LINH THÀNH CÔNG',
                     successMessages[
                         Math.floor(Math.random() * successMessages.length)
                     ]
@@ -85,7 +85,7 @@ export default {
                 ];
 
                 replyEmbed = warningEmbed(
-                    '<:ianxin:1545417228147757147> Vẫn Là Nên Tự Lực Cánh Sinh',
+                    '### <:ianxin:1545417228147757147> Vẫn Là Nên Tự Lực Cánh Sinh',
                     failMessages[Math.floor(Math.random() * failMessages.length)]
                 );
             }
