@@ -23,7 +23,7 @@ export default {
         .addStringOption(option =>
             option
                 .setName('type')
-                .setDescription('Type of crime to commit')
+                .setDescription('Nhận hoặc chọn Phi Vụ mà Đạo Hữu muốn')
                 .setRequired(true)
                 .addChoices(
                     { name: 'Thuận Thủ Khiên Dương', value: 'thuận-thủ-khiên-dương' },
@@ -50,7 +50,8 @@ export default {
                 throw createError(
                     "<:itrom:1545417233935630400> Đang Bị Giam Giữ",
                     ErrorTypes.RATE_LIMIT,
-                    `Đạo Hữu đang bị **Tiên Minh Chấp Pháp Ty** giam giữ tại **Lạc Tiên Uyên**. Còn ${timeLeft} phút mới được thả.`,
+                    `Đạo Hữu đang bị **Tiên Minh Chấp Pháp Ty** giam giữ tại **Lạc Tiên Uyên**. 
+                    Còn ${timeLeft} phút mới được thả.`,
                     { jailTimeRemaining: userData.jailedUntil - now }
                 );
             }
