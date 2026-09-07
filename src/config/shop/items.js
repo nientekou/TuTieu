@@ -15,7 +15,7 @@ cooldown: 86400000,
     },
       {
         id: 'canthinhtrieu',
-        name: 'Cần Thính Triều 🎣',
+        name: 'Cần Thính Triều :fishing_pole_and_fish:',
         price: 5000,
         description: 'Triều Sinh Vạn Tượng đã mở. Triều dâng sinh vạn tượng. Sao còn chần chờ chưa vác cần đến đó kiếm một ít cơ duyên? Mang theo Cần Thính Triều, người câu không chỉ nhìn phao mà nghe con nước, thuận theo thủy thế.',
         type: 'tool',
