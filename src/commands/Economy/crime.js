@@ -95,7 +95,9 @@ export default {
                 
                 const embed = successEmbed(
                     "🗡️ Phi Vụ Thành Công!",
-                    `Đạo Hữu đã hoàn thành ${crime.name} và thu được **${amountEarned}**<:lt1:1545082415033360495>`
+                    `Đạo Hữu đã hoàn thành ${crime.name}
+                     ## <:a1:1546550426063741058> THU HOẠCH
+                    ㅤ└**${amountEarned}**<:lt1:1545082415033360495>`
                 );
                 
                 await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
