@@ -56,30 +56,30 @@ export default {
                 allUserData.findIndex((u) => u.userId === interaction.user.id) +
                 1;
             const rankEmoji = ["<:taiphu1:1546542226937610300>", "<:taiphu2:1546542223053561976>", "<:taiphu3:1546542220784443532>"];
-            const leaderboardEntries = [];
+            const bxhtaiphuEntries = [];
 
             for (let i = 0; i < topUsers.length; i++) {
                 const user = topUsers[i];
                 const rank = i + 1;
                 const emoji = rankEmoji[i] || `**#${rank}**`;
 
-                leaderboardEntries.push(
+                bxhtaiphuEntries.push(
                     `${emoji} <@${user.userId}> - <:tientrang:1545104597901774948> ${user.net_worth.toLocaleString()}`,
                 );
             }
 
-            logger.info(`[ECONOMY] Leaderboard generated`, { 
+            logger.info(`[ECONOMY] Bảng Tài Phú`, { 
                 guildId, 
                 userCount: allUserData.length,
                 userRank 
             });
 
-            const description = leaderboardEntries.length > 0
-                ? leaderboardEntries.join("\n")
+            const description = bxhtaiphuEntries.length > 0
+                ? bxhtaiphuEntries.join("\n")
                 : "Bảng Tài Phú";
 
             const embed = createEmbed({
-                title: `Economy Leaderboard`,
+                title: `Bảng Tài Phú`,
                 description,
                 footer: `Thứ hạng của Đạo Hữu:  ${userRank > 0 ?`#${userRank}`: "Chưa có thứ hạng"}`,
             });
