@@ -13,7 +13,7 @@ class EconomyService {
   static PHIVU_COOLDOWN = 60 * 60 * 1000;
   static ROB_COOLDOWN = 4 * 60 * 60 * 1000;
   static MINE_COOLDOWN = 60 * 60 * 1000;
-  static FISH_COOLDOWN = 45 * 60 * 1000;
+  static CAUCA_COOLDOWN = 45 * 60 * 1000;
   static BEG_COOLDOWN = 30 * 60 * 1000;
   
   static DAILY_AMOUNT = 1000;
