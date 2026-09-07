@@ -8,11 +8,11 @@ import { InteractionHelper } from '../../utils/interactionHelper.js';
 export default {
     data: new SlashCommandBuilder()
         .setName('balance')
-        .setDescription("Mở Túi Càn Khôn của bạn hoặc người khác")
+        .setDescription("Mở Linh Nang của Đạo Hữu hoặc người khác")
         .addUserOption(option =>
             option
                 .setName('user')
-                .setDescription('Người bạn cần xem Túi Càn Khôn')
+                .setDescription('Người Đạo Hữu muốn xem Linh Nang')
                 .setRequired(false)
         ),
 
@@ -24,15 +24,15 @@ export default {
         const targetUser = userOption || interaction.user;
         const guildId = interaction.guildId;
 
-        logger.info(`[ECONOMY] Mở Túi - userOption: ${userOption?.id || 'null'}, targetUser: ${targetUser.id}, guildId: ${guildId}, isPrefix: ${!!interaction._commandStartTime}`);
+        logger.info(`[ECONOMY] Mở Linh Nang - userOption: ${userOption?.id || 'null'}, targetUser: ${targetUser.id}, guildId: ${guildId}, isPrefix: ${!!interaction._commandStartTime}`);
 
-        logger.debug(`[ECONOMY] Mở Túi ${targetUser.id}`, { userId: targetUser.id, guildId });
+        logger.debug(`[ECONOMY] Mở Linh Nang ${targetUser.id}`, { userId: targetUser.id, guildId });
 
         if (targetUser.bot) {
             throw createError(
                 "Đang kiểm tra",
                 ErrorTypes.VALIDATION,
-                "Bots không có Túi Càn Khôn"
+                "Bots không có Linh Nang"
             );
         }
 
@@ -42,9 +42,9 @@ export default {
 
         if (!userData) {
             throw createError(
-                "Túi Càn Khôn bị kẹt",
+                "Linh Nang bị kẹt",
                 ErrorTypes.DATABASE,
-                "Túi Càn Khôn không thể mở ra, thử lại lần sau vậy",
+                "Linh Nang không thể mở ra, thử lại lần sau vậy",
                 { userId: targetUser.id, guildId }
             );
         }
@@ -55,8 +55,8 @@ export default {
         const bank = typeof userData.bank === 'number' ? userData.bank : 0;
 
             const embed = createEmbed({
-                title: `Túi Càn Khôn của ${targetUser.username}`,
-                description: `Bên trong Túi Càn Khôn của ${targetUser.username}.`,
+                title: `Linh Nang của ${targetUser.username}`,
+                description: `Bên trong Linh Nang của ${targetUser.username}.`,
             })
                 .addFields(
                     {
@@ -65,12 +65,12 @@ export default {
                         inline: true,
                     },
                     {
-                        name: "<:tientrang:1545104597901774948> Tiền Trang",
+                        name: "<:tientrang:1545104597901774948> Thương Bảo Khố",
                         value: `${bank.toLocaleString()}<:lt1:1545082415033360495> / ${maxBank.toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     },
                     {
-                        name: "<:tvp1:1545082419273801859> Tổng cộng",
+                        name: "<:tvp1:1545082419273801859> Tổng",
                         value: `${(wallet + bank).toLocaleString()}<:lt1:1545082415033360495>`,
                         inline: true,
                     }
@@ -80,7 +80,7 @@ export default {
                     iconURL: interaction.user.displayAvatarURL(),
                 });
 
-            logger.info(`[ECONOMY] Đã mở Túi`, { userId: targetUser.id, wallet, bank });
+            logger.info(`[ECONOMY] Đã mở Linh Nang`, { userId: targetUser.id, wallet, bank });
 
             await InteractionHelper.safeEditReply(interaction, { embeds: [embed] });
     }, { command: 'balance' })
