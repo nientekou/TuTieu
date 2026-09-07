@@ -148,14 +148,14 @@ userData.lastMine = now;
             await setEconomyData(client, guildId, userId, userData);
 
             const embed = successEmbed(
-                "⛏️ Khai Khoáng Thành Công!",
+                "<:icuoc:1545714179581943868> Khai Khoáng Thành Công!",
                 `Đạo Hữu đã thăm dò **${location}** 
                 ${multiplierMessage}
                  ## <:a1:1546550426063741058> THU HOẠCH
                 ㅤ└${finalEarned.toLocaleString()}<:lt1:1545082415033360495>`,
             )
                 .addFields({
-                    name: "Linh Thạch Hiện Có",
+                    name: "<:lt1:1545082415033360495> Hiện Có",
                     value: `${userData.wallet.toLocaleString()}<:lt1:1545082415033360495>`,
                     inline: true,
                 })
