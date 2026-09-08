@@ -129,10 +129,10 @@ export default {
             let finalEarned = baseEarned;
             let multiplierMessage = "";
 
-            if (hasDiamondPickaxe > 0) {
+            if (hasBancophu > 0) {
                 finalEarned = Math.floor(baseEarned * BANCOPHU_MULTIPLIER);
                 multiplierMessage = `\n<:bcp:1545728177169502288> *Thưởng thêm từ Bàn Cổ Phủ: +100%*`;
-            } else if (hasPickaxe > 0) {
+            } else if (hasCuockhailinh > 0) {
                 finalEarned = Math.floor(baseEarned * CUOCKHAILINH_MULTIPLIER);
                 multiplierMessage = `\n<:icuoc:1545714179581943868> *Thưởng thêm từ Cuốc Khai Linh: +20%*`;
             }
